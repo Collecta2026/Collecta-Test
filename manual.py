@@ -351,7 +351,10 @@ MANUAL = [
                  "appears dimmed (greyed) with a small padlock, so people can see what the system does "
                  "without being able to act on it. The block is also enforced on the server.",
          steps=["Roles: Administrator (full access, cannot be locked out), CFO, Finance Manager, "
-                "Managing Director (view & report only, no data entry), Credit Control, Sales, Maintenance.",
+                "Managing Director (view & report only, no data entry), Credit Control, "
+                "Account Manager (reconciliation — read & export only, allocates cash and reconciles "
+                "the debtors ledger in the general accounts; deliberately cannot post or edit in Collecta), "
+                "Sales, Maintenance.",
                 "Hover a menu heading to see its items; dimmed items with a padlock aren't available to you.",
                 "An administrator sets who can do what on Admin > Access Control.",
                 "Add an email for each user so they receive approval-request notifications."],

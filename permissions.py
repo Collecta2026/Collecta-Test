@@ -14,6 +14,7 @@ ROLES = [
     ("fm", "Finance Manager"),
     ("md", "Managing Director"),
     ("credit_control", "Credit Control"),
+    ("account_manager", "Account Manager (reconciliation)"),
     ("sales", "Sales"),
     ("maintenance", "Maintenance"),
 ]
@@ -64,6 +65,11 @@ DEFAULT_MATRIX = {
                        "customers", "customer_edit", "credit_limits", "guarantees",
                        "reports", "exports", "bulk_import", "legal", "reschedule",
                        "sales_clearance", "parts_sales"},
+    # Account Manager sits in the general accounts: allocates cash and reconciles the
+    # Collecta debtors ledger to the GL. Deliberately read + export only inside Collecta,
+    # so they never reconcile their own postings (segregation of duties). No posting,
+    # no editing, no approving.
+    "account_manager": _VIEW | {"audit_log"},
     "sales": {"dashboard", "customers", "sales_clearance"},
     "maintenance": {"dashboard", "customers", "maintenance_notes"},
 }
@@ -79,14 +85,26 @@ def role_key(user):
 
 # ---- persistence (matrix stored in DB, seeded from defaults) ----
 def seed_matrix():
+    """Backfill the permission matrix additively.
+
+    Adds a RolePermission row for any (role, capability) pair that doesn't yet
+    exist, using the default value. Never touches rows that already exist, so an
+    admin's customisations in Access Control are always preserved. This also means
+    new roles and new capabilities shipped in later uploads (e.g. the Account
+    Manager role, or Parts sales) light up correctly on databases that were seeded
+    by an earlier version — mirroring the safe, additive schema migration.
+    """
     from models import db, RolePermission
-    if RolePermission.query.first() is not None:
-        return
+    existing = {(rp.role, rp.capability) for rp in RolePermission.query.all()}
+    added = False
     for role, _ in ROLES:
         allowed = DEFAULT_MATRIX.get(role, set())
         for cap in CAP_KEYS:
-            db.session.add(RolePermission(role=role, capability=cap, allowed=(cap in allowed)))
-    db.session.commit()
+            if (role, cap) not in existing:
+                db.session.add(RolePermission(role=role, capability=cap, allowed=(cap in allowed)))
+                added = True
+    if added:
+        db.session.commit()
 
 
 def get_matrix():

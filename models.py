@@ -215,6 +215,18 @@ class AuditLog(db.Model):
     detail = db.Column(db.Text)
 
 
+class AccountCredit(db.Model):
+    """Unallocated credit held on account when a receipt exceeds the open balance.
+    Kept strictly per customer, per account (Machine/Parts) and per currency."""
+    __tablename__ = "account_credits"
+    id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey("customers.id"), index=True, nullable=False)
+    account_type = db.Column(db.String(10), default="MACHINE")   # MACHINE / PARTS
+    currency = db.Column(db.String(3), nullable=False)
+    balance = db.Column(db.Numeric(16, 2), default=0)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 class Approval(db.Model):
     """Pending digital-authorisation requests (reschedules, gate overrides)."""
     __tablename__ = "approvals"

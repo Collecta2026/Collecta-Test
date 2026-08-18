@@ -201,6 +201,76 @@ def build_schedule(total, count, first_date, freq_days=30):
     return out
 
 
+def propose_allocation(customer_id, account_type, currency, amount):
+    """Oldest-due-date-first allocation within one account and currency.
+    Legal-customer instalments are skipped in the auto-suggestion (0), but still listed so the
+    controller can deliberately allocate to them on override. Ties broken by instalment ID;
+    instalments with no due date come last. Any surplus becomes unallocated credit on account."""
+    amount = Decimal(str(amount))
+    rows = [r for r in instalment_rows()
+            if r["customer_id"] == customer_id and r["account_type"] == account_type
+            and r["currency"] == currency and r["state"] == "open" and r["net"] > 0]
+    rows.sort(key=lambda r: (r["due_date"] or date.max, r["inst_id"]))
+    remaining = amount
+    out = []
+    for r in rows:
+        net = Decimal(str(r["net"]))
+        if r["legal"]:
+            sugg = Decimal("0")           # skip legal/disputed in the auto-suggest
+        else:
+            sugg = min(remaining, net) if remaining > 0 else Decimal("0")
+            remaining -= sugg
+        out.append(dict(id=r["id"], inst_id=r["inst_id"], due_date=r["due_date"],
+                        bucket=r["bucket"], net=float(net), suggested=float(sugg),
+                        legal=r["legal"]))
+    allocated = sum(Decimal(str(o["suggested"])) for o in out)
+    surplus = float(amount - allocated)
+    return dict(rows=out, amount=float(amount), allocated=float(allocated),
+                surplus=(surplus if surplus > 0.005 else 0.0))
+
+
+def get_account_credit(customer_id, account_type, currency):
+    from models import AccountCredit
+    c = AccountCredit.query.filter_by(customer_id=customer_id, account_type=account_type,
+                                      currency=currency).first()
+    return float(c.balance) if (c and c.balance) else 0.0
+
+
+def account_credits_for(customer_id):
+    """All non-zero unallocated credits for a customer, for display on the customer page."""
+    from models import AccountCredit
+    out = []
+    for c in AccountCredit.query.filter_by(customer_id=customer_id).all():
+        if c.balance and float(c.balance) > 0:
+            out.append(dict(account_type=c.account_type, currency=c.currency, balance=float(c.balance)))
+    return out
+
+
+def adjust_account_credit(customer_id, account_type, currency, delta):
+    from models import db, AccountCredit
+    c = AccountCredit.query.filter_by(customer_id=customer_id, account_type=account_type,
+                                      currency=currency).first()
+    if not c:
+        c = AccountCredit(customer_id=customer_id, account_type=account_type,
+                          currency=currency, balance=Decimal("0"))
+        db.session.add(c); db.session.flush()
+    c.balance = (c.balance or Decimal("0")) + Decimal(str(delta))
+    if c.balance < 0:
+        c.balance = Decimal("0")
+    db.session.commit()
+    return float(c.balance)
+
+
+def ageing_impact(pairs):
+    """pairs: list of (bucket, amount). Returns {bucket: total} in ageing order."""
+    order = ["Current", "1-30 Days", "31-60 Days", "61-90 Days", "91-180 Days",
+             "181-365 Days", "365+ Days", "No Due Date"]
+    d = {}
+    for bucket, amt in pairs:
+        d[bucket] = d.get(bucket, 0) + amt
+    return [(b, d[b]) for b in order if b in d] + [(b, v) for b, v in d.items() if b not in order]
+
+
 def conversion_report_rows():
     """All currency conversions (source USD instalments closed as converted), for the report."""
     from models import Instalment, Customer

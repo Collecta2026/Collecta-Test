@@ -389,31 +389,96 @@ def create_app():
             return report_download(export, "Debtors Ledger", headers, data, "debtors_ledger")
         return render_template("ledger.html", rows=rows, ccy=ccy, status=status, atype=atype)
 
-    # ---------------- Collections ----------------
+    # ---------------- Collections (oldest-first allocation with confirm/override) ----------------
     @app.route("/collections", methods=["GET", "POST"])
     @login_required
     def collections():
         if request.method == "POST":
-            inst = Instalment.query.filter_by(inst_id=request.form["inst_id"].strip()).first()
-            amt = parse_money(request.form["amount"])
-            if not inst or not amt or amt <= 0:
-                flash("Pick a valid Instalment ID and a positive amount.", "danger")
-            else:
+            step = request.form.get("step")
+            cust = Customer.query.filter_by(cust_ref=(request.form.get("cust_ref") or "").strip()).first()
+            atype = (request.form.get("account_type") or "MACHINE").upper()
+            ccy = (request.form.get("currency") or "").upper()
+            if not cust or atype not in ("MACHINE", "PARTS") or ccy not in ("EGP", "USD"):
+                flash("Choose a customer, account and currency.", "danger")
+                return redirect(url_for("collections"))
+            cash = parse_money(request.form.get("amount")) or Decimal("0")
+            apply_credit = request.form.get("apply_credit") == "1"
+            avail_credit = svc.get_account_credit(cust.id, atype, ccy)
+            credit_used = Decimal(str(avail_credit)) if apply_credit else Decimal("0")
+            total_to_alloc = cash + credit_used
+
+            if step == "propose":
+                if total_to_alloc <= 0:
+                    flash("Enter a positive amount (or apply available credit).", "danger")
+                    return redirect(url_for("collections"))
+                prop = svc.propose_allocation(cust.id, atype, ccy, total_to_alloc)
+                impact = svc.ageing_impact([(r["bucket"], r["suggested"]) for r in prop["rows"] if r["suggested"] > 0])
+                return render_template("collections_confirm.html", cust=cust, atype=atype, ccy=ccy,
+                                       cash=float(cash), credit_used=float(credit_used),
+                                       avail_credit=avail_credit, prop=prop, impact=impact,
+                                       method=request.form.get("method"), txn_ref=request.form.get("txn_ref"),
+                                       collected_on=(request.form.get("collected_on") or date.today().isoformat()),
+                                       comments=request.form.get("comments"))
+
+            if step == "confirm":
                 con_date = parse_date(request.form.get("collected_on")) or date.today()
-                c = Collection(customer_id=inst.customer_id, instalment_id=inst.id,
-                               txn_ref=request.form.get("txn_ref"), amount=amt,
-                               currency=inst.currency, method=request.form.get("method"),
-                               collected_on=con_date,
-                               bucket_at_collection=svc.bucket_at(inst.due_date, con_date),
-                               received_by=(current_user.full_name or current_user.username),
-                               comments=request.form.get("comments"))
-                db.session.add(c)
+                # read overridden allocations
+                allocations = []
+                total_alloc = Decimal("0")
+                overridden = False
+                prop = svc.propose_allocation(cust.id, atype, ccy, total_to_alloc)
+                sugg_map = {str(r["id"]): r["suggested"] for r in prop["rows"]}
+                for key, val in request.form.items():
+                    if key.startswith("alloc_"):
+                        iid = key[6:]
+                        a = parse_money(val) or Decimal("0")
+                        if a > 0:
+                            allocations.append((int(iid), a))
+                            total_alloc += a
+                            if abs(float(a) - float(sugg_map.get(iid, 0))) > 0.005:
+                                overridden = True
+                if total_alloc <= 0:
+                    flash("Nothing to allocate.", "danger")
+                    return redirect(url_for("collections"))
+                if total_alloc > total_to_alloc + Decimal("0.01"):
+                    flash(f"Allocated {total_alloc:,.2f} exceeds the amount available "
+                          f"{total_to_alloc:,.2f} {ccy}. Adjust and try again.", "danger")
+                    return redirect(url_for("collections"))
+                # post the allocations against their instalments (same currency only)
+                pairs = []
+                for iid, a in allocations:
+                    inst = db.session.get(Instalment, iid)
+                    if not inst or inst.currency != ccy or (inst.account_type or "MACHINE") != atype:
+                        continue
+                    db.session.add(Collection(
+                        customer_id=cust.id, instalment_id=inst.id, txn_ref=request.form.get("txn_ref"),
+                        amount=a, currency=ccy, method=request.form.get("method"), collected_on=con_date,
+                        bucket_at_collection=svc.bucket_at(inst.due_date, con_date),
+                        received_by=(current_user.full_name or current_user.username),
+                        comments=request.form.get("comments")))
+                    pairs.append((svc.bucket_at(inst.due_date, con_date), float(a)))
                 db.session.commit()
-                flash(f"Recorded {amt:,.2f} {inst.currency} against {inst.inst_id}.", "success")
+                # settle credit movements: consume applied credit, bank any surplus as new credit
+                if credit_used > 0:
+                    svc.adjust_account_credit(cust.id, atype, ccy, -float(credit_used))
+                surplus = float(total_to_alloc - total_alloc)
+                if surplus > 0.005:
+                    newbal = svc.adjust_account_credit(cust.id, atype, ccy, surplus)
+                    flash(f"Recorded. Surplus {surplus:,.2f} {ccy} held as unallocated credit "
+                          f"(now {newbal:,.2f} {ccy} on the {atype.title()} account).", "info")
+                audit("collection_recorded", cust.cust_ref,
+                      f"{ccy} {float(total_alloc):,.2f} {atype} across {len(allocations)} instalment(s)"
+                      + (" [OVERRIDDEN]" if overridden else " [oldest-first]")
+                      + (f", credit applied {float(credit_used):,.2f}" if credit_used else "")
+                      + (f", surplus→credit {surplus:,.2f}" if surplus > 0.005 else ""))
+                flash(f"Recorded {float(total_alloc):,.2f} {ccy} against the {atype.title()} account "
+                      f"({'overridden' if overridden else 'oldest-first'}).", "success")
+                return redirect(url_for("collections"))
             return redirect(url_for("collections"))
+
         recent = Collection.query.order_by(Collection.id.desc()).limit(25).all()
-        insts = Instalment.query.order_by(Instalment.inst_id).all()
-        return render_template("collections.html", recent=recent, insts=insts)
+        customers = Customer.query.order_by(Customer.cust_ref).all()
+        return render_template("collections.html", recent=recent, customers=customers)
 
     # ---------------- New instalment / new customer ----------------
     @app.route("/instalment/new", methods=["GET", "POST"])
@@ -743,10 +808,11 @@ def create_app():
         parts_over = (parts_limit is not None and parts["total"] > parts_limit)
         pays = Collection.query.filter_by(customer_id=cid).order_by(Collection.id.desc()).all()
         notes = svc.customer_notes(cid)
+        credits = svc.account_credits_for(cid)
         return render_template("customer_detail.html", cust=cust, rows=rows, total=total,
                                overdue=overdue, limit=limit, over_limit=over_limit, pays=pays,
                                machine=machine, parts=parts, combined=combined,
-                               parts_limit=parts_limit, parts_over=parts_over,
+                               parts_limit=parts_limit, parts_over=parts_over, credits=credits,
                                notes=notes, users=User.query.order_by(User.username).all(),
                                legal_stages=svc.LEGAL_STAGES,
                                default_pct=svc.legal_provision_default())

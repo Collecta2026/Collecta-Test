@@ -246,18 +246,26 @@ MANUAL = [
          keywords=["currency", "conversion", "usd", "egp", "fx", "exchange loss", "rate", "convert"]),
 
     # ---------------- Collections & chasing ----------------
-    dict(id="collections", cat="Collections", title="Recording a collection",
+    dict(id="collections", cat="Collections", title="Recording a receipt (oldest-first allocation)",
          path="Collections > Record Collection", route="collections", args={},
-         summary="Log each receipt against the instalment it pays, with a transaction "
-                 "reference and payment method.",
+         summary="Record a receipt and let Collecta allocate it oldest instalment first within the chosen "
+                 "account, so ageing is always settled by the oldest debt. You confirm or override the "
+                 "proposed split before anything posts. Receipts are single-currency.",
          steps=["Open Collections > Record Collection.",
-                "Pick the Instalment ID being paid, enter the amount, transaction reference "
-                "and method (cash, cheque, bank transfer, card, other).",
-                "Save - the ledger, ageing and dashboard update immediately."],
-         tips=["Record collections under your own login so commission is attributed to you.",
-               "Collecta snapshots the ageing bucket at the moment of collection - this "
-               "drives the weighted commission."],
-         keywords=["collection", "payment", "receipt", "transaction", "method", "record"]),
+                "Pick the customer, the account (Machine or Parts) and the currency, then enter the amount received.",
+                "Collecta proposes a split — oldest due date first, filling each instalment before the next.",
+                "Review the proposal and the ageing impact; adjust any figure to override, then Confirm & post.",
+                "If the money doesn't fully cover an instalment it is left part-paid, and the next receipt clears that "
+                "instalment's remaining balance first.",
+                "Any amount beyond the open balance is held as unallocated credit on that account, shown on the "
+                "customer page and applied on the next receipt if you tick 'apply credit'."],
+         tips=["Machine and Parts are settled separately — a receipt only ever touches the account you chose.",
+               "Legal instalments are shown but not auto-allocated; you can still allocate to them deliberately.",
+               "To settle a USD debt with EGP (or vice-versa), use Customers > Currency Conversion first (CFO/MD approval) — "
+               "receipts themselves never cross currency.",
+               "The proposed split, any override, and the final allocation are all written to the audit log."],
+         keywords=["collection", "payment", "receipt", "allocation", "oldest first", "waterfall",
+                   "part payment", "unallocated credit", "override", "ageing"]),
     dict(id="reminders", cat="Collections", title="Reminder letters (4 levels)",
          path="Collections > Reminder Letters", route="reminders", args={},
          summary="Escalating chase letters, from a gentle reminder (Level 1) to a final "

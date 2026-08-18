@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}Reminders{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Reminder Letters — customers due chasing</h4>
+<p class="text-muted small">Level is set by the oldest overdue item: L1 = 1–30 days, L2 = 31–60, L3 = 61–90, L4 = 90+ (final demand).</p>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm table-hover">
+<thead><tr><th>Level</th><th>Ref</th><th>Customer</th><th>Ccy</th><th class="money">Overdue</th><th class="money">Oldest (days)</th><th></th></tr></thead>
+<tbody>
+{% for c in cands %}
+<tr><td><span class="badge bg-{{ ['secondary','info','warning','danger','dark'][c.level] }}">L{{ c.level }}</span> {{ c.level_name }}</td>
+<td>{{ c.cust_ref }}</td><td class="arabic">{{ c.customer }}</td><td>{{ c.currency }}</td>
+<td class="money text-danger">{{ c.overdue|money(c.currency) }}</td><td class="money">{{ c.oldest }}</td>
+<td><a class="btn btn-sm btn-outline-danger" href="{{ url_for('reminder_letter', cid=c.customer_id, level=c.level) }}">Letter</a></td></tr>
+{% endfor %}
+</tbody></table>
+<div class="small text-muted">{{ cands|length }} customers with overdue balances</div>
+</div></div>
+{% endblock %}

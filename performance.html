@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% block title %}Controller Performance{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0" style="color:#1f3864;">Controller Performance (by ledger)</h4>
+<div class="mb-3 noprint">
+  <span class="text-muted small me-2">Download:</span>
+  <a class="btn btn-sm btn-outline-success" href="?from={{ f.get("from","") }}&amp;to={{ f.get("to","") }}&amp;export=csv">CSV</a>
+  <a class="btn btn-sm btn-outline-success" href="?from={{ f.get("from","") }}&amp;to={{ f.get("to","") }}&amp;export=xlsx">Excel</a>
+  <a class="btn btn-sm btn-outline-danger" href="?from={{ f.get("from","") }}&amp;to={{ f.get("to","") }}&amp;export=pdf">PDF</a>
+</div>
+  <div class="noprint"><button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;" onclick="window.print()">Print</button></div>
+</div>
+<form class="row g-2 align-items-end mb-3 noprint" method="get">
+  <div class="col-md-2"><label class="form-label small">From</label><input type="date" class="form-control form-control-sm" name="from" value="{{ f.get('from','') }}"></div>
+  <div class="col-md-2"><label class="form-label small">To</label><input type="date" class="form-control form-control-sm" name="to" value="{{ f.get('to','') }}"></div>
+  <div class="col-md-2"><button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Run</button></div>
+</form>
+{% for who, byccy in perf.items() %}
+<div class="card shadow-sm mb-3"><div class="card-body">
+  <h5 style="color:#1f3864;">{{ who }}</h5>
+  <table class="table table-sm">
+    <thead><tr><th>Ccy</th><th class="money">Customers</th><th class="money">Outstanding</th><th class="money">Overdue</th>
+      <th class="money">Collected (period)</th><th class="money">Recovery %</th><th class="money">Commission</th></tr></thead>
+    <tbody>
+    {% for ccy in ['EGP','USD'] %}{% set p = byccy[ccy] %}{% if p.customers or p.collected %}
+      <tr><td>{{ ccy }}</td><td class="money">{{ p.customers }}</td>
+        <td class="money">{{ p.outstanding|money }}</td><td class="money text-danger">{{ p.overdue|money }}</td>
+        <td class="money text-success">{{ p.collected|money }}</td>
+        <td class="money">{{ '%.0f%%'|format(p.recovery_pct) if p.recovery_pct is not none else '—' }}</td>
+        <td class="money fw-bold">{{ p.commission|money(ccy) }}</td></tr>
+    {% endif %}{% endfor %}
+    </tbody>
+  </table>
+</div></div>
+{% endfor %}
+{% if not perf %}<p class="text-muted">No data yet.</p>{% endif %}
+<p class="small text-muted">Recovery % = collected ÷ (collected + current overdue) for that owner's ledger. EGP and USD separate.</p>
+{% endblock %}

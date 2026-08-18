@@ -1,0 +1,92 @@
+{% extends "base.html" %}{% block title %}Settings{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Settings</h4>
+<div class="row g-3">
+<div class="col-lg-4"><div class="card shadow-sm"><div class="card-body">
+  <h6>Currency / FX</h6>
+  <p class="small text-muted">USD → EGP rate used for the EGP-equivalent memo total. Native EGP/USD figures are never converted.</p>
+  <form method="post"><input type="hidden" name="section" value="fx">
+    <div class="mb-2"><label class="form-label small">1 USD =</label>
+      <div class="input-group input-group-sm"><input class="form-control" name="fx_rate" value="{{ v.fx_rate }}"><span class="input-group-text">EGP</span></div></div>
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save FX</button>
+  </form>
+</div></div></div>
+<div class="col-lg-4"><div class="card shadow-sm"><div class="card-body">
+  <h6>Email (SMTP) {% if email_ready %}<span class="badge bg-success">configured</span>{% else %}<span class="badge bg-secondary">not set</span>{% endif %}</h6>
+  <form method="post"><input type="hidden" name="section" value="email">
+    <div class="mb-1"><input class="form-control form-control-sm" name="smtp_host" placeholder="SMTP host" value="{{ v.smtp_host }}"></div>
+    <div class="mb-1"><input class="form-control form-control-sm" name="smtp_port" placeholder="Port (587)" value="{{ v.smtp_port }}"></div>
+    <div class="mb-1"><input class="form-control form-control-sm" name="smtp_user" placeholder="Username" value="{{ v.smtp_user }}"></div>
+    <div class="mb-1"><input class="form-control form-control-sm" type="password" name="smtp_pass" placeholder="Password (leave blank to keep)"></div>
+    <div class="mb-1"><input class="form-control form-control-sm" name="smtp_from" placeholder="From address" value="{{ v.smtp_from }}"></div>
+    <div class="form-check form-check-sm mb-2"><input class="form-check-input" type="checkbox" name="smtp_tls" value="1" {{ 'checked' if v.smtp_tls in ('1','') }}>
+      <label class="form-check-label small">Use STARTTLS</label></div>
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save email</button>
+  </form>
+</div></div></div>
+<div class="col-lg-4"><div class="card shadow-sm"><div class="card-body">
+  <h6>Database</h6>
+  <p class="small text-muted">Currently using <b>{{ current_db }}</b>. To move to shared multi-user mode, paste your <b>Neon</b> connection string and restart the app.</p>
+  <form method="post"><input type="hidden" name="section" value="database">
+    <div class="mb-2"><input class="form-control form-control-sm" name="database_url" placeholder="postgresql+psycopg://…neon.tech/neondb?sslmode=require"></div>
+    <button class="btn btn-sm btn-outline-warning">Save DB URL (.env)</button>
+  </form>
+</div></div></div>
+<div class="col-lg-4"><div class="card shadow-sm"><div class="card-body">
+  <h6>Collection strategy (call scheduler)</h6>
+  <p class="small text-muted">Drives how the call scheduler prioritises overdue customers.</p>
+  <form method="post"><input type="hidden" name="section" value="strategy">
+    <div class="mb-2"><label class="form-label small">Strategy</label>
+      <select class="form-select form-select-sm" name="call_strategy">
+        {% for key,s in strategies.items() %}<option value="{{key}}" {{ 'selected' if v.call_strategy==key }}>{{ s.label }}</option>{% endfor %}</select></div>
+    <div class="row g-2">
+      <div class="col"><label class="form-label small">Calls / day</label>
+        <input class="form-control form-control-sm" name="call_capacity" value="{{ v.call_capacity }}"></div>
+      <div class="col"><label class="form-label small">Cool-down (days)</label>
+        <input class="form-control form-control-sm" name="call_cooldown" value="{{ v.call_cooldown }}"></div>
+    </div>
+    <button class="btn btn-sm btn-primary mt-2" style="background:#1f3864;border:0;">Save strategy</button>
+  </form>
+</div></div></div>
+<div class="col-lg-8"><div class="card shadow-sm"><div class="card-body">
+  <h6>Commission rates by ageing bucket</h6>
+  <p class="small text-muted">Controllers earn commission on collections, weighted by the bucket the money was collected from. Older debt is harder — give it a higher rate.</p>
+  <form method="post"><input type="hidden" name="section" value="commission">
+    <div class="mb-2" style="max-width:360px;"><label class="form-label small">Default owner share (%) — used where a bucket has no specific split</label>
+      <div class="input-group input-group-sm"><input class="form-control" name="owner_share" value="{{ '%.0f'|format(owner_share) }}"><span class="input-group-text">% to owner</span></div></div>
+    <div class="mb-2" style="max-width:360px;"><label class="form-label small">Default doubtful-debt provision for legal accounts (%)</label>
+      <div class="input-group input-group-sm"><input class="form-control" name="legal_provision_default" value="{{ '%.0f'|format(legal_provision_default) }}"><span class="input-group-text">% provided</span></div></div>
+    <div class="table-responsive"><table class="table table-sm align-middle">
+      <thead><tr><th>Ageing bucket</th><th style="width:130px">Rate %</th><th style="width:160px">Owner share %</th><th class="text-muted small">Collector gets</th></tr></thead>
+      <tbody>
+      {% for b in comm_order %}{% if b != 'No Due Date' %}
+        <tr><td>{{ b }}</td>
+          <td><input class="form-control form-control-sm" name="{{ 'comm_rate_' + b.lower().replace(' ','_').replace('-','_').replace('+','plus') }}" value="{{ '%.2f'|format(comm_rates[b]) }}"></td>
+          <td><input class="form-control form-control-sm" name="{{ 'comm_owner_' + b.lower().replace(' ','_').replace('-','_').replace('+','plus') }}" value="{{ '%.0f'|format(owner_splits[b]) }}"></td>
+          <td class="text-muted small">{{ '%.0f'|format(100 - owner_splits[b]) }}%</td></tr>
+      {% endif %}{% endfor %}
+      </tbody>
+    </table></div>
+    <button class="btn btn-sm btn-primary mt-2" style="background:#1f3864;border:0;">Save commission rates</button>
+    <a class="btn btn-sm btn-outline-secondary mt-2" href="{{ url_for('commission_targets') }}">Set targets</a>
+  </form>
+</div></div></div>
+<div class="col-lg-4"><div class="card shadow-sm"><div class="card-body">
+  <h6>Branding (white-label)</h6>
+  <p class="small text-muted">Product name appears in the app; organisation name and logo appear on the pages, letters and printed reports.</p>
+  <form method="post" enctype="multipart/form-data"><input type="hidden" name="section" value="branding">
+    <div class="mb-2"><label class="form-label small">Product name</label>
+      <input class="form-control form-control-sm" name="product_name" value="{{ brand.product }}"></div>
+    <div class="mb-2"><label class="form-label small">Organisation name</label>
+      <input class="form-control form-control-sm" name="org_name" value="{{ brand.org }}"></div>
+    <div class="mb-2"><label class="form-label small">Organisation logo</label>
+      {% if has_org_logo %}<div class="mb-1"><img src="{{ url_for('brand_org_logo') }}" style="max-height:48px;border:1px solid #eee;border-radius:4px;padding:2px;background:#fff;" alt="current logo"></div>{% endif %}
+      <input class="form-control form-control-sm" type="file" name="org_logo" accept="image/*">
+      <div class="form-text">PNG, JPG or SVG, up to ~1.5 MB. Shows on the top bar, login, and printed reports.</div>
+      {% if has_org_logo %}<div class="form-check mt-1"><input class="form-check-input" type="checkbox" name="remove_logo" id="rmlogo"><label class="form-check-label small" for="rmlogo">Remove current logo</label></div>{% endif %}
+    </div>
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save branding</button>
+  </form>
+</div></div></div>
+</div>
+{% endblock %}

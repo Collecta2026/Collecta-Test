@@ -1,0 +1,50 @@
+{% extends "base.html" %}{% block title %}Overdue Customers — {{ ccy }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center flex-wrap">
+  <h4 class="mb-0" style="color:#1f3864;">Overdue Customers — {{ ccy }}</h4>
+  <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+</div>
+<div class="mb-3 noprint">
+  <span class="text-muted small me-2">Download:</span>
+  <a class="btn btn-sm btn-outline-success" href="?export=csv">CSV</a>
+  <a class="btn btn-sm btn-outline-success" href="?export=xlsx">Excel</a>
+  <a class="btn btn-sm btn-outline-danger" href="?export=pdf">PDF</a>
+</div>
+
+<p class="text-muted small">{{ rows|length }} customer(s) with an overdue balance in {{ ccy }} · total overdue
+  <b class="text-danger">{{ total_overdue|money(ccy) }}</b>. Click a customer to open their account.</p>
+
+<div class="card shadow-sm"><div class="card-body p-0">
+<table class="table table-sm table-hover mb-0">
+  <thead style="background:#1f3864;color:#fff;">
+    <tr>
+      <th>Ref</th><th>Customer</th><th>Ledger Owner</th><th>Phone</th>
+      <th class="money">Total Outstanding</th><th class="money">Overdue</th>
+      <th class="text-center">Oldest (days)</th><th>Worst Bucket</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.cust_ref }}</td>
+      <td class="arabic"><a href="{{ url_for('customer_detail', cid=r.customer_id) }}">{{ r.customer }}</a></td>
+      <td>{{ r.owner }}</td>
+      <td>{{ r.phone }}</td>
+      <td class="money">{{ r.total|money(ccy) }}</td>
+      <td class="money text-danger fw-bold">{{ r.overdue|money(ccy) }}</td>
+      <td class="text-center">{{ r.oldest }}</td>
+      <td>{{ r.worst }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="8" class="text-center text-muted py-3">No overdue customers in {{ ccy }}. 🎉</td></tr>
+    {% endfor %}
+  </tbody>
+  {% if rows %}
+  <tfoot><tr class="fw-bold" style="border-top:2px solid #1f3864;">
+    <td colspan="5" class="text-end">Total overdue</td>
+    <td class="money text-danger">{{ total_overdue|money(ccy) }}</td><td colspan="2"></td>
+  </tr></tfoot>
+  {% endif %}
+</table>
+</div></div>
+{% endblock %}

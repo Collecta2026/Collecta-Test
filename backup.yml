@@ -1,0 +1,64 @@
+# Collecta — automatic nightly database backup.
+# Runs every night, exports the whole Neon database, and keeps copies two ways:
+#   1) a downloadable file attached to each run (kept 90 days), and
+#   2) a permanent copy committed to a separate "backups" branch of this repo.
+# It needs ONE secret named DATABASE_URL (your Neon connection string).
+# You can also run it any time from the Actions tab using "Run workflow".
+
+name: Nightly database backup
+
+on:
+  schedule:
+    - cron: "0 2 * * *"     # 02:00 UTC daily (~04:00 Cairo). Change if you like.
+  workflow_dispatch: {}       # adds a manual "Run workflow" button
+
+permissions:
+  contents: write             # lets the job save the backup to the "backups" branch
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Export the database (matching Postgres client via Docker)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::DATABASE_URL secret is not set. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          mkdir -p backups
+          STAMP=$(date -u +%Y-%m-%d)
+          echo "Creating backup for $STAMP ..."
+          docker run --rm -e DATABASE_URL postgres:17 \
+            sh -c 'pg_dump "$DATABASE_URL" --no-owner --no-privileges' \
+            | gzip > "backups/collecta-$STAMP.sql.gz"
+          echo "Backup size:"; ls -lh backups/
+
+      - name: Attach the backup to this run (downloadable, kept 90 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: collecta-backup
+          path: backups/*.sql.gz
+          retention-days: 90
+
+      - name: Save a permanent copy to the 'backups' branch
+        run: |
+          git config user.name "collecta-backup-bot"
+          git config user.email "backup-bot@users.noreply.github.com"
+          FILE=$(ls backups/*.sql.gz | head -n1)
+          git fetch origin backups || true
+          if git ls-remote --exit-code --heads origin backups >/dev/null 2>&1; then
+            git checkout -B backups origin/backups
+          else
+            git checkout --orphan backups
+            git reset --hard
+          fi
+          mkdir -p backups
+          cp "$FILE" backups/ 2>/dev/null || true
+          git add backups/
+          git commit -m "Backup $(date -u +%F)" || { echo "No changes to commit."; exit 0; }
+          git push origin backups

@@ -1,0 +1,96 @@
+{% extends "base.html" %}{% block title %}Bulk Import{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Bulk Import</h4>
+<p class="text-muted small">Bring in many instalments or receipts at once: download a template, paste your rows in the same column order, upload, review, then confirm. EGP and USD stay separate throughout.</p>
+
+{% if stage == 'home' %}
+<div class="row g-3">
+  {% for kind, spec in specs.items() %}
+  <div class="col-lg-6">
+    <div class="card shadow-sm h-100"><div class="card-body">
+      <h5 style="color:#1f3864;">{{ spec.title }}</h5>
+      <p class="small text-muted">
+        {% if kind=='instalments' %}Add new instalments. Leave <b>Customer Ref</b> blank for a new customer and Collecta assigns the next code automatically; new customers are created for you.
+        {% else %}Record receipts against instalments that already exist in the system.{% endif %}
+      </p>
+      <ol class="small">
+        <li>Download the template and open it in Excel.</li>
+        <li>Paste your rows under the headers (see the <b>Instructions</b> tab), then delete the grey example rows.</li>
+        <li>Save, then upload it below and review before confirming.</li>
+      </ol>
+      <a class="btn btn-sm btn-outline-secondary mb-3" href="{{ url_for('import_template', kind=kind) }}">⬇ Download {{ spec.title }} template (Excel)</a>
+      <form method="post" action="{{ url_for('import_preview') }}" enctype="multipart/form-data" class="d-flex gap-2 align-items-center">
+        <input type="hidden" name="kind" value="{{ kind }}">
+        <input class="form-control form-control-sm" type="file" name="file" accept=".xlsx,.csv" required>
+        <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;white-space:nowrap;">Upload &amp; review</button>
+      </form>
+    </div></div>
+  </div>
+  {% endfor %}
+</div>
+<div class="card shadow-sm mt-3"><div class="card-body">
+  <h6>Column mapping</h6>
+  <div class="row">
+  {% for kind, spec in specs.items() %}
+    <div class="col-lg-6">
+      <div class="fw-bold small mt-2">{{ spec.title }}</div>
+      <table class="table table-sm small"><thead><tr><th>Column</th><th>Required</th><th>Example</th></tr></thead><tbody>
+        {% for key,header,req,help,ex in spec.columns %}<tr><td>{{ header }}</td><td>{{ req }}</td><td class="text-muted">{{ ex }}</td></tr>{% endfor %}
+      </tbody></table>
+    </div>
+  {% endfor %}
+  </div>
+</div></div>
+
+{% elif stage == 'preview' %}
+<div class="alert alert-light border">Reviewing <b>{{ filename }}</b> — {{ specs[kind].title }}. Nothing has been saved yet.</div>
+<div class="row text-center mb-3">
+  <div class="col"><div class="card"><div class="card-body py-2"><div class="text-muted small">Rows accepted</div><div class="fs-4 fw-bold text-success">{{ accepted|length }}</div></div></div></div>
+  <div class="col"><div class="card"><div class="card-body py-2"><div class="text-muted small">Rows rejected</div><div class="fs-4 fw-bold {{ 'text-danger' if rejected else 'text-muted' }}">{{ rejected|length }}</div></div></div></div>
+</div>
+
+{% if rejected %}
+<div class="card shadow-sm mb-3"><div class="card-body">
+  <h6 class="text-danger">Rejected rows (fix these in your file and upload again)</h6>
+  <table class="table table-sm"><thead><tr><th>File row</th><th>Key</th><th>Reason</th></tr></thead><tbody>
+    {% for r in rejected %}<tr><td>{{ r.row }}</td><td>{{ r.key }}</td><td class="small text-danger">{{ r.reason }}</td></tr>{% endfor %}
+  </tbody></table>
+</div></div>
+{% endif %}
+
+{% if move %}
+<div class="card shadow-sm mb-3"><div class="card-body">
+  <h6>Projected balance movement</h6>
+  <table class="table table-sm"><thead><tr><th>Ref</th><th>Customer</th><th>Ccy</th><th class="money">Old balance</th><th class="money">Change</th><th class="money">New balance</th></tr></thead><tbody>
+    {% for m in move %}<tr><td>{{ m.ref }}</td><td class="arabic">{{ m.name }}</td><td>{{ m.currency }}</td>
+      <td class="money">{{ m.old|money }}</td><td class="money {{ 'text-success' if m.change<0 else '' }}">{{ m.change|money }}</td><td class="money fw-bold">{{ m.new|money }}</td></tr>{% endfor %}
+    {% for ccy, t in totals.items() %}<tr class="fw-bold"><td>TOTAL</td><td></td><td>{{ ccy }}</td>
+      <td class="money">{{ t.old|money }}</td><td class="money">{{ t.change|money }}</td><td class="money">{{ t.new|money }}</td></tr>{% endfor %}
+  </tbody></table>
+</div></div>
+{% endif %}
+
+<form method="post" action="{{ url_for('import_commit') }}">
+  <input type="hidden" name="kind" value="{{ kind }}">
+  <input type="hidden" name="filename" value="{{ filename }}">
+  <input type="hidden" name="accepted_json" value='{{ accepted_json|e }}'>
+  <a class="btn btn-outline-secondary" href="{{ url_for('import_home') }}">Cancel</a>
+  {% if accepted %}<button class="btn btn-primary" style="background:#1f3864;border:0;">Confirm import of {{ accepted|length }} row(s)</button>{% endif %}
+</form>
+
+{% elif stage == 'audit' %}
+<div class="alert alert-success">Import complete — {{ result.created }} {{ specs[kind].title|lower }} row(s) saved{% if n_new %}, {{ n_new }} new customer(s) created{% endif %}.</div>
+<a class="btn btn-sm btn-outline-secondary mb-3" href="{{ url_for('import_audit_download', token=token) }}">⬇ Download audit report (Excel)</a>
+<div class="card shadow-sm mb-3"><div class="card-body">
+  <h6>Balance movement (old → new)</h6>
+  <table class="table table-sm"><thead><tr><th>Ref</th><th>Customer</th><th>Ccy</th><th class="money">Old balance</th><th class="money">Change</th><th class="money">New balance</th></tr></thead><tbody>
+    {% for m in move %}<tr><td>{{ m.ref }}</td><td class="arabic">{{ m.name }}</td><td>{{ m.currency }}</td>
+      <td class="money">{{ m.old|money }}</td><td class="money {{ 'text-success' if m.change<0 else '' }}">{{ m.change|money }}</td><td class="money fw-bold">{{ m.new|money }}</td></tr>{% endfor %}
+    {% for ccy, t in totals.items() %}<tr class="fw-bold"><td>TOTAL</td><td></td><td>{{ ccy }}</td>
+      <td class="money">{{ t.old|money }}</td><td class="money">{{ t.change|money }}</td><td class="money">{{ t.new|money }}</td></tr>{% endfor %}
+  </tbody></table>
+</div></div>
+<a class="btn btn-primary" style="background:#1f3864;border:0;" href="{{ url_for('import_home') }}">Import another file</a>
+<a class="btn btn-outline-secondary" href="{{ url_for('ledger') }}">Go to ledger</a>
+{% endif %}
+{% endblock %}

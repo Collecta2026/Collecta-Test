@@ -1,0 +1,102 @@
+{% extends "base.html" %}{% block title %}Help &amp; Manual{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h4 class="mb-0" style="color:#1f3864;">{{ product_name }} — Operating Manual</h4>
+  <button class="btn btn-sm btn-outline-secondary noprint" onclick="window.print()">Print / Save as PDF</button>
+</div>
+<p class="text-muted small">Search any function, jump to its help, and open it directly in the system.</p>
+
+<div class="input-group mb-4 noprint" style="max-width:640px;">
+  <span class="input-group-text">🔎</span>
+  <input id="manualSearch" class="form-control form-control-lg" placeholder="Search the manual and functions… e.g. commission, reminder, allocation"
+         value="{{ q }}" autofocus oninput="filterManual()">
+</div>
+
+<div class="row">
+  <!-- Contents sheet -->
+  <div class="col-lg-3 noprint">
+    <div class="card shadow-sm sticky-top" style="top:1rem;">
+      <div class="card-body">
+        <h6 class="text-muted">Contents</h6>
+        <nav id="toc">
+        {% for cat in categories %}
+          {% set items = manual|selectattr('cat','equalto',cat)|list %}
+          {% if items %}
+          <div class="toc-cat" data-cat="{{ cat }}">
+            <div class="fw-bold small mt-2" style="color:#1f3864;">{{ cat }}</div>
+            {% for s in items %}
+              <a class="d-block small text-decoration-none toc-link" data-target="{{ s.id }}" href="#{{ s.id }}">{{ s.title }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        {% endfor %}
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sections -->
+  <div class="col-lg-9">
+    <div id="noResults" class="alert alert-warning d-none">No help topics match your search.</div>
+    {% for cat in categories %}
+      {% set items = manual|selectattr('cat','equalto',cat)|list %}
+      {% for s in items %}
+      <div class="card shadow-sm mb-3 manual-section" id="{{ s.id }}"
+           data-text="{{ (s.title ~ ' ' ~ s.summary ~ ' ' ~ (s.keywords|join(' ')) ~ ' ' ~ s.cat)|lower }}">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="badge bg-light text-dark border">{{ s.cat }}</span>
+              <h5 class="mt-1" style="color:#1f3864;">{{ s.title }}</h5>
+              <div class="text-muted small">Menu: {{ s.path }}</div>
+            </div>
+            {% if s.route %}
+              <a class="btn btn-sm btn-primary noprint" style="background:#1f3864;border:0;white-space:nowrap;"
+                 href="{{ url_for(s.route, **s.args) }}">Open this function →</a>
+            {% endif %}
+          </div>
+          <p class="mt-2 mb-2">{{ s.summary }}</p>
+          {% if s.steps %}
+          <ol class="mb-2">{% for st in s.steps %}<li class="small">{{ st }}</li>{% endfor %}</ol>
+          {% endif %}
+          {% if s.tips %}
+          <div class="small text-muted">{% for t in s.tips %}<div>💡 {{ t }}</div>{% endfor %}</div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+function filterManual(){
+  var q = (document.getElementById('manualSearch').value||'').toLowerCase().trim();
+  var any = false;
+  document.querySelectorAll('.manual-section').forEach(function(el){
+    var show = !q || el.getAttribute('data-text').indexOf(q) !== -1;
+    el.style.display = show ? '' : 'none';
+    if(show) any = true;
+  });
+  // filter contents links
+  document.querySelectorAll('.toc-link').forEach(function(a){
+    var target = document.getElementById(a.getAttribute('data-target'));
+    a.style.display = (target && target.style.display !== 'none') ? '' : 'none';
+  });
+  document.querySelectorAll('.toc-cat').forEach(function(c){
+    var visible = c.querySelectorAll('.toc-link:not([style*="none"])').length;
+    c.style.display = visible ? '' : 'none';
+  });
+  document.getElementById('noResults').classList.toggle('d-none', any);
+}
+document.querySelectorAll('.toc-link').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var el = document.getElementById(a.getAttribute('data-target'));
+    if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'});
+      el.style.transition='background .2s'; el.style.background='#fff7e6';
+      setTimeout(function(){ el.style.background=''; }, 900); }
+  });
+});
+window.addEventListener('DOMContentLoaded', function(){ if(document.getElementById('manualSearch').value) filterManual(); });
+</script>
+{% endblock %}

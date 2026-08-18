@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% block title %}Aged {{ ccy }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0" style="color:#1f3864;">Aged Debtors Analysis — {{ ccy }}</h4>
+<div class="mb-3 noprint">
+  <span class="text-muted small me-2">Download:</span>
+  <a class="btn btn-sm btn-outline-success" href="?export=csv">CSV</a>
+  <a class="btn btn-sm btn-outline-success" href="?export=xlsx">Excel</a>
+  <a class="btn btn-sm btn-outline-danger" href="?export=pdf">PDF</a>
+</div>
+  <div class="btn-group btn-group-sm">
+    <a class="btn btn-outline-secondary {{ 'active' if ccy=='EGP' }}" href="{{ url_for('aged', ccy='EGP') }}">EGP</a>
+    <a class="btn btn-outline-secondary {{ 'active' if ccy=='USD' }}" href="{{ url_for('aged', ccy='USD') }}">USD</a>
+  </div>
+</div>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm table-hover">
+<thead><tr><th>Ref</th><th>Customer</th>
+{% for b in m.buckets %}<th class="money">{{ b }}</th>{% endfor %}
+<th class="money">Total</th><th class="money">Overdue</th></tr></thead>
+<tbody>
+{% for c in m.customers %}
+<tr><td><a href="{{ url_for('customer_detail', cid=c.customer_id) }}">{{ c.cust_ref }}</a></td><td class="arabic">{{ c.customer }}</td>
+{% for b in m.buckets %}<td class="money {{ 'bucket-old' if b in ['181-365 Days','365+ Days'] else ('bucket-mid' if b=='91-180 Days' else '') }}">{{ c.buckets.get(b,0)|money }}</td>{% endfor %}
+<td class="money fw-bold">{{ c.total|money }}</td>
+<td class="money text-danger">{{ c.overdue|money }}</td></tr>
+{% endfor %}
+<tr class="fw-bold table-dark"><td colspan="2">TOTAL LEDGER</td>
+{% for b in m.buckets %}<td class="money">{{ m.totals[b]|money }}</td>{% endfor %}
+<td class="money">{{ m.grand|money }}</td><td class="money">{{ m.overdue|money }}</td></tr>
+</tbody></table>
+<div class="small text-muted">{{ m.customers|length }} customers · overdue {{ '%.1f'|format(100*m.overdue/m.grand if m.grand else 0) }}% of ledger</div>
+</div></div>
+{% endblock %}

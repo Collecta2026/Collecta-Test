@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% block title %}Ledger{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0" style="color:#1f3864;">Debtors Ledger</h4>
+<div class="mb-3 noprint">
+  <span class="text-muted small me-2">Download:</span>
+  <a class="btn btn-sm btn-outline-success" href="?ccy={{ ccy }}&amp;status={{ status }}&amp;export=csv">CSV</a>
+  <a class="btn btn-sm btn-outline-success" href="?ccy={{ ccy }}&amp;status={{ status }}&amp;export=xlsx">Excel</a>
+  <a class="btn btn-sm btn-outline-danger" href="?ccy={{ ccy }}&amp;status={{ status }}&amp;export=pdf">PDF</a>
+</div>
+  <form class="d-flex gap-2" method="get">
+    <select class="form-select form-select-sm" name="ccy" onchange="this.form.submit()">
+      <option value="">All currencies</option>
+      <option value="EGP" {{'selected' if ccy=='EGP'}}>EGP</option>
+      <option value="USD" {{'selected' if ccy=='USD'}}>USD</option></select>
+    <select class="form-select form-select-sm" name="status" onchange="this.form.submit()">
+      <option value="">All statuses</option>
+      {% for s in ['OVERDUE','CURRENT','SETTLED','NO DATE'] %}<option value="{{s}}" {{'selected' if status==s}}>{{s}}</option>{% endfor %}
+    </select>
+  </form>
+</div>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm table-hover">
+<thead><tr><th>Instalment ID</th><th>Ref</th><th>Customer</th><th>Ccy</th>
+<th class="money">Original</th><th class="money">Received</th><th class="money">Net</th>
+<th>Due</th><th class="money">Days</th><th>Bucket</th><th>Status</th><th>Security</th></tr></thead>
+<tbody>
+{% for r in rows %}
+<tr class="{{ 'bucket-old' if r.bucket in ['181-365 Days','365+ Days'] else ('bucket-mid' if r.bucket=='91-180 Days' else '') }}">
+<td>{{ r.inst_id }}</td><td><a href="{{ url_for('customer_detail', cid=r.customer_id) }}">{{ r.cust_ref }}</a></td>
+<td class="arabic">{{ r.customer }}</td><td>{{ r.currency }}</td>
+<td class="money">{{ r.original|money }}</td><td class="money text-success">{{ r.received|money }}</td>
+<td class="money fw-bold">{{ r.net|money }}</td><td>{{ r.due_date or '—' }}</td>
+<td class="money">{{ r.days_overdue if r.days_overdue is not none else '' }}</td>
+<td>{{ r.bucket }}</td>
+<td><span class="badge bg-{{ 'danger' if r.status=='OVERDUE' else ('success' if r.status=='CURRENT' else 'secondary') }}">{{ r.status }}</span></td>
+<td>{{ r.security }}</td></tr>
+{% endfor %}
+</tbody></table>
+<div class="small text-muted">{{ rows|length }} instalments</div>
+</div></div>
+{% endblock %}

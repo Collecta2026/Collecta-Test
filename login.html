@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block title %}Login{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-5"><div class="col-md-4">
+  <div class="card shadow-sm"><div class="card-body p-4">
+    {% if has_org_logo %}<div class="text-center mb-3"><img src="{{ url_for('brand_org_logo') }}" style="max-height:70px;max-width:80%" alt="{{ org_name }}"></div>{% endif %}
+    <div class="text-center mb-2"><img src="{{ url_for('static', filename='logo.svg') }}" style="max-width:210px;width:100%" alt="{{ product_name }}"></div>
+    <p class="text-muted small mb-4">Credit Control &amp; Collections · {{ org_name }}</p>
+    <form method="post">
+      <div class="mb-3"><label class="form-label">Username</label>
+        <input class="form-control" name="username" autofocus required></div>
+      <div class="mb-3"><label class="form-label">Password</label>
+        <input class="form-control" type="password" name="password" required></div>
+      <button class="btn btn-primary w-100" style="background:#1f3864;border:0;">Sign in</button>
+    </form>
+  </div></div>
+</div></div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}{% block title %}Customers{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0" style="color:#1f3864;">Customers</h4>
+  <form class="d-flex gap-2" method="get">
+    <input class="form-control form-control-sm" name="q" value="{{ q }}" placeholder="Search account no. or name…" style="min-width:280px;">
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Search</button>
+  </form>
+</div>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm table-hover">
+<thead><tr><th>Ref</th><th>Account No.</th><th>Customer</th><th>Ccy</th>
+<th>Phone</th><th>Email</th><th class="money">Outstanding</th><th class="money">Overdue</th><th class="money">Credit Limit</th></tr></thead>
+<tbody>
+{% for c in rows %}{% set b = bal.get(c.id) %}
+<tr {% if c.credit_limit and b and b.total > c.credit_limit|float %}class="table-danger"{% endif %}>
+  <td><a href="{{ url_for('customer_detail', cid=c.id) }}">{{ c.cust_ref }}</a></td>
+  <td>{{ c.account_no or '—' }}</td><td class="arabic">{{ c.name }}</td><td>{{ c.currency }}</td>
+  <td>{{ c.phone or '' }}</td><td>{{ c.email or '' }}</td>
+  <td class="money">{{ (b.total if b else 0)|money(c.currency) }}</td>
+  <td class="money text-danger">{{ (b.overdue if b else 0)|money(c.currency) }}</td>
+  <td class="money">{{ c.credit_limit|money(c.currency) if c.credit_limit is not none else '—' }}</td></tr>
+{% endfor %}
+</tbody></table>
+<div class="small text-muted">{{ rows|length }} customers{% if q %} matching “{{ q }}”{% endif %}</div>
+</div></div>
+{% endblock %}

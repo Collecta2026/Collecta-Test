@@ -1,0 +1,95 @@
+{% extends "base.html" %}{% block title %}Dashboard{% endblock %}
+{% block content %}
+<style>.kpi-link{color:inherit;text-decoration:none;border-bottom:1px dotted #b8b8b8;cursor:pointer}.kpi-link:hover{border-bottom-style:solid}</style>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0" style="color:#1f3864;">Dashboard</h4>
+  <form class="d-flex align-items-center gap-2" method="get">
+    <label class="small text-muted">As at</label>
+    <input type="date" class="form-control form-control-sm" name="as_at" value="{{ as_at }}">
+    <button class="btn btn-sm btn-outline-secondary">Re-age</button>
+  </form>
+</div>
+
+{% for ccy, colour in [('EGP','#1f3864'), ('USD','#2e7d8a')] %}
+{% set k = kpis[ccy] %}
+<h6 class="text-muted mt-2">{{ 'EGP — Egyptian Pounds' if ccy=='EGP' else 'USD — US Dollars' }}</h6>
+<div class="row g-3 mb-3">
+  <div class="col-md-3"><div class="card kpi shadow-sm"><div class="card-body">
+    <div class="text-muted small">Total Outstanding</div><div class="val" style="color:{{colour}}"><a class="kpi-link" href="{{ url_for('ledger', ccy=ccy) }}" title="View all {{ ccy }} instalments">{{ k.total|money(ccy) }}</a></div></div></div></div>
+  <div class="col-md-3"><div class="card kpi shadow-sm"><div class="card-body">
+    <div class="text-muted small">Overdue</div><div class="val text-danger"><a class="kpi-link" href="{{ url_for('ledger', ccy=ccy, status='OVERDUE') }}" title="View overdue {{ ccy }} instalments">{{ k.overdue|money(ccy) }}</a></div></div></div></div>
+  <div class="col-md-3"><div class="card kpi shadow-sm"><div class="card-body">
+    <div class="text-muted small">Overdue %</div><div class="val text-warning">{{ '%.1f'|format(k.overdue_pct) }}%</div></div></div></div>
+  <div class="col-md-3"><div class="card kpi shadow-sm"><div class="card-body">
+    <div class="text-muted small">Customers (<a href="{{ url_for('overdue_customers', ccy=ccy) }}" style="font-weight:600;">{{k.customers_overdue}} overdue</a>)</div><div class="val" style="color:{{colour}}"><a class="kpi-link" href="{{ url_for('ledger', ccy=ccy) }}" title="View the {{ ccy }} ledger">{{ k.customers }}</a></div></div></div></div>
+</div>
+{% endfor %}
+
+<div class="card kpi shadow-sm mb-3" style="background:#eef2f8;">
+  <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+    <div><div class="text-muted small">Combined book value (EGP-equivalent memo · USD converted at FX {{ '%.2f'|format(eq.fx) }})</div>
+      <div class="val" style="color:#1f3864;">{{ eq.total|money('EGP') }}</div></div>
+    <div class="text-end"><div class="text-muted small">Overdue (EGP-eq)</div>
+      <div class="val text-danger">{{ eq.overdue|money('EGP') }}</div></div>
+    <div class="text-muted small">Set the USD→EGP rate in <a href="{{ url_for('settings') if current_user.is_admin else '#' }}">Settings</a>. Native EGP and USD figures above remain unconverted.</div>
+  </div>
+</div>
+
+{% if legal['EGP'].n or legal['USD'].n %}
+<div class="card shadow-sm mb-3 border-dark">
+  <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+    <div>⚖ <b>Legal sub-ledger</b> — <a href="{{ url_for('legal_ledger') }}">review with legal team</a></div>
+    {% for ccy in ['EGP','USD'] %}{% if legal[ccy].n %}
+    <div class="text-end small">
+      <span class="text-muted">{{ ccy }} ({{ legal[ccy].n }}):</span>
+      gross <b>{{ legal[ccy].gross|money(ccy) }}</b> ·
+      provision <b style="color:#bf8f00;">{{ legal[ccy].provision|money(ccy) }}</b> ·
+      net <b>{{ legal[ccy].net|money(ccy) }}</b></div>
+    {% endif %}{% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="row g-3">
+  <div class="col-lg-5">
+    <div class="card shadow-sm"><div class="card-body">
+      <h6 class="card-title">Ageing Summary</h6>
+      <table class="table table-sm">
+        <thead><tr><th>Bucket</th><th class="money">EGP</th><th class="money">USD</th></tr></thead>
+        <tbody>
+        {% for b in BUCKETS if b != 'No Due Date' %}
+          <tr class="{{ 'bucket-old' if b in ['181-365 Days','365+ Days'] else ('bucket-mid' if b=='91-180 Days' else '') }}">
+            <td>{{ b }}</td>
+            <td class="money">{{ ageing['EGP'][b]|money }}</td>
+            <td class="money">{{ ageing['USD'][b]|money }}</td></tr>
+        {% endfor %}
+          <tr class="fw-bold"><td>Total</td>
+            <td class="money">{{ ageing['EGP']['_total']|money }}</td>
+            <td class="money">{{ ageing['USD']['_total']|money }}</td></tr>
+        </tbody>
+      </table>
+      <div class="small text-muted">Collected to date: {{ coll['EGP'].amount|money('EGP') }} · {{ coll['USD'].amount|money('USD') }} ({{ coll['EGP'].count + coll['USD'].count }} receipts)</div>
+    </div></div>
+  </div>
+
+  {% for ccy in ['EGP','USD'] %}
+  <div class="col-lg-{{ 7 if ccy=='EGP' else 12 }}">
+    <div class="card shadow-sm"><div class="card-body">
+      <h6 class="card-title">Top 10 Customers — {{ ccy }}</h6>
+      <table class="table table-sm table-hover">
+        <thead><tr><th>Ref</th><th>Customer</th><th class="money">Outstanding</th><th class="money">Overdue</th></tr></thead>
+        <tbody>
+        {% for c in top[ccy] %}
+          <tr><td><a href="{{ url_for('customer_detail', cid=c.customer_id) }}">{{ c.cust_ref }}</a></td>
+            <td class="arabic">{{ c.customer }}</td>
+            <td class="money">{{ c.total|money(ccy) }}</td>
+            <td class="money text-danger">{{ c.overdue|money(ccy) }}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div></div>
+  </div>
+  {% endfor %}
+</div>
+<p class="small text-muted mt-3">EGP and USD are reported separately and never summed.</p>
+{% endblock %}

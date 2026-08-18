@@ -1,0 +1,84 @@
+{% extends "base.html" %}{% block title %}{{ cust.name }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h4 class="mb-0" style="color:#1f3864;"><span class="arabic">{{ cust.name }}</span>
+    <span class="text-muted fs-6">· {{ cust.cust_ref }} · A/C {{ cust.account_no or '—' }} · {{ cust.currency }}</span></h4>
+  <div>
+    <a class="btn btn-sm btn-outline-danger" href="{{ url_for('reminder_letter', cid=cust.id) }}">Reminder letter</a>
+  </div>
+</div>
+{% if over_limit %}<div class="alert alert-danger py-2">Over credit limit — outstanding {{ total|money(cust.currency) }} exceeds limit {{ limit|money(cust.currency) }}.</div>{% endif %}
+{% if cust.legal_status == 'legal' %}
+<div class="alert alert-dark py-2 d-flex justify-content-between align-items-center">
+  <div>⚖ <b>In legal sub-ledger</b> — stage: {{ cust.legal_stage or '—' }} · provision {{ '%.0f'|format(cust.provision_pct or default_pct) }}% · referred {{ cust.legal_date or '—' }}{% if cust.legal_reason %} · {{ cust.legal_reason }}{% endif %}</div>
+  {% if current_user.is_admin %}<form method="post" action="{{ url_for('legal_return', cid=cust.id) }}"><input type="hidden" name="next" value="{{ url_for('customer_detail', cid=cust.id) }}"><button class="btn btn-sm btn-outline-light">Return to active</button></form>{% endif %}
+</div>
+{% elif current_user.is_admin %}
+<div class="card shadow-sm mb-3"><div class="card-body py-2">
+  <form method="post" action="{{ url_for('legal_transfer') }}" class="row g-2 align-items-end">
+    <input type="hidden" name="customer_id" value="{{ cust.id }}">
+    <input type="hidden" name="next" value="{{ url_for('customer_detail', cid=cust.id) }}">
+    <div class="col-auto"><label class="form-label small mb-0">⚖ Transfer to legal — stage</label>
+      <select class="form-select form-select-sm" name="stage">{% for s in legal_stages %}<option>{{ s }}</option>{% endfor %}</select></div>
+    <div class="col-auto"><label class="form-label small mb-0">Provision %</label>
+      <input class="form-control form-control-sm" name="provision_pct" value="{{ '%.0f'|format(default_pct) }}" style="width:90px"></div>
+    <div class="col"><label class="form-label small mb-0">Reason</label>
+      <input class="form-control form-control-sm" name="reason" placeholder="e.g. no response after final demand"></div>
+    <div class="col-auto"><button class="btn btn-sm btn-dark">Transfer to legal</button></div>
+  </form>
+</div></div>
+{% endif %}
+
+<div class="row g-3">
+<div class="col-lg-4"><div class="card shadow-sm"><div class="card-body">
+  <h6>Contact & credit</h6>
+  <form method="post">
+    <div class="mb-2"><label class="form-label small">Account No.</label><input class="form-control form-control-sm" name="account_no" value="{{ cust.account_no or '' }}"></div>
+    <div class="mb-2"><label class="form-label small">Contact person</label><input class="form-control form-control-sm" name="contact_person" value="{{ cust.contact_person or '' }}"></div>
+    <div class="mb-2"><label class="form-label small">Phone / Mobile</label><input class="form-control form-control-sm" name="phone" value="{{ cust.phone or '' }}" placeholder="+20…"></div>
+    <div class="mb-2"><label class="form-label small">Email</label><input class="form-control form-control-sm" type="email" name="email" value="{{ cust.email or '' }}"></div>
+    <div class="mb-2"><label class="form-label small">Address</label><textarea class="form-control form-control-sm" name="address" rows="2">{{ cust.address or '' }}</textarea></div>
+    <div class="mb-2"><label class="form-label small">Credit limit ({{ cust.currency }})</label><input class="form-control form-control-sm" name="credit_limit" value="{{ cust.credit_limit if cust.credit_limit is not none else '' }}"></div>
+    <div class="mb-2"><label class="form-label small">Ledger owner (controller)</label>
+      <select class="form-select form-select-sm" name="owner_id">
+        <option value="">— unallocated —</option>
+        {% for u in users %}<option value="{{ u.id }}" {{ 'selected' if cust.owner_id==u.id }}>{{ u.full_name or u.username }}</option>{% endfor %}</select></div>
+    <div class="mb-2"><label class="form-label small">Notes</label><textarea class="form-control form-control-sm" name="notes" rows="2">{{ cust.notes or '' }}</textarea></div>
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save</button>
+  </form>
+</div></div></div>
+<div class="col-lg-8">
+  <div class="card shadow-sm mb-3"><div class="card-body">
+    <div class="row text-center">
+      <div class="col"><div class="text-muted small">Outstanding</div><div class="fs-5 fw-bold">{{ total|money(cust.currency) }}</div></div>
+      <div class="col"><div class="text-muted small">Overdue</div><div class="fs-5 fw-bold text-danger">{{ overdue|money(cust.currency) }}</div></div>
+      <div class="col"><div class="text-muted small">Credit limit</div><div class="fs-5 fw-bold">{{ limit|money(cust.currency) if limit is not none else '—' }}</div></div>
+      <div class="col"><div class="text-muted small">Headroom</div><div class="fs-5 fw-bold {{ 'text-danger' if over_limit }}">{{ (limit-total)|money(cust.currency) if limit is not none else '—' }}</div></div>
+    </div>
+  </div></div>
+  <div class="card shadow-sm"><div class="card-body table-responsive">
+    <h6>Instalments</h6>
+    <table class="table table-sm"><thead><tr><th>ID</th><th>Due</th><th class="money">Original</th>
+      <th class="money">Received</th><th class="money">Net</th><th>Bucket</th><th>Status</th><th>Security</th></tr></thead><tbody>
+    {% for r in rows %}<tr class="{{ 'bucket-old' if r.bucket in ['181-365 Days','365+ Days'] else ('bucket-mid' if r.bucket=='91-180 Days' else '') }}">
+      <td>{{ r.inst_id }}</td><td>{{ r.due_date or '—' }}</td><td class="money">{{ r.original|money }}</td>
+      <td class="money text-success">{{ r.received|money }}</td><td class="money fw-bold">{{ r.net|money }}</td>
+      <td>{{ r.bucket }}</td><td>{{ r.status }}</td><td>{{ r.security }}</td></tr>{% endfor %}
+    </tbody></table>
+  </div></div>
+  <div class="card shadow-sm mt-3"><div class="card-body">
+    <h6>Contact history &amp; comments</h6>
+    <form method="post" action="{{ url_for('customer_note', cid=cust.id) }}" class="d-flex gap-2 mb-3">
+      <input class="form-control form-control-sm" name="text" placeholder="Add a comment / note from a call…" required>
+      <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;white-space:nowrap;">Add note</button>
+    </form>
+    {% for n in notes %}
+      <div class="border-start ps-2 mb-2" style="border-width:3px !important;border-color:{{ '#c00000' if n.kind=='outcome' else '#4472c4' }} !important;">
+        <div class="small">{{ n.text }}</div>
+        <div class="text-muted" style="font-size:.72rem;">{{ n.author or 'system' }} · {{ n.created_at.strftime('%d-%b-%Y %H:%M') }}{% if n.kind!='note' %} · {{ n.kind }}{% endif %}</div>
+      </div>
+    {% else %}<div class="text-muted small">No contact notes yet.</div>{% endfor %}
+  </div></div>
+</div>
+</div>
+{% endblock %}

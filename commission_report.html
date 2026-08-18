@@ -1,0 +1,85 @@
+{% extends "base.html" %}{% block title %}Commission{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <div class="fw-bold" style="color:#1f3864;">{{ org_name }}</div>
+    <h4 class="mb-0" style="color:#1f3864;">Collection Commission Statement</h4>
+  </div>
+  <div class="noprint">
+    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('performance_report') }}">Performance</a>
+    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('commission_targets') }}">Set targets</a>
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;" onclick="window.print()">Print</button>
+  </div>
+</div>
+<div class="alert alert-light border py-2 small noprint">
+  Commission is split between the ledger owner and whoever recorded the collection,
+  <b>set per ageing bucket</b> in Admin → Settings → Commission. Rates are weighted by ageing bucket.
+</div>
+<form class="row g-2 align-items-end mb-3 noprint" method="get">
+  <div class="col-md-2"><label class="form-label small">Month (statement)</label>
+    <input type="month" class="form-control form-control-sm" name="month" value="{{ month }}"></div>
+  <div class="col-md-3"><label class="form-label small">Controller</label>
+    <select class="form-select form-select-sm" name="controller">
+      <option value="">All controllers</option>
+      {% for cc in controllers %}<option value="{{cc}}" {{'selected' if f.get('controller')==cc}}>{{cc}}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Run month</button></div>
+  <div class="col-md-4">
+    <a class="btn btn-sm btn-success" href="{{ url_for('commission_export', month=month, controller=f.get('controller',''), format='csv') }}">⬇ CSV</a>
+    <a class="btn btn-sm btn-success" href="{{ url_for('commission_export', month=month, controller=f.get('controller',''), format='xlsx') }}">⬇ Excel</a>
+    <a class="btn btn-sm btn-danger" href="{{ url_for('commission_export', month=month, controller=f.get('controller',''), format='pdf') }}">⬇ PDF</a>
+  </div>
+</form>
+{% if period and period[0] %}<p class="small text-muted noprint">Period: {{ period[0] }} to {{ period[1] }}</p>{% endif %}
+
+{% if not data.report %}<p class="text-muted">No collections in this period.</p>{% endif %}
+
+{% for who, byccy in data.report.items() %}
+<div class="card shadow-sm mb-4"><div class="card-body">
+  <h5 style="color:#1f3864;">{{ who }}</h5>
+  {% for ccy, cc in byccy.items() %}
+  {% if cc.owner.collected or cc.collector.collected %}
+  <h6 class="text-muted mt-3">{{ ccy }} — total commission {{ cc.total_commission|money(ccy) }}</h6>
+
+  {% if cc.owner.collected %}
+  <div class="small fw-bold mt-2">As ledger owner (collections from your customers) — {{ '%.0f'|format(data.owner_share) }}% share</div>
+  <table class="table table-sm mb-2">
+    <thead><tr><th>Ageing bucket</th><th class="money">Collected</th><th class="money">Rate %</th>
+      <th class="money">Commission</th><th class="money">Target</th><th class="money">vs Target</th></tr></thead>
+    <tbody>
+    {% for b in data.order %}{% set r = cc.owner.buckets[b] %}{% if r.collected or r.target %}
+      <tr class="{{ 'bucket-old' if b in ['181-365 Days','365+ Days'] else ('bucket-mid' if b=='91-180 Days' else '') }}">
+        <td>{{ b }}</td><td class="money">{{ r.collected|money }}</td><td class="money">{{ '%.2f'|format(r.rate) }}</td>
+        <td class="money fw-bold">{{ r.commission|money(ccy) }}</td>
+        <td class="money">{{ r.target|money if r.target else '—' }}</td>
+        <td class="money">{{ '%.0f%%'|format(100*r.collected/r.target) if r.target else '—' }}</td></tr>
+    {% endif %}{% endfor %}
+      <tr class="fw-bold"><td>Owner subtotal</td><td class="money">{{ cc.owner.collected|money }}</td><td></td>
+        <td class="money">{{ cc.owner.commission|money(ccy) }}</td>
+        <td class="money">{{ cc.owner.target|money if cc.owner.target else '—' }}</td>
+        <td class="money">{{ '%.0f%%'|format(cc.owner.weighted_ach) if cc.owner.weighted_ach is not none else '—' }}</td></tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if cc.collector.collected %}
+  <div class="small fw-bold">As collector (payments you recorded) — {{ '%.0f'|format(data.collector_share) }}% share</div>
+  <table class="table table-sm mb-2">
+    <thead><tr><th>Ageing bucket</th><th class="money">Collected</th><th class="money">Rate %</th><th class="money">Commission</th></tr></thead>
+    <tbody>
+    {% for b in data.order %}{% set r = cc.collector.buckets[b] %}{% if r.collected %}
+      <tr><td>{{ b }}</td><td class="money">{{ r.collected|money }}</td><td class="money">{{ '%.2f'|format(r.rate) }}</td>
+        <td class="money fw-bold">{{ r.commission|money(ccy) }}</td></tr>
+    {% endif %}{% endfor %}
+      <tr class="fw-bold"><td>Collector subtotal</td><td class="money">{{ cc.collector.collected|money }}</td><td></td>
+        <td class="money">{{ cc.collector.commission|money(ccy) }}</td></tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  <div class="text-end fw-bold" style="color:#1f3864;">TOTAL {{ ccy }} COMMISSION: {{ cc.total_commission|money(ccy) }}</div>
+  {% endif %}
+  {% endfor %}
+</div></div>
+{% endfor %}
+<p class="small text-muted">EGP and USD commissions are shown separately and never combined.</p>
+{% endblock %}

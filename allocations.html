@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% block title %}Ledger Allocation{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Ledger Allocation</h4>
+<p class="text-muted small">Allocate ranges of customers to a credit controller (the ledger owner). New customers are allocated at creation or by the per-currency default below.</p>
+<div class="row g-3">
+<div class="col-lg-5">
+  <div class="card shadow-sm mb-3"><div class="card-body">
+    <h6>Allocate a range to a controller</h6>
+    <form method="post"><input type="hidden" name="action" value="range">
+      <div class="mb-2"><label class="form-label small">Controller (ledger owner)</label>
+        <select class="form-select form-select-sm" name="owner_id" required>
+          {% for u in users %}<option value="{{ u.id }}">{{ u.full_name or u.username }}</option>{% endfor %}</select></div>
+      <div class="mb-2"><label class="form-label small">Allocate by</label>
+        <select class="form-select form-select-sm" name="kind">
+          <option value="ref">Customer Ref range (e.g. EGP001 → EGP020)</option>
+          <option value="account">Account number range</option></select></div>
+      <div class="row g-2">
+        <div class="col"><label class="form-label small">From</label><input class="form-control form-control-sm" name="frm" required></div>
+        <div class="col"><label class="form-label small">To</label><input class="form-control form-control-sm" name="to" required></div>
+      </div>
+      <button class="btn btn-sm btn-primary mt-2" style="background:#1f3864;border:0;">Allocate range</button>
+    </form>
+  </div></div>
+  <div class="card shadow-sm"><div class="card-body">
+    <h6>Default owner for NEW customers</h6>
+    <p class="small text-muted">New customers created without an explicit owner are allocated here (per currency).</p>
+    <form method="post"><input type="hidden" name="action" value="default">
+      {% for ccy in ['EGP','USD'] %}
+      <div class="mb-2"><label class="form-label small">{{ ccy }} default owner</label>
+        <select class="form-select form-select-sm" name="default_{{ ccy }}">
+          <option value="">— none —</option>
+          {% for u in users %}<option value="{{ u.id }}" {{ 'selected' if defaults[ccy]==(u.id|string) }}>{{ u.full_name or u.username }}</option>{% endfor %}</select></div>
+      {% endfor %}
+      <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save defaults</button>
+    </form>
+  </div></div>
+</div>
+<div class="col-lg-7"><div class="card shadow-sm"><div class="card-body table-responsive">
+  <h6>Allocation summary</h6>
+  <table class="table table-sm">
+    <thead><tr><th>Ledger owner</th><th class="money">EGP custs</th><th class="money">EGP outstanding</th><th class="money">EGP overdue</th>
+      <th class="money">USD custs</th><th class="money">USD outstanding</th><th class="money">USD overdue</th></tr></thead>
+    <tbody>
+    {% for who, o in summary.items() %}
+    <tr class="{{ 'table-warning' if who=='(unallocated)' }}">
+      <td>{{ who }}</td>
+      <td class="money">{{ o.EGP.n }}</td><td class="money">{{ o.EGP.total|money }}</td><td class="money text-danger">{{ o.EGP.overdue|money }}</td>
+      <td class="money">{{ o.USD.n }}</td><td class="money">{{ o.USD.total|money }}</td><td class="money text-danger">{{ o.USD.overdue|money }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <div class="small text-muted">You can also set/override an owner on each customer's own page.</div>
+</div></div></div>
+</div>
+{% endblock %}

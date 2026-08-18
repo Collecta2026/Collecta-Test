@@ -1,0 +1,5244 @@
+{
+ "customers": [
+  {
+   "cust_ref": "EGP001",
+   "account_no": "121810038",
+   "name": "اقساط محمود احمد عبد المنعم محمود الصفتي ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP002",
+   "account_no": "121810092",
+   "name": "اقساط احمد سعدان زغلول محمد-عمر صلاح الدين متولي ابراهيم-اسامه محمد بهاء السيد احمد 1212203",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP003",
+   "account_no": "121810079",
+   "name": "اقساط احمد محمد الشناوي بيومي ج م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP004",
+   "account_no": "121810063",
+   "name": "اقساط احمد رضوان مصطفى عبد الغفار / هيثم رمضان احمد محمد ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP005",
+   "account_no": "121810088",
+   "name": "اقساط ابو بكر محمد ابو بكر جاد 1212191",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP006",
+   "account_no": "121810039",
+   "name": "اقساط محمد حسام محمد محمد العيسوي ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP007",
+   "account_no": "121810083",
+   "name": "اقساط / عبدالرحيم حسين محمود محمد-1212148",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP008",
+   "account_no": "121810056",
+   "name": "اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP009",
+   "account_no": "121810091",
+   "name": "اقساط محمد فاروق ثابت فراج 1212205 $ تعديل الي ح.م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP010",
+   "account_no": "121810012",
+   "name": "اقساط محمد سعيد عبد الفتاح محمد ونس ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP011",
+   "account_no": "121810066",
+   "name": "اقساط محمد محمد سنوسي عبد الحميد ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP012",
+   "account_no": "121810082",
+   "name": "اقساط خالد محمد فرحان مصطفى ابو بكر 1212158 ج.م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP013",
+   "account_no": "121810070",
+   "name": "اقساط اسلام خليل محروس / ريهام لاشين ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP014",
+   "account_no": "121810004",
+   "name": "اقساط محمد زكريا عبد الجيد فرج رجب ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP015",
+   "account_no": "121810087",
+   "name": "اقساط محمود اسامة محمود زحير 1212138",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP016",
+   "account_no": "121810062",
+   "name": "اقساط اسماعيل ناصر اسماعيل يوسف ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP017",
+   "account_no": "1213115",
+   "name": "اقساط جرجس مسعود كامل ابراهيم -بطرس مسعود كامل ابراهيم / تحويل الى ج م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP018",
+   "account_no": "121810045",
+   "name": "اقساط رضوان صبري رضوان حسن عبد العزيز ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP019",
+   "account_no": "121810014",
+   "name": "اقساط ريهام صلاح مختار حسن لاشين ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP020",
+   "account_no": "121810076",
+   "name": "اقساط /يحيى عاطف سعد محمد الفحام / جنيه 1212149",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP021",
+   "account_no": "121810080",
+   "name": "اقساط احمد محمد محمد امين البنا",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP022",
+   "account_no": "121810078",
+   "name": "اقساط / احمد طارق حسين سليمان / 1212134",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP023",
+   "account_no": "121810069",
+   "name": "اقساط محمد احمد عويس جارحي ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP024",
+   "account_no": "121810077",
+   "name": "اقساط /محمد مطيع محمد مرسي جزر 1212119",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP025",
+   "account_no": "121810061",
+   "name": "اقساط ابراهيم محمد فهيم مهدي ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP026",
+   "account_no": "12185",
+   "name": "اقساط محمد حسان حسن معوض / جنية 2-1212210",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP027",
+   "account_no": "121810057",
+   "name": "اقساط ندا محمود امام الليثي سيد ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP028",
+   "account_no": "121810015",
+   "name": "اقساط حسن علي محمد محمود سيد الاهل ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP029",
+   "account_no": "121810068",
+   "name": "اقساط مصطفى محمد سليمان محمد العلاوي ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP030",
+   "account_no": "121810019",
+   "name": "اقساط حازم عبد العزيز محمود كريم ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP031",
+   "account_no": "121810090",
+   "name": "اقساط محمد جمعه عبدالستار 1212108-3",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP032",
+   "account_no": "121810003",
+   "name": "اقساط محمد رمضان عبد الحميد محمد ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP033",
+   "account_no": "12184",
+   "name": "اقساط احمد محمد حمزه عقل $ معدل الي ج.م 1212190",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP034",
+   "account_no": "121810093",
+   "name": "اقساط عبدالرحمن احمد عبدالباري محمد ابراهيم تم التحويل الى ج م - 1212184",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP035",
+   "account_no": "121810074",
+   "name": "اقساط عمرو محمد محجوب ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP036",
+   "account_no": "121810089",
+   "name": "اقساط مايكل موسي فهمي يوسف 1212090",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP037",
+   "account_no": "121810041",
+   "name": "اقساط عمرو طارق ابراهيم حميدو عبد الحميد ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP038",
+   "account_no": "121830002",
+   "name": "اقساط يوسف سيد عبد الفتاح سيد يورو / تحويل الى ج م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP039",
+   "account_no": "121810073",
+   "name": "اقساط محمد جلال علي قاسم $ تحويل الى جنيه",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP040",
+   "account_no": "121810081",
+   "name": "اقساط -شريف محمد فرج الله عبداللطيف ج.م 1212142",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP041",
+   "account_no": "121810055",
+   "name": "اقساط سعيد فاروق ابراهيم عبيدة ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP042",
+   "account_no": "121810031",
+   "name": "اقساط احمد يوسف محمود عبد الفتاح كلوب ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP043",
+   "account_no": "121810046",
+   "name": "اقساط محمد محمود عبد الجواد الفتاح ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP044",
+   "account_no": "121810064",
+   "name": "اقساط محمود عبد الرحمن سكر ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP045",
+   "account_no": "121810025",
+   "name": "اقساط محمد فريد احمد محمد ج/م",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP046",
+   "account_no": "1214145",
+   "name": "محمود حرفوش / نقدي",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP047",
+   "account_no": "121810071",
+   "name": "اقساط /عاصم الدجوي / معرض EDS",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "EGP048",
+   "account_no": "1214137",
+   "name": "احمد شعبان محمد عمار / نقدي",
+   "currency": "EGP",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD001",
+   "account_no": "121820043",
+   "name": "اقساط احمد اسامه عويس امام احمد $ 1212181",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD002",
+   "account_no": "121820016",
+   "name": "اقساط مصطفى ابو السعد / المنصورة $",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD003",
+   "account_no": "121820049",
+   "name": "اقساط السيد بيه محمد بيه دراز $ 1212213",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD004",
+   "account_no": "121820032",
+   "name": "اقساط محمد علي ابو العنين شرف الدين $",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD005",
+   "account_no": "121820044",
+   "name": "اقساط احمد مصطفي احمد ابو السعد $ 5-1212073",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD006",
+   "account_no": "121820033",
+   "name": "اقساط محمد جمعة عبد الستار عبد السيد $",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD007",
+   "account_no": "121820047",
+   "name": "اقساط محمد حسان حسن معوض $ 1212210",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD008",
+   "account_no": "121820046",
+   "name": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبدالهادي $ 1212208",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD009",
+   "account_no": null,
+   "name": "اقساط مصطفى ابو السعد / المنصورة $",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD010",
+   "account_no": "121820040",
+   "name": "اقساط -محمود محمد عمار عبدالعزيز $ 1212168",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD011",
+   "account_no": "121820039",
+   "name": "اقساط فيصل جواد العزو 1212143",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD012",
+   "account_no": "121820038",
+   "name": "اقساط انوار عطية صابر محمد $",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD013",
+   "account_no": "121820048",
+   "name": "اقساط احمد سيد قطب فرج احمد $ 5-1212039",
+   "currency": "USD",
+   "credit_limit": null
+  },
+  {
+   "cust_ref": "USD014",
+   "account_no": "121820045",
+   "name": "اقساط عمرو محمد محجوب دولار",
+   "currency": "USD",
+   "credit_limit": null
+  }
+ ],
+ "instalments": [
+  {
+   "inst_id": "EGP001-01",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-03-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 1 عن شهر 3 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-02",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-04-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 عن شهر 4 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801584"
+  },
+  {
+   "inst_id": "EGP001-03",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-04-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 2 عن شهر 4 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-04",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-05-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 5 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801584"
+  },
+  {
+   "inst_id": "EGP001-05",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-05-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 3 عن شهر 5 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-06",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-06-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 6 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801584"
+  },
+  {
+   "inst_id": "EGP001-07",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-06-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 عن شهر 6 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-08",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2026-07-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 7 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938527 / تاريخ الشيك 15-04-2"
+  },
+  {
+   "inst_id": "EGP001-09",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-07-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 7 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801585"
+  },
+  {
+   "inst_id": "EGP001-10",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-07-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 7 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-11",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2026-08-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 8 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938527 / تاريخ الشيك 15-04-2"
+  },
+  {
+   "inst_id": "EGP001-12",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-08-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 8 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801585"
+  },
+  {
+   "inst_id": "EGP001-13",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-08-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 8 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-14",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2026-09-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 9 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938528 / تاريخ الشيك 15-05-2"
+  },
+  {
+   "inst_id": "EGP001-15",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-09-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 9 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801585"
+  },
+  {
+   "inst_id": "EGP001-16",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-09-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 9 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-17",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2026-10-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 10 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938528 / تاريخ الشيك 15-04-"
+  },
+  {
+   "inst_id": "EGP001-18",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-10-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 10 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801585"
+  },
+  {
+   "inst_id": "EGP001-19",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-10-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 10 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-20",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2026-11-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 11 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938529 / تاريخ الشيك 15-06-"
+  },
+  {
+   "inst_id": "EGP001-21",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 34000.0,
+   "due_date": "2026-11-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 11 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801585"
+  },
+  {
+   "inst_id": "EGP001-22",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-11-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 11 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-23",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2026-12-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 12 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938529 / تاريخ الشيك 15-06-"
+  },
+  {
+   "inst_id": "EGP001-24",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 36000.0,
+   "due_date": "2026-12-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 12 لجهاز ال T20 بشيط بنكي cib بقيمة 205000 ج رقم الشيك 000303801585"
+  },
+  {
+   "inst_id": "EGP001-25",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2026-12-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 12 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-26",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2027-01-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 19 عن شهر 1 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938530 / تاريخ الشيك 15-07-2"
+  },
+  {
+   "inst_id": "EGP001-27",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-01-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 1 بشيك مجمع من السي اي بي رقم الشيك 000303801586 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-28",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2027-02-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 20 عن شهر 2 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938530 / تاريخ الشيك 15-07-2"
+  },
+  {
+   "inst_id": "EGP001-29",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-02-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 2 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-30",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2027-03-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 21 عن شهر 3 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938531 / تاريخ الشيك 15-08-2"
+  },
+  {
+   "inst_id": "EGP001-31",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-03-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 3 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-32",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 21250.0,
+   "due_date": "2027-04-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 عن شهر 4 (Zotion fast sintering furnace F2+Zotion dry milling c5 ) شيك رقم 000130938531 / تاريخ الشيك 15-08-2"
+  },
+  {
+   "inst_id": "EGP001-33",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-04-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 4 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-34",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-05-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 5 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-35",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-06-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 6 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-36",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-07-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 7 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-37",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-08-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 8 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-38",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-09-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 19 عن شهر 9 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-39",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-10-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 20 عن شهر 10 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-40",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-11-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 21 عن شهر 11 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-41",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2027-12-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 عن شهر 12 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-42",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 52500.0,
+   "due_date": "2028-01-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 عن شهر 1 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP001-43",
+   "cust_ref": "EGP001",
+   "currency": "EGP",
+   "original_amount": 42500.0,
+   "due_date": "2028-02-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 عن شهر 2 بشيك مجمع من السي اي بي رقم الشيك 000303801587 وشيك اخر رقم 000303801588 خاص بماكينة الريتون"
+  },
+  {
+   "inst_id": "EGP002-01",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-04-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 1 عن شهر 4 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158946"
+  },
+  {
+   "inst_id": "EGP002-02",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-05-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 2 عن شهر 5 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158946"
+  },
+  {
+   "inst_id": "EGP002-03",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-06-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 3 عن شهر 6 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158946"
+  },
+  {
+   "inst_id": "EGP002-04",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-07-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 عن شهر 7 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158946"
+  },
+  {
+   "inst_id": "EGP002-05",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-08-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 8 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158946"
+  },
+  {
+   "inst_id": "EGP002-06",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-09-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 9 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158947"
+  },
+  {
+   "inst_id": "EGP002-07",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 100000.0,
+   "due_date": "2026-09-10",
+   "security": "Cheque",
+   "reference": "دفعه مستحقه خلال ال 6 شهور الاولي متبقي علي العميل 1000 كضمان لمبلغ متبقي من القسط"
+  },
+  {
+   "inst_id": "EGP002-08",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-10-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 10 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158947"
+  },
+  {
+   "inst_id": "EGP002-09",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-11-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 11 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158947"
+  },
+  {
+   "inst_id": "EGP002-10",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2026-12-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 12 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158947"
+  },
+  {
+   "inst_id": "EGP002-11",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2027-01-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 1 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158947"
+  },
+  {
+   "inst_id": "EGP002-12",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2027-02-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 2 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158948"
+  },
+  {
+   "inst_id": "EGP002-13",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2027-03-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 3 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158948"
+  },
+  {
+   "inst_id": "EGP002-14",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2027-04-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 4 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158948"
+  },
+  {
+   "inst_id": "EGP002-15",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2027-05-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 5 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158948"
+  },
+  {
+   "inst_id": "EGP002-16",
+   "cust_ref": "EGP002",
+   "currency": "EGP",
+   "original_amount": 80000.0,
+   "due_date": "2027-06-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 6 لجهاز الارج بشيك مجمع من البنك الاهلي بقيمة 433,000 رقم الشيك 42717000158948"
+  },
+  {
+   "inst_id": "EGP003-01",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 34550.0,
+   "due_date": "2025-08-15",
+   "security": "Unsecured",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "EGP003-02",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 110000.0,
+   "due_date": "2025-09-15",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 4 شهر 9 عن سيستم الايديت بدون شيكات او سندات امانة وتم الاثبات بعد التواصل مع م عمرو وا عادل"
+  },
+  {
+   "inst_id": "EGP003-03",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 110000.0,
+   "due_date": "2025-10-15",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 5 شهر 10 عن سيستم الايديت بدون شيكات او سندات امانة وتم الاثبات بعد التواصل مع م عمرو وا عادل"
+  },
+  {
+   "inst_id": "EGP003-04",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 110000.0,
+   "due_date": "2025-11-15",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 6 شهر 11 عن سيستم الايديت بدون شيكات او سندات امانة وتم الاثبات بعد التواصل مع م عمرو وا عادل"
+  },
+  {
+   "inst_id": "EGP003-05",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 70000.0,
+   "due_date": "2026-01-15",
+   "security": "Unsecured",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "EGP003-06",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 110000.0,
+   "due_date": "2026-02-15",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 9 شهر 2 عن سيستم الايديت بدون شيكات او سندات امانة وتم الاثبات بعد التواصل مع م عمرو وا عادل"
+  },
+  {
+   "inst_id": "EGP003-07",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 110000.0,
+   "due_date": "2026-03-15",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 10 شهر 3 عن سيستم الايديت بدون شيكات او سندات امانة وتم الاثبات بعد التواصل مع م عمرو وا عادل"
+  },
+  {
+   "inst_id": "EGP003-08",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 110000.0,
+   "due_date": "2026-04-15",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 11 شهر 4 عن سيستم الايديت بدون شيكات او سندات امانة وتم الاثبات بعد التواصل مع م عمرو وا عادل"
+  },
+  {
+   "inst_id": "EGP003-09",
+   "cust_ref": "EGP003",
+   "currency": "EGP",
+   "original_amount": 90000.0,
+   "due_date": "2026-05-15",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم12 شهر 5 عن سيستم الايديت بدون شيكات او سندات امانة وتم الاثبات بعد التواصل مع م عمرو وا عادل"
+  },
+  {
+   "inst_id": "EGP004-01",
+   "cust_ref": "EGP004",
+   "currency": "EGP",
+   "original_amount": 19267.0,
+   "due_date": "2026-01-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 1 شيك رقم 12765530000022 شيك مجمع بقيمة 984375"
+  },
+  {
+   "inst_id": "EGP004-02",
+   "cust_ref": "EGP004",
+   "currency": "EGP",
+   "original_amount": 164062.0,
+   "due_date": "2026-02-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 2 شيك رقم 12765530000022 شيك مجمع بقيمة 984375"
+  },
+  {
+   "inst_id": "EGP004-03",
+   "cust_ref": "EGP004",
+   "currency": "EGP",
+   "original_amount": 164062.0,
+   "due_date": "2026-03-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 3 شيك رقم 12765530000022 شيك مجمع بقيمة 984375"
+  },
+  {
+   "inst_id": "EGP004-04",
+   "cust_ref": "EGP004",
+   "currency": "EGP",
+   "original_amount": 164062.0,
+   "due_date": "2026-04-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 4 شيك رقم 12765530000022 شيك مجمع بقيمة 984375"
+  },
+  {
+   "inst_id": "EGP004-05",
+   "cust_ref": "EGP004",
+   "currency": "EGP",
+   "original_amount": 164062.0,
+   "due_date": "2026-05-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 5 شيك رقم 12765530000022 شيك مجمع بقيمة 984375"
+  },
+  {
+   "inst_id": "EGP004-06",
+   "cust_ref": "EGP004",
+   "currency": "EGP",
+   "original_amount": 164068.0,
+   "due_date": "2026-06-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 6 شيك رقم 12765530000022 شيك مجمع بقيمة 984375"
+  },
+  {
+   "inst_id": "EGP005-01",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-07-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 7 بموجب اشيك رقم 56917000019818 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-02",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-08-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 8 ببموجب اشيك رقم 56917000019819 بنك الاهلي نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-03",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-09-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 9 بموجب اشيك رقم 56917000019820 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-04",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-10-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 10 بموجب اشيك رقم 56917000019821 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-05",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-11-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 11 بموجب اشيك رقم 56917000019822 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-06",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-12-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 12 بموجب اشيك رقم 56917000019823 بنك الاهلي   نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-07",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2027-01-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 1 بموجب اشيك مجمع عن شهرين  رقم 56917000019824 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-08",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2027-02-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 2 بموجب اشيك مجمع عن شهرين  رقم 56917000019824 بنك الاهلي وع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-09",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2027-03-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 3 بموجب اشيك مجمع عن شهرين  رقم 56917000019825 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-10",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2027-04-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 4 بموجب اشيك مجمع عن شهرين  رقم 56917000019825 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP005-11",
+   "cust_ref": "EGP005",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2027-05-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 3 بموجب اشيك رقم 56917000019814 بنك الاهلي  نوع الجهاز LARGE V"
+  },
+  {
+   "inst_id": "EGP006-01",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 15000.0,
+   "due_date": "2026-06-01",
+   "security": "Cheque",
+   "reference": "قبض شيك  43011898 من 121810039-اقساط محمد حسام محمد محمد العيسوي ج/م شيك مجمع على 4 دفعات  تاريخ الشيك1-7-2025 قسط رقم 2"
+  },
+  {
+   "inst_id": "EGP006-02",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 75000.0,
+   "due_date": "2026-06-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 شهر 6 بموجب شيك مجمع رقم 000303937326 عن جهاز لارج في"
+  },
+  {
+   "inst_id": "EGP006-03",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 15000.0,
+   "due_date": "2026-07-01",
+   "security": "Cheque",
+   "reference": "قبض شيك  43011898 من 121810039-اقساط محمد حسام محمد محمد العيسوي ج/م شيك مجمع على 4 دفعات  تاريخ الشيك1-7-2025 قسط رقم 2"
+  },
+  {
+   "inst_id": "EGP006-04",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 75000.0,
+   "due_date": "2026-07-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 شهر 7 بموجب شيك مجمع رقم 000303937326 عن جهاز لارج في"
+  },
+  {
+   "inst_id": "EGP006-05",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 15000.0,
+   "due_date": "2026-08-01",
+   "security": "Cheque",
+   "reference": "قبض شيك  43011898 من 121810039-اقساط محمد حسام محمد محمد العيسوي ج/م شيك مجمع على 4 دفعات  تاريخ الشيك1-7-2025 قسط رقم 2"
+  },
+  {
+   "inst_id": "EGP006-06",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 75000.0,
+   "due_date": "2026-08-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 شهر 8 بموجب شيك مجمع رقم 000303937326 عن جهاز لارج في"
+  },
+  {
+   "inst_id": "EGP006-07",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 15000.0,
+   "due_date": "2026-09-01",
+   "security": "Cheque",
+   "reference": "قبض شيك  43011898 من 121810039-اقساط محمد حسام محمد محمد العيسوي ج/م شيك مجمع على 4 دفعات  تاريخ الشيك1-7-2025 قسط رقم 2"
+  },
+  {
+   "inst_id": "EGP006-08",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 75000.0,
+   "due_date": "2026-09-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 شهر 9 بموجب شيك مجمع رقم 000303937325 عن جهاز لارج في"
+  },
+  {
+   "inst_id": "EGP006-09",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 75000.0,
+   "due_date": "2026-10-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 شهر 10 بموجب شيك مجمع رقم 000303937325 عن جهاز لارج في"
+  },
+  {
+   "inst_id": "EGP006-10",
+   "cust_ref": "EGP006",
+   "currency": "EGP",
+   "original_amount": 75000.0,
+   "due_date": "2026-11-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 شهر 11 بموجب شيك مجمع رقم 000303937325 عن جهاز لارج في"
+  },
+  {
+   "inst_id": "EGP007-01",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 53000.0,
+   "due_date": "2026-06-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 6 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208812عن جهاز SMART 3DX-3IN 1 INTELLIGE"
+  },
+  {
+   "inst_id": "EGP007-02",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-07-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 7 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208812عن جهاز SMART 3DX-3IN 1 INTELLIGE"
+  },
+  {
+   "inst_id": "EGP007-03",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-08-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 8 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208812عن جهاز SMART 3DX-3IN 1 INTELLIG"
+  },
+  {
+   "inst_id": "EGP007-04",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-09-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 9 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208811عن جهاز SMART 3DX-3IN 1 INTELLIG"
+  },
+  {
+   "inst_id": "EGP007-05",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-10-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 10 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208811عن جهاز SMART 3DX-3IN 1 INTELLI"
+  },
+  {
+   "inst_id": "EGP007-06",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-11-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 11 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208811عن جهاز SMART 3DX-3IN 1 INTELLI"
+  },
+  {
+   "inst_id": "EGP007-07",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2026-12-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 12 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208811عن جهاز SMART 3DX-3IN 1 INTELLI"
+  },
+  {
+   "inst_id": "EGP007-08",
+   "cust_ref": "EGP007",
+   "currency": "EGP",
+   "original_amount": 60000.0,
+   "due_date": "2027-01-18",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 1 ويوجد شيك مجمع بقيمة 300,000 ج.م بنك الاهلي رقم الشيك 51290000208811عن جهاز SMART 3DX-3IN 1 INTELLIG"
+  },
+  {
+   "inst_id": "EGP008-01",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 6250.0,
+   "due_date": "2025-10-16",
+   "security": "Cheque",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "EGP008-02",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2026-06-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 6 رقم الشيك 19636576 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-03",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2026-07-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 7 رقم الشيك 19636577 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-04",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2026-08-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 8 رقم الشيك 19636578 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-05",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2026-09-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 9 رقم الشيك 19636579 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-06",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2026-10-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 10 رقم الشيك 19636580 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رق"
+  },
+  {
+   "inst_id": "EGP008-07",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2026-11-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 11 رقم الشيك 19636581 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رق"
+  },
+  {
+   "inst_id": "EGP008-08",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2026-12-16",
+   "security": "Cheque",
+   "reference": "قسط رم 18 عن شهر 12 رقم الشيك 19636582 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-09",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2027-01-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 19 عن شهر 1 رقم الشيك 19636583 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-10",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2027-02-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 20 عن شهر 2 رقم الشيك 19636584 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-11",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2027-03-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 21 عن شهر 3 رقم الشيك 19636585 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-12",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2027-04-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 عن شهر 4 رقم الشيك 19636586 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-13",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25200.0,
+   "due_date": "2027-05-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 عن شهر 5 رقم الشيك 19636587 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP008-14",
+   "cust_ref": "EGP008",
+   "currency": "EGP",
+   "original_amount": 25400.0,
+   "due_date": "2027-06-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 عن شهر 6 رقم الشيك 19636588 قبض من 121810056-اقساط الحسين محمد سعيد احمد محمد الصعيدي ج/م شيكات قبض /جنيه رقم"
+  },
+  {
+   "inst_id": "EGP009-01",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2026-06-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 3 عن شهر 6 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-02",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2026-07-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 4 عن شهر 7 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-03",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2026-08-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 5 عن شهر 8 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-04",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2026-09-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 6 عن شهر 9 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-05",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2026-10-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 7 عن شهر 10 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-06",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2026-11-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 8 عن شهر 11 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-07",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2026-12-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 9 عن شهر 12 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-08",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2027-01-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 10 عن شهر 1 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-09",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2027-02-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 11 عن شهر 2 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP009-10",
+   "cust_ref": "EGP009",
+   "currency": "EGP",
+   "original_amount": 29750.0,
+   "due_date": "2027-03-09",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 12 عن شهر 3 لجهاز الC5 بموجب ايصال امانه بقيمة 29,750"
+  },
+  {
+   "inst_id": "EGP010-01",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18284.0,
+   "due_date": "2026-04-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 10 عن شهر 4"
+  },
+  {
+   "inst_id": "EGP010-02",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-05-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 11 عن شهر 5"
+  },
+  {
+   "inst_id": "EGP010-03",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-06-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 12 عن شهر 6"
+  },
+  {
+   "inst_id": "EGP010-04",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-07-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 13 عن شهر 7"
+  },
+  {
+   "inst_id": "EGP010-05",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-08-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 14 عن شهر 8"
+  },
+  {
+   "inst_id": "EGP010-06",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-09-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 15 عن شهر 9"
+  },
+  {
+   "inst_id": "EGP010-07",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-10-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 16 عن شهر 10"
+  },
+  {
+   "inst_id": "EGP010-08",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-11-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 17 عن شهر 11"
+  },
+  {
+   "inst_id": "EGP010-09",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2026-12-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 18 عن شهر 12"
+  },
+  {
+   "inst_id": "EGP010-10",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2027-01-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 19 عن شهر 1"
+  },
+  {
+   "inst_id": "EGP010-11",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2027-02-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 20 عن شهر 2"
+  },
+  {
+   "inst_id": "EGP010-12",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2027-03-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 21 عن شهر 3"
+  },
+  {
+   "inst_id": "EGP010-13",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2027-04-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 22 عن شهر 4"
+  },
+  {
+   "inst_id": "EGP010-14",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18433.0,
+   "due_date": "2027-05-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 23 عن شهر 5"
+  },
+  {
+   "inst_id": "EGP010-15",
+   "cust_ref": "EGP010",
+   "currency": "EGP",
+   "original_amount": 18441.0,
+   "due_date": "2027-06-04",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 24 عن شهر 6"
+  },
+  {
+   "inst_id": "EGP011-01",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 11225.0,
+   "due_date": "2025-06-05",
+   "security": "Trust Receipt",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "EGP011-02",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2025-07-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-03",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2025-08-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-04",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2025-09-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-05",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2025-10-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-06",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2025-11-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-07",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2025-12-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-08",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2026-01-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-09",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2026-02-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-10",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2026-03-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP011-11",
+   "cust_ref": "EGP011",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2026-04-05",
+   "security": "Trust Receipt",
+   "reference": "سندات امانة قبض من 121810066-اقساط محمد محمد سنوسي عبد الحميد ج/م شيكات قبض /جنيه رقم:27استحقاق 5-1-2025"
+  },
+  {
+   "inst_id": "EGP012-01",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-03-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 8 عن شهر 3 عن جهاز c5 بموجب ايصال امانه رقم 8"
+  },
+  {
+   "inst_id": "EGP012-02",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-04-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 9 عن شهر 4 عن جهاز c5 بموجب ايصال امانه رقم 9"
+  },
+  {
+   "inst_id": "EGP012-03",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-05-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 10 عن شهر 5 عن جهاز c5 بموجب ايصال امانه رقم 10"
+  },
+  {
+   "inst_id": "EGP012-04",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-06-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 11 عن شهر 6 عن جهاز c5 بموجب ايصال امانه رقم 11"
+  },
+  {
+   "inst_id": "EGP012-05",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-07-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 12 عن شهر 7 عن جهاز c5 بموجب ايصال امانه رقم 12"
+  },
+  {
+   "inst_id": "EGP012-06",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-08-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 13 عن شهر 8 عن جهاز c5 بموجب ايصال امانه رقم 13"
+  },
+  {
+   "inst_id": "EGP012-07",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-09-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 14 عن شهر 9 عن جهاز c5 بموجب ايصال امانه رقم 14"
+  },
+  {
+   "inst_id": "EGP012-08",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-10-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 15 عن شهر 10 عن جهاز c5 بموجب ايصال امانه رقم 15"
+  },
+  {
+   "inst_id": "EGP012-09",
+   "cust_ref": "EGP012",
+   "currency": "EGP",
+   "original_amount": 27682.0,
+   "due_date": "2026-11-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 16 عن شهر 11 عن جهاز c5 بموجب ايصال امانه رقم 16"
+  },
+  {
+   "inst_id": "EGP013-01",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 8600.0,
+   "due_date": "2025-12-30",
+   "security": "Cheque",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "EGP013-02",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-01-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 1 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-03",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-02-28",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 2 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-04",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-03-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 3 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-05",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-04-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 4 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-06",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-05-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 5 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-07",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-06-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 6 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-08",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-07-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 7 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-09",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-08-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 8 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-10",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-09-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 9 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-11",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-10-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 10 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-12",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-11-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 11 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-13",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2026-12-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 19 عن شهر 12 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-14",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2027-01-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 20 عن شهر 1 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-15",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2027-02-28",
+   "security": "Cheque",
+   "reference": "قسط رقم 21 عن شهر 2 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-16",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2027-03-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 عن شهر 3 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-17",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 9800.0,
+   "due_date": "2027-04-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 عن شهر 4 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP013-18",
+   "cust_ref": "EGP013",
+   "currency": "EGP",
+   "original_amount": 8600.0,
+   "due_date": "2027-05-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 عن شهر 5 بدون شيكات"
+  },
+  {
+   "inst_id": "EGP014-01",
+   "cust_ref": "EGP014",
+   "currency": "EGP",
+   "original_amount": 34375.0,
+   "due_date": "2026-06-15",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 20 تاريخ استحقاق 15-6-2026 شيك رقم 38317000087070"
+  },
+  {
+   "inst_id": "EGP014-02",
+   "cust_ref": "EGP014",
+   "currency": "EGP",
+   "original_amount": 34375.0,
+   "due_date": "2026-07-15",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 21 تاريخ استحقاق 15-7-2026 شيك رقم 38317000087071"
+  },
+  {
+   "inst_id": "EGP014-03",
+   "cust_ref": "EGP014",
+   "currency": "EGP",
+   "original_amount": 34375.0,
+   "due_date": "2026-08-15",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 22 تاريخ استحقاق 15-8-2026 شيك رقم 38317000087072"
+  },
+  {
+   "inst_id": "EGP014-04",
+   "cust_ref": "EGP014",
+   "currency": "EGP",
+   "original_amount": 34375.0,
+   "due_date": "2026-09-15",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 23 تاريخ استحقاق 15-9-2026 شيك رقم 38317000087073"
+  },
+  {
+   "inst_id": "EGP014-05",
+   "cust_ref": "EGP014",
+   "currency": "EGP",
+   "original_amount": 34375.0,
+   "due_date": "2026-10-15",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 24 تاريخ استحقاق 15-10-2026 شيك رقم 38317000087074"
+  },
+  {
+   "inst_id": "EGP015-01",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-07-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 7 شيك رقم 72932934 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-02",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-08-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 8 شيك رقم 72932935 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-03",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-09-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 9 شيك رقم 72932936 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-04",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-10-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 10 شيك رقم 72932937 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-05",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-11-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 11 شيك رقم 72932938 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-06",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-12-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 12 شيك رقم 72932939 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-07",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2027-01-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 1 شيك رقم 72932940 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-08",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2027-02-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 2 شيك رقم 72932941 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-09",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2027-03-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 3 شيك رقم 72932942 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-10",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2027-04-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 4 شيك رقم 72932943 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-11",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2027-05-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 5 شيك رقم 72932944 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-12",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2027-06-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 6 شيك رقم 72932945 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP015-13",
+   "cust_ref": "EGP015",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2027-07-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 7 شيك رقم 72932946 بنك QNB عن جهاز MICRSCOPE"
+  },
+  {
+   "inst_id": "EGP016-01",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2026-06-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 16 عن شهر 6 ايصال رقم 16 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:731استحقاق 13-"
+  },
+  {
+   "inst_id": "EGP016-02",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2026-07-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 17 عن شهر 7 ايصال رقم 17 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:732استحقاق 13-"
+  },
+  {
+   "inst_id": "EGP016-03",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2026-08-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 18 عن شهر 8 ايصال رقم 18 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:733استحقاق 13-"
+  },
+  {
+   "inst_id": "EGP016-04",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2026-09-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 19 عن شهر 9 ايصال رقم 19 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:734استحقاق 13-"
+  },
+  {
+   "inst_id": "EGP016-05",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2026-10-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 20 عن شهر 10 ايصال رقم 20 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:735استحقاق 13"
+  },
+  {
+   "inst_id": "EGP016-06",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2026-11-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 21 عن شهر 11 ايصال رقم 21 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:736استحقاق 13"
+  },
+  {
+   "inst_id": "EGP016-07",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2026-12-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 22 عن شهر 12 ايصال رقم 22 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:737استحقاق 13"
+  },
+  {
+   "inst_id": "EGP016-08",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 17200.0,
+   "due_date": "2027-01-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 23 عن شهر 1 ايصال رقم 23 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:738استحقاق 13-"
+  },
+  {
+   "inst_id": "EGP016-09",
+   "cust_ref": "EGP016",
+   "currency": "EGP",
+   "original_amount": 16900.0,
+   "due_date": "2027-02-13",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 24 عن شهر 2 ايصال رقم 24 قبض من 121810062-اقساط اسماعيل ناصر اسماعيل يوسف ج/م شيكات قبض /جنيه رقم:739استحقاق 13-"
+  },
+  {
+   "inst_id": "EGP017-01",
+   "cust_ref": "EGP017",
+   "currency": "EGP",
+   "original_amount": 151500.0,
+   "due_date": "2026-05-01",
+   "security": "Cheque",
+   "reference": "قبض شيك رقم 06317000112342 من 1213115-جرجس مسعود كامل ابراهيم -بطرس مسعود كامل ابراهيم / وسيط شيكات قبض /جنيه رقم:175است"
+  },
+  {
+   "inst_id": "EGP018-01",
+   "cust_ref": "EGP018",
+   "currency": "EGP",
+   "original_amount": 130000.0,
+   "due_date": "2024-12-15",
+   "security": "Cheque",
+   "reference": "قبض شيك رقم 24317000062992 من 121810045-اقساط رضوان صبري رضوان حسن عبد العزيز ج/م شيكات قبض /جنيه رقم:269استحقاق 15-10-2"
+  },
+  {
+   "inst_id": "EGP019-01",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2025-11-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 شهر 30/11/2025 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-02",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2025-12-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 شهر 30/12/2025 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-03",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-01-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 شهر 30/1/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-04",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-02-28",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 شهر 28/2/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-05",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-03-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 17شهر 30/3/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-06",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-04-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 شهر 30/4/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-07",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-05-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 19 شهر 30/5/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-08",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-06-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 20 شهر 30/6/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-09",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-07-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 21 شهر 30/7/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-10",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-08-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 شهر 30/8/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-11",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-09-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 شهر 30/9/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP019-12",
+   "cust_ref": "EGP019",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-10-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 شهر 30/10/2026 عن جهاز مايكرو سكوب شيكات مجمعة عدد 2 بقيمة 460000 ج م رقم الشيك (000130548033 + 111130548034)"
+  },
+  {
+   "inst_id": "EGP020-01",
+   "cust_ref": "EGP020",
+   "currency": "EGP",
+   "original_amount": 20000.0,
+   "due_date": "2026-07-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 7 رقم الشيك 11300000027597"
+  },
+  {
+   "inst_id": "EGP020-02",
+   "cust_ref": "EGP020",
+   "currency": "EGP",
+   "original_amount": 20000.0,
+   "due_date": "2026-08-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 8 رقم الشيك 11300000027597"
+  },
+  {
+   "inst_id": "EGP020-03",
+   "cust_ref": "EGP020",
+   "currency": "EGP",
+   "original_amount": 20000.0,
+   "due_date": "2026-09-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 9 رقم الشيك 11300000027598"
+  },
+  {
+   "inst_id": "EGP020-04",
+   "cust_ref": "EGP020",
+   "currency": "EGP",
+   "original_amount": 20000.0,
+   "due_date": "2026-10-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 10 رقم الشيك 11300000027598"
+  },
+  {
+   "inst_id": "EGP020-05",
+   "cust_ref": "EGP020",
+   "currency": "EGP",
+   "original_amount": 20000.0,
+   "due_date": "2026-11-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 11 رقم الشيك 11300000027598"
+  },
+  {
+   "inst_id": "EGP020-06",
+   "cust_ref": "EGP020",
+   "currency": "EGP",
+   "original_amount": 10000.0,
+   "due_date": "2026-12-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 12 رقم الشيك 11300000027598"
+  },
+  {
+   "inst_id": "EGP021-01",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2026-08-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 14 شهر 8 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-02",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2026-09-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 15 شهر 9 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-03",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2026-10-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 16 شهر 10 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-04",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2026-11-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 17 شهر 11 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-05",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2026-12-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 18 شهر 12 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-06",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2027-01-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 19 شهر 1 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-07",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2027-02-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 20 شهر 2 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-08",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2027-03-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 21 شهر 3 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-09",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2027-04-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 22 شهر 4 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-10",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2027-05-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 23 شهر 5 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP021-11",
+   "cust_ref": "EGP021",
+   "currency": "EGP",
+   "original_amount": 9375.0,
+   "due_date": "2027-06-02",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 24 شهر 6 عن جهاز مايكروسكوب بموجب سندات امانة"
+  },
+  {
+   "inst_id": "EGP022-01",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-07-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 14 عن شهر 7 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-02",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-08-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 15 عن شهر 8 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-03",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-09-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 16 عن شهر 9 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-04",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-10-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 17 عن شهر 10 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-05",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-11-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 18 عن شهر 11 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-06",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-12-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 19 عن شهر 12 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-07",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-01-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 20 عن شهر 1 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-08",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-02-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 21 عن شهر 2 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-09",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-03-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 22 عن شهر 3 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-10",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-04-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 23 عن شهر 4 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP022-11",
+   "cust_ref": "EGP022",
+   "currency": "EGP",
+   "original_amount": 8800.0,
+   "due_date": "2027-05-22",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 24 عن شهر 5 بموجب ايصال امانه مجمع"
+  },
+  {
+   "inst_id": "EGP023-01",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-07-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 14 شهر 7 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-02",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-08-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 15 شهر 8 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-03",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-09-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 16 شهر 9 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-04",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-10-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 17 شهر 10 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-05",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-11-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 18 شهر 11 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-06",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-12-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 19 شهر 12 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-07",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-01-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 20 شهر 1 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-08",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-02-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 21 شهر 2 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-09",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-03-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 22 شهر 3 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-10",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-04-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 23 شهر 4 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP023-11",
+   "cust_ref": "EGP023",
+   "currency": "EGP",
+   "original_amount": 8800.0,
+   "due_date": "2027-05-18",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 24 شهر 5 جهاز ميكروسكوب بموجب شيكين اجماليات"
+  },
+  {
+   "inst_id": "EGP024-01",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-07-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 14 عن شهر 7 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-02",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-08-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 15 عن شهر 8 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-03",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-09-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 16 عن شهر 9 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-04",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-10-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 17 عن شهر 10 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-05",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-11-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 18 عن شهر 11 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-06",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2026-12-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 19 عن شهر 12 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-07",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-01-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 20 عن شهر 1 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-08",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-02-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 21 عن شهر 2 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-09",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-03-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 22 عن شهر 3 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-10",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 9400.0,
+   "due_date": "2027-04-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 23 عن شهر 4 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP024-11",
+   "cust_ref": "EGP024",
+   "currency": "EGP",
+   "original_amount": 8800.0,
+   "due_date": "2027-05-21",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 24 عن شهر 5 بموجب ايصال اماه مجمع"
+  },
+  {
+   "inst_id": "EGP025-01",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2026-06-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 6 شيك رقم 03217000042558"
+  },
+  {
+   "inst_id": "EGP025-02",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2026-07-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 7 شيك رقم 03217000042558"
+  },
+  {
+   "inst_id": "EGP025-03",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2026-08-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 8 شيك رقم 03217000042558"
+  },
+  {
+   "inst_id": "EGP025-04",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2026-09-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 9 شيك رقم 03217000042558"
+  },
+  {
+   "inst_id": "EGP025-05",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2026-10-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 10 شيك رقم 03217000042558"
+  },
+  {
+   "inst_id": "EGP025-06",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2026-11-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 11 شيك رقم 03217000042559"
+  },
+  {
+   "inst_id": "EGP025-07",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2026-12-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 19 عن شهر 12 شيك رقم 03217000042559"
+  },
+  {
+   "inst_id": "EGP025-08",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2027-01-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 20 عن شهر 1 شيك رقم 03217000042559"
+  },
+  {
+   "inst_id": "EGP025-09",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2027-02-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 21 عن شهر 2 شيك رقم 03217000042559"
+  },
+  {
+   "inst_id": "EGP025-10",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2027-03-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 عن شهر 3 شيك رقم 03217000042559"
+  },
+  {
+   "inst_id": "EGP025-11",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 8100.0,
+   "due_date": "2027-04-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 عن شهر 4 شيك رقم 03217000042560"
+  },
+  {
+   "inst_id": "EGP025-12",
+   "cust_ref": "EGP025",
+   "currency": "EGP",
+   "original_amount": 6200.0,
+   "due_date": "2027-05-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 عن شهر 5 شيك رقم 03217000042560"
+  },
+  {
+   "inst_id": "EGP026-01",
+   "cust_ref": "EGP026",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2026-06-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 2 شهر 6 شيك مجمع رقم الشيك 618837 البريد المصري"
+  },
+  {
+   "inst_id": "EGP026-02",
+   "cust_ref": "EGP026",
+   "currency": "EGP",
+   "original_amount": 25000.0,
+   "due_date": "2026-07-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 3 شهر 7 شيك مجمع رقم الشيك 618837 البريد المصري"
+  },
+  {
+   "inst_id": "EGP026-03",
+   "cust_ref": "EGP026",
+   "currency": "EGP",
+   "original_amount": 14000.0,
+   "due_date": "2026-08-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 شهر 8 شيك مجمع رقم الشيك 618837 البريد المصري"
+  },
+  {
+   "inst_id": "EGP026-04",
+   "cust_ref": "EGP026",
+   "currency": "EGP",
+   "original_amount": 14000.0,
+   "due_date": "2026-09-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 شهر 9 شيك مجمع رقم الشيك 618837 البريد المصري"
+  },
+  {
+   "inst_id": "EGP026-05",
+   "cust_ref": "EGP026",
+   "currency": "EGP",
+   "original_amount": 14000.0,
+   "due_date": "2026-10-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 شهر 10 شيك مجمع رقم الشيك 618837 البريد المصري"
+  },
+  {
+   "inst_id": "EGP027-01",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6750.0,
+   "due_date": "2026-06-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 12 عن شهر 6 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-02",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-07-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 13 عن شهر 7 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-03",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-08-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 14 عن شهر 8 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-04",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-09-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 15 عن شهر 9 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-05",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-10-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 16 عن شهر 10 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-06",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-11-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 17 عن شهر 11 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-07",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-12-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 18 عن شهر 12 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-08",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-01-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 19 عن شهر 1 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-09",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-02-28",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 20 عن شهر 2 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-10",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-03-28",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 21 عن شهر 3 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-11",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-04-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 22 عن شهر 4 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-12",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-05-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 23 عن شهر 5 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP027-13",
+   "cust_ref": "EGP027",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-06-29",
+   "security": "Trust Receipt",
+   "reference": "القسط ال 24 عن شهر 6 عن جهاز TABEO-1 بايصال امانه"
+  },
+  {
+   "inst_id": "EGP028-01",
+   "cust_ref": "EGP028",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-06-12",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 6 عن شيك مجمع بقيمة 51334 ج رقم الشيك 603000297754 عن جهاز ديسك توب اسكنر"
+  },
+  {
+   "inst_id": "EGP028-02",
+   "cust_ref": "EGP028",
+   "currency": "EGP",
+   "original_amount": 8000.0,
+   "due_date": "2026-07-11",
+   "security": "Cheque",
+   "reference": "قبض جزء من شيك 603000297756 من 1212021-حسن علي محمد محمود سيد الاهل - حسن علي محمد محمود سيد الاهل شيكات قبض /جنيه رقم:6"
+  },
+  {
+   "inst_id": "EGP028-03",
+   "cust_ref": "EGP028",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-07-12",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 7 عن شيك مجمع بقيمة 51334 ج رقم الشيك 603000297754 عن جهاز ديسك توب اسكنر"
+  },
+  {
+   "inst_id": "EGP028-04",
+   "cust_ref": "EGP028",
+   "currency": "EGP",
+   "original_amount": 18000.0,
+   "due_date": "2026-08-11",
+   "security": "Cheque",
+   "reference": "قبض جزء من شيك 603000297756 من 1212021-حسن علي محمد محمود سيد الاهل - حسن علي محمد محمود سيد الاهل شيكات قبض /جنيه رقم:6"
+  },
+  {
+   "inst_id": "EGP028-05",
+   "cust_ref": "EGP028",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-08-12",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 8 عن شيك مجمع بقيمة 51334 ج رقم الشيك 603000297754 عن جهاز ديسك توب اسكنر"
+  },
+  {
+   "inst_id": "EGP028-06",
+   "cust_ref": "EGP028",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-09-12",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 9 عن شيك مجمع بقيمة 51334 ج رقم الشيك 603000297755 عن جهاز ديسك توب اسكنر"
+  },
+  {
+   "inst_id": "EGP028-07",
+   "cust_ref": "EGP028",
+   "currency": "EGP",
+   "original_amount": 12500.0,
+   "due_date": "2026-10-12",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 10 عن شيك مجمع بقيمة 51334 ج رقم الشيك 603000297755 عن جهاز ديسك توب اسكنر"
+  },
+  {
+   "inst_id": "EGP029-01",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-07-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 7 شيك رقم 69149977 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:868اس"
+  },
+  {
+   "inst_id": "EGP029-02",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-08-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 8 شيك رقم 69149978قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:869است"
+  },
+  {
+   "inst_id": "EGP029-03",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-09-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 9 شيك رقم 69149979 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:870اس"
+  },
+  {
+   "inst_id": "EGP029-04",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-10-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 10 شيك رقم 69149980 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:871ا"
+  },
+  {
+   "inst_id": "EGP029-05",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-11-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 11 شيك رقم 69149981 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:872ا"
+  },
+  {
+   "inst_id": "EGP029-06",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2026-12-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 19 عن شهر 12 شيك رقم 69149982قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:873اس"
+  },
+  {
+   "inst_id": "EGP029-07",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-01-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 20 عن شهر 1 شيك رقم 69149983 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:874اس"
+  },
+  {
+   "inst_id": "EGP029-08",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-02-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 21 عن شهر 2 شيك رقم 69149984 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:875اس"
+  },
+  {
+   "inst_id": "EGP029-09",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-03-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 عن شهر 3 شيك رقم 69149985 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:876اس"
+  },
+  {
+   "inst_id": "EGP029-10",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-04-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 عن شهر 4 شيك رقم 69149986 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:877اس"
+  },
+  {
+   "inst_id": "EGP029-11",
+   "cust_ref": "EGP029",
+   "currency": "EGP",
+   "original_amount": 6875.0,
+   "due_date": "2027-05-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 عن شهر 5 شيك رقم 69149987 قبض من 121810068-اقساط مصطفى محمد سليمان محمد العلاوي ج/م شيكات قبض /جنيه رقم:878اس"
+  },
+  {
+   "inst_id": "EGP030-01",
+   "cust_ref": "EGP030",
+   "currency": "EGP",
+   "original_amount": 16660.0,
+   "due_date": "2026-02-28",
+   "security": "Trust Receipt",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "EGP030-02",
+   "cust_ref": "EGP030",
+   "currency": "EGP",
+   "original_amount": 50000.0,
+   "due_date": "2026-08-28",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 4شهر 8- 2026ايصال امانة (تابيو 1 + سكشن)"
+  },
+  {
+   "inst_id": "EGP031-01",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-06-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 عن شهر 6 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-02",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-07-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 7 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-03",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-08-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 8 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-04",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-09-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 9 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-05",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-10-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 10 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-06",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-11-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 11 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-07",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-12-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 12 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-08",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-01-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 1 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP031-09",
+   "cust_ref": "EGP031",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-02-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 2 شيك بنك اهلي 18717000119745 عن جهاز F2"
+  },
+  {
+   "inst_id": "EGP032-01",
+   "cust_ref": "EGP032",
+   "currency": "EGP",
+   "original_amount": 15625.0,
+   "due_date": "2026-06-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 22 شهر 6-2026 جهاز E5"
+  },
+  {
+   "inst_id": "EGP032-02",
+   "cust_ref": "EGP032",
+   "currency": "EGP",
+   "original_amount": 4580.0,
+   "due_date": "2026-06-14",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 تاريخ 14-6-2026 جهاز تابيو"
+  },
+  {
+   "inst_id": "EGP032-03",
+   "cust_ref": "EGP032",
+   "currency": "EGP",
+   "original_amount": 15625.0,
+   "due_date": "2026-07-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 شهر 7-2026 جهاز E5"
+  },
+  {
+   "inst_id": "EGP032-04",
+   "cust_ref": "EGP032",
+   "currency": "EGP",
+   "original_amount": 15625.0,
+   "due_date": "2026-08-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 شهر 8-2026 جهاز E5"
+  },
+  {
+   "inst_id": "EGP033-01",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-07-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 7 شيك رقم 100005615902 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP033-02",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-08-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 8 شيك رقم 100005615903 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP033-03",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-09-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 9 شيك رقم 100005615904 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP033-04",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-10-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 10 شيك رقم 100005615905 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP033-05",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-11-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 11 شيك رقم 100005615906 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP033-06",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-12-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 12 شيك رقم 100005615907 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP033-07",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-01-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 1-2027 شيك رقم 100005615908 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP033-08",
+   "cust_ref": "EGP033",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-02-10",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 2-2027 شيك رقم 100005615909 بنك مصر عن جهاز ال F2"
+  },
+  {
+   "inst_id": "EGP034-01",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-07-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 7 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP034-02",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-08-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 8 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP034-03",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-09-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 9 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP034-04",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-10-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 10 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP034-05",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-11-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 11 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP034-06",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-12-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 12 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP034-07",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-01-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 1 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP034-08",
+   "cust_ref": "EGP034",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-02-11",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 2 بعدد 2 شيكات مجمعة رقم الشيك 0000131146884 وشيك رقم 000131146885 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "EGP035-01",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-07-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 7 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP035-02",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-08-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 8 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP035-03",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-09-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 9 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP035-04",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-10-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 10 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP035-05",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-11-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 11 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP035-06",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-12-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 12 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP035-07",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-01-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 1 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP035-08",
+   "cust_ref": "EGP035",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-02-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 2 بشيك مجمع بنك ابو ظبي الاسلامي رقم الشيك 64201403024824 لجهاز ال zotion furnace machine F2"
+  },
+  {
+   "inst_id": "EGP036-01",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-07-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 7 شيك بنك الاهلي رقم الاهلي 15317000092731 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP036-02",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-08-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 8 شيك بنك الاهلي رقم الاهلي 15317000092731 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP036-03",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-09-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 9 شيك بنك الاهلي رقم الاهلي 15317000092732 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP036-04",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-10-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 10 شيك بنك الاهلي رقم الاهلي 15317000092732 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP036-05",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-11-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 11 شيك بنك الاهلي رقم الاهلي 15317000092732 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP036-06",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2026-12-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 12 شيك بنك الاهلي رقم الاهلي 15317000092732 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP036-07",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-01-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 1 شيك بنك الاهلي رقم الاهلي 15317000092732 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP036-08",
+   "cust_ref": "EGP036",
+   "currency": "EGP",
+   "original_amount": 6400.0,
+   "due_date": "2027-02-16",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 2 شيك بنك الاهلي رقم الاهلي 15317000092732 لجهاز Zotion F2"
+  },
+  {
+   "inst_id": "EGP037-01",
+   "cust_ref": "EGP037",
+   "currency": "EGP",
+   "original_amount": 23250.0,
+   "due_date": "2026-07-10",
+   "security": "Cheque",
+   "reference": "قبض جزء شيك رقم 65225768 من 121810041-اقساط عمرو طارق ابراهيم حميدو عبد الحميد ج/م شيكات قبض /جنيه رقم:336استحقاق 10-1-2"
+  },
+  {
+   "inst_id": "EGP037-02",
+   "cust_ref": "EGP037",
+   "currency": "EGP",
+   "original_amount": 25250.0,
+   "due_date": "2026-08-10",
+   "security": "Cheque",
+   "reference": "قبض جزء شيك رقم 65225768 من 121810041-اقساط عمرو طارق ابراهيم حميدو عبد الحميد ج/م شيكات قبض /جنيه رقم:336استحقاق 10-1-2"
+  },
+  {
+   "inst_id": "EGP038-01",
+   "cust_ref": "EGP038",
+   "currency": "EGP",
+   "original_amount": 7140.0,
+   "due_date": "2026-08-07",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 8 عن جهاز RAPID 3 شيك بريد رقم 968494"
+  },
+  {
+   "inst_id": "EGP038-02",
+   "cust_ref": "EGP038",
+   "currency": "EGP",
+   "original_amount": 7140.0,
+   "due_date": "2026-09-07",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 9 عن جهاز RAPID 3 شيك بريد رقم 968500"
+  },
+  {
+   "inst_id": "EGP038-03",
+   "cust_ref": "EGP038",
+   "currency": "EGP",
+   "original_amount": 7140.0,
+   "due_date": "2026-10-07",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 10 عن جهاز RAPID 3 شيك بريد رقم 968496"
+  },
+  {
+   "inst_id": "EGP038-04",
+   "cust_ref": "EGP038",
+   "currency": "EGP",
+   "original_amount": 7140.0,
+   "due_date": "2026-11-07",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 11 عن جهاز RAPID 3 شيك بريد رقم 968497"
+  },
+  {
+   "inst_id": "EGP038-05",
+   "cust_ref": "EGP038",
+   "currency": "EGP",
+   "original_amount": 7140.0,
+   "due_date": "2026-12-07",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 12 عن جهاز RAPID 3 شيك بريد رقم 968499"
+  },
+  {
+   "inst_id": "EGP038-06",
+   "cust_ref": "EGP038",
+   "currency": "EGP",
+   "original_amount": 6120.0,
+   "due_date": "2027-01-07",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 1 عن جهاز RAPID 3 شيك بريد رقم 968491"
+  },
+  {
+   "inst_id": "EGP039-01",
+   "cust_ref": "EGP039",
+   "currency": "EGP",
+   "original_amount": 16170.0,
+   "due_date": "2026-07-13",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 17 شهر 7 /F2 - T20 وملحقاتها شيك بنك القاهرة رقم 606000217494"
+  },
+  {
+   "inst_id": "EGP039-02",
+   "cust_ref": "EGP039",
+   "currency": "EGP",
+   "original_amount": 19110.0,
+   "due_date": "2026-08-13",
+   "security": "Cheque",
+   "reference": "تحصيل قسط رقم 18 شهر 8 /F2 - T20 وملحقاتها شيك بنك القاهرة رقم 606000217496"
+  },
+  {
+   "inst_id": "EGP040-01",
+   "cust_ref": "EGP040",
+   "currency": "EGP",
+   "original_amount": 31750.0,
+   "due_date": "2026-07-09",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 7 بشيك مجمع رقم الشيك 05235489 بنك فيصل الاسلامي عن جهاز CBCT WITH CEPH"
+  },
+  {
+   "inst_id": "EGP041-01",
+   "cust_ref": "EGP041",
+   "currency": "EGP",
+   "original_amount": 4500.0,
+   "due_date": "2026-07-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 7 شيك رقم 100003389798 بنك مصر Aidite-CFP-200 Porcelain Furnace"
+  },
+  {
+   "inst_id": "EGP041-02",
+   "cust_ref": "EGP041",
+   "currency": "EGP",
+   "original_amount": 4500.0,
+   "due_date": "2026-08-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 8 شيك رقم 100003389798 بنك مصر Aidite-CFP-200 Porcelain Furnace"
+  },
+  {
+   "inst_id": "EGP041-03",
+   "cust_ref": "EGP041",
+   "currency": "EGP",
+   "original_amount": 4500.0,
+   "due_date": "2026-09-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 9 شيك رقم 100003389798 بنك مصر Aidite-CFP-200 Porcelain Furnace"
+  },
+  {
+   "inst_id": "EGP041-04",
+   "cust_ref": "EGP041",
+   "currency": "EGP",
+   "original_amount": 4500.0,
+   "due_date": "2026-10-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 عن شهر 10 شيك رقم 100003389798 بنك مصر Aidite-CFP-200 Porcelain Furnace"
+  },
+  {
+   "inst_id": "EGP041-05",
+   "cust_ref": "EGP041",
+   "currency": "EGP",
+   "original_amount": 4500.0,
+   "due_date": "2026-11-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 عن شهر 11 شيك رقم 100003389798 بنك مصر Aidite-CFP-200 Porcelain Furnace"
+  },
+  {
+   "inst_id": "EGP041-06",
+   "cust_ref": "EGP041",
+   "currency": "EGP",
+   "original_amount": 4500.0,
+   "due_date": "2026-12-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 عن شهر 12 شيك رقم 100003389798 بنك مصر Aidite-CFP-200 Porcelain Furnace"
+  },
+  {
+   "inst_id": "EGP041-07",
+   "cust_ref": "EGP041",
+   "currency": "EGP",
+   "original_amount": 3500.0,
+   "due_date": "2027-01-15",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 عن شهر 1 شيك رقم 100003389798 بنك مصر Aidite-CFP-200 Porcelain Furnace"
+  },
+  {
+   "inst_id": "EGP042-01",
+   "cust_ref": "EGP042",
+   "currency": "EGP",
+   "original_amount": 30000.0,
+   "due_date": "2026-08-10",
+   "security": "Cheque",
+   "reference": "قبض شيك رقم 305000026448 من 121810031-اقساط احمد يوسف محمود عبد الفتاح كلوب ج/م شيكات قبض /جنيه رقم:67استحقاق 10-2-2025"
+  },
+  {
+   "inst_id": "EGP043-01",
+   "cust_ref": "EGP043",
+   "currency": "EGP",
+   "original_amount": 15000.0,
+   "due_date": "2026-07-01",
+   "security": "Cheque",
+   "reference": "قبض 18990000238828 من 121810046-اقساط محمد محمود عبد الجواد الفتاح ج/م شيكات قبض /جنيه رقم:140استحقاق 1-2-2025"
+  },
+  {
+   "inst_id": "EGP043-02",
+   "cust_ref": "EGP043",
+   "currency": "EGP",
+   "original_amount": 15000.0,
+   "due_date": "2026-08-01",
+   "security": "Cheque",
+   "reference": "قبض 18990000238829 من 121810046-اقساط محمد محمود عبد الجواد الفتاح ج/م شيكات قبض /جنيه رقم:140استحقاق 1-2-2025"
+  },
+  {
+   "inst_id": "EGP044-01",
+   "cust_ref": "EGP044",
+   "currency": "EGP",
+   "original_amount": 4860.0,
+   "due_date": "2026-07-06",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 شهر 7 جهاز رابت 3 بموجب شيك رقم 9784233000"
+  },
+  {
+   "inst_id": "EGP044-02",
+   "cust_ref": "EGP044",
+   "currency": "EGP",
+   "original_amount": 4860.0,
+   "due_date": "2026-08-06",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 شهر 8 جهاز رابت 3 بموجب شيك رقم 9784233001"
+  },
+  {
+   "inst_id": "EGP044-03",
+   "cust_ref": "EGP044",
+   "currency": "EGP",
+   "original_amount": 4860.0,
+   "due_date": "2026-09-06",
+   "security": "Cheque",
+   "reference": "قسط رقم 16 شهر 9 جهاز رابت 3 بموجب شيك رقم 9784233002"
+  },
+  {
+   "inst_id": "EGP044-04",
+   "cust_ref": "EGP044",
+   "currency": "EGP",
+   "original_amount": 4860.0,
+   "due_date": "2026-10-06",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 شهر 10 جهاز رابت 3 بموجب شيك رقم 9784233003"
+  },
+  {
+   "inst_id": "EGP044-05",
+   "cust_ref": "EGP044",
+   "currency": "EGP",
+   "original_amount": 4860.0,
+   "due_date": "2026-11-06",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 شهر 12 جهاز رابت 3 بموجب شيك رقم 9784233004"
+  },
+  {
+   "inst_id": "EGP045-01",
+   "cust_ref": "EGP045",
+   "currency": "EGP",
+   "original_amount": 5800.0,
+   "due_date": "2026-06-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 23 عن شهر 7 (shining3D Lab ScannerAutoScan-DS-EX Pro (C))شيك رقم 45117000049768 بتاريخ 25/1/2025 الشيك يحتوي علي"
+  },
+  {
+   "inst_id": "EGP045-02",
+   "cust_ref": "EGP045",
+   "currency": "EGP",
+   "original_amount": 6600.0,
+   "due_date": "2026-07-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 24 عن شهر 8 (shining3D Lab ScannerAutoScan-DS-EX Pro (C))شيك رقم 45117000049768 بتاريخ 25/1/2025 الشيك يحتوي علي"
+  },
+  {
+   "inst_id": "EGP046-01",
+   "cust_ref": "EGP046",
+   "currency": "EGP",
+   "original_amount": 10850.0,
+   "due_date": "2026-03-31",
+   "security": "Trust Receipt",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "EGP047-01",
+   "cust_ref": "EGP047",
+   "currency": "EGP",
+   "original_amount": 5100.0,
+   "due_date": "2026-06-09",
+   "security": "Cheque",
+   "reference": "قبض شيك رقم 53602664 من 121810071-اقساط /عاصم الدجوي / معرض EDS شيكات قبض /جنيه رقم:659استحقاق 9-6-2026"
+  },
+  {
+   "inst_id": "EGP047-02",
+   "cust_ref": "EGP047",
+   "currency": "EGP",
+   "original_amount": 2300.0,
+   "due_date": "2026-07-09",
+   "security": "Cheque",
+   "reference": "قبض شيك رقم 53602664 من 121810071-اقساط /عاصم الدجوي / معرض EDS شيكات قبض /جنيه رقم:659استحقاق 9-7-2026"
+  },
+  {
+   "inst_id": "EGP048-01",
+   "cust_ref": "EGP048",
+   "currency": "EGP",
+   "original_amount": 3000.0,
+   "due_date": "2026-04-07",
+   "security": "Trust Receipt",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "USD001-01",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-03-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 1 عن شهر 3 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-02",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-04-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 2 عن شهر 4 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-03",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-05-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 3 عن شهر 5 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-04",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-06-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 4 عن شهر 6 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-05",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-07-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 5 عن شهر 7 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-06",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-08-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 6 عن شهر 8 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-07",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-09-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 7 عن شهر 9 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-08",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-10-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 8 عن شهر 10 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-09",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-11-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 9 عن شهر 11 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-10",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2026-12-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 10 عن شهر 12 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-11",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2027-01-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 11 عن شهر 1 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-12",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2027-02-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 12 عن شهر 2 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-13",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2027-03-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 13 عن شهر 3 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-14",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2027-04-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 14 عن شهر 4 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-15",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2027-05-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 15 عن شهر 5 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-16",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2027-06-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 16 عن شهر 6 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-17",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 3000.0,
+   "due_date": "2027-07-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 17 عن شهر 7 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD001-18",
+   "cust_ref": "USD001",
+   "currency": "USD",
+   "original_amount": 4000.0,
+   "due_date": "2027-08-17",
+   "security": "Trust Receipt",
+   "reference": "قسط رقم 18 عن شهر 8 بايصالات امانه مجمعه عن جهاز ال RITON"
+  },
+  {
+   "inst_id": "USD002-01",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 214.0,
+   "due_date": "2026-05-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 5 عن رقم شيك 44213466 شيك بنك تنمية الصادرات عن ماكينة الريتون"
+  },
+  {
+   "inst_id": "USD002-02",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-06-25",
+   "security": "Cheque",
+   "reference": "قسط رقم6 عن شهر 6 لجهار الريتون لعقد رقم 3-1212073 رقم الشيك 44213461 البنك المصري لتنمية الصادرات استحقاق 25-6-2026"
+  },
+  {
+   "inst_id": "USD002-03",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-06-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 6 عن رقم شيك 44213466 شيك بنك تنمية الصادرات عن ماكينة الريتون"
+  },
+  {
+   "inst_id": "USD002-04",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-07-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 7 لجهار الريتون لعقد رقم 3-1212073 رقم الشيك 44213462 البنك المصري لتنمية الصادرات استحقاق 25-7-2026"
+  },
+  {
+   "inst_id": "USD002-05",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-07-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 7 عن رقم شيك 44213466 شيك بنك تنمية الصادرات عن ماكينة الريتون"
+  },
+  {
+   "inst_id": "USD002-06",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-08-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 8 لجهار الريتون لعقد رقم 3-1212073 رقم الشيك 44213463 البنك المصري لتنمية الصادرات استحقاق 25-8-2026"
+  },
+  {
+   "inst_id": "USD002-07",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-08-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 8 عن رقم شيك 44213466 شيك بنك تنمية الصادرات عن ماكينة الريتون"
+  },
+  {
+   "inst_id": "USD002-08",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-09-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 9 لجهار الريتون لعقد رقم 3-1212073 رقم الشيك 44213464 البنك المصري لتنمية الصادرات استحقاق 25-9-2026"
+  },
+  {
+   "inst_id": "USD002-09",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-09-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 9 عن رقم شيك 44213466 شيك بنك تنمية الصادرات عن ماكينة الريتون"
+  },
+  {
+   "inst_id": "USD002-10",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-10-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 10 لجهار الريتون لعقد رقم 3-1212073 رقم الشيك 44213465 البنك المصري لتنمية الصادرات استحقاق 25-10-2026"
+  },
+  {
+   "inst_id": "USD002-11",
+   "cust_ref": "USD002",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-10-25",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 10 عن رقم شيك 44213466 شيك بنك تنمية الصادرات عن ماكينة الريتون"
+  },
+  {
+   "inst_id": "USD003-01",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-06-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 1 شهر 6 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-02",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 6000.0,
+   "due_date": "2026-07-01",
+   "security": "Cheque",
+   "reference": "دفعة بتاريخ 01-07 شهر 7 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-03",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-07-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 2 شهر 7 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-04",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-08-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 3 شهر 8 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-05",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-09-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 شهر 9 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-06",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-10-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 شهر 10 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-07",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-11-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 شهر 11 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-08",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2026-12-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 شهر 12 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-09",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2027-01-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 شهر 1 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-10",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2027-02-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 شهر 2 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-11",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2000.0,
+   "due_date": "2027-03-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 شهر 3 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-12",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-04-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 شهر 4 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-13",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-05-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 شهر 5 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-14",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-06-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 شهر 6 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-15",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-07-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 شهر 7 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-16",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-08-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 15 شهر 8 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-17",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-09-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 16شهر 9 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-18",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-10-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 17 شهر 10 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD003-19",
+   "cust_ref": "USD003",
+   "currency": "USD",
+   "original_amount": 2500.0,
+   "due_date": "2027-11-13",
+   "security": "Cheque",
+   "reference": "قسط رقم 18 شهر 11 شيكات مجمعة رقم 000131410865 - 000131410866 - 000131410867 البنك التجاري الدولي"
+  },
+  {
+   "inst_id": "USD004-01",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 500.0,
+   "due_date": "2025-03-13",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 1 شهر 3 Face Scanner Shining 3D "
+  },
+  {
+   "inst_id": "USD004-02",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 500.0,
+   "due_date": "2025-04-13",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 2 شهر 4 Face Scanner Shining 3D /بدون شيكات"
+  },
+  {
+   "inst_id": "USD004-03",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 500.0,
+   "due_date": "2025-05-13",
+   "security": "Unsecured",
+   "reference": "تحصيل قسط رقم 3 شهر 5 Face Scanner Shining 3D /بدون شيكات"
+  },
+  {
+   "inst_id": "USD004-04",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-06-01",
+   "security": "Trust Receipt",
+   "reference": "تحصيل قسط رقم 13 شهر 6 عن جهاز الريتون بدون شيكات او سندات امانة"
+  },
+  {
+   "inst_id": "USD004-05",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-07-01",
+   "security": "Trust Receipt",
+   "reference": "تحصيل قسط رقم 14 شهر 7 عن جهاز الريتون بدون شيكات او سندات امانة"
+  },
+  {
+   "inst_id": "USD004-06",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-08-01",
+   "security": "Trust Receipt",
+   "reference": "تحصيل قسط رقم 15 شهر 8 عن جهاز الريتون بدون شيكات او سندات امانة"
+  },
+  {
+   "inst_id": "USD004-07",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-09-01",
+   "security": "Trust Receipt",
+   "reference": "تحصيل قسط رقم 16 شهر 9 عن جهاز الريتون بدون شيكات او سندات امانة"
+  },
+  {
+   "inst_id": "USD004-08",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-10-01",
+   "security": "Trust Receipt",
+   "reference": "تحصيل قسط رقم 17 شهر 10 عن جهاز الريتون بدون شيكات او سندات امانة"
+  },
+  {
+   "inst_id": "USD004-09",
+   "cust_ref": "USD004",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-11-01",
+   "security": "Trust Receipt",
+   "reference": "تحصيل قسط رقم 18 شهر 11 عن جهاز الريتون بدون شيكات او سندات امانة"
+  },
+  {
+   "inst_id": "USD005-01",
+   "cust_ref": "USD005",
+   "currency": "USD",
+   "original_amount": 102.0,
+   "due_date": "2026-05-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 1 عن شهر 5 بنك كريدي اجريكول مصر شيك رقم 11801742457206 شيكات مجمعة عدد6 شيكات"
+  },
+  {
+   "inst_id": "USD005-02",
+   "cust_ref": "USD005",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-06-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 2 عن شهر 6 بنك كريدي اجريكول مصر شيك رقم 11801742457207 شيكات مجمعة عدد6 شيكات"
+  },
+  {
+   "inst_id": "USD005-03",
+   "cust_ref": "USD005",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-07-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 3 عن شهر 7 بنك كريدي اجريكول مصر شيك رقم 11801742457208 شيكات مجمعة عدد6 شيكات"
+  },
+  {
+   "inst_id": "USD005-04",
+   "cust_ref": "USD005",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-08-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 عن شهر 8 بنك كريدي اجريكول مصر شيك رقم 11801742457209 شيكات مجمعة عدد6 شيكات"
+  },
+  {
+   "inst_id": "USD005-05",
+   "cust_ref": "USD005",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-09-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 عن شهر 9 بنك كريدي اجريكول مصر شيك رقم 11801742457210 شيكات مجمعة عدد6 شيكات"
+  },
+  {
+   "inst_id": "USD005-06",
+   "cust_ref": "USD005",
+   "currency": "USD",
+   "original_amount": 5000.0,
+   "due_date": "2026-10-30",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 عن شهر 10 بنك كريدي اجريكول مصر شيك رقم 11801742457205 شيكات مجمعة عدد6 شيكات"
+  },
+  {
+   "inst_id": "USD006-01",
+   "cust_ref": "USD006",
+   "currency": "USD",
+   "original_amount": 2430.0,
+   "due_date": "2026-05-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 5 شيك رقم 18717000119751"
+  },
+  {
+   "inst_id": "USD006-02",
+   "cust_ref": "USD006",
+   "currency": "USD",
+   "original_amount": 5100.0,
+   "due_date": "2026-06-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 6 شيك رقم 18717000119752"
+  },
+  {
+   "inst_id": "USD006-03",
+   "cust_ref": "USD006",
+   "currency": "USD",
+   "original_amount": 5100.0,
+   "due_date": "2026-07-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 عن شهر 7 شيك رقم 18717000119753"
+  },
+  {
+   "inst_id": "USD006-04",
+   "cust_ref": "USD006",
+   "currency": "USD",
+   "original_amount": 4950.0,
+   "due_date": "2026-08-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 عن شهر 8 شيك رقم 18717000119754"
+  },
+  {
+   "inst_id": "USD007-01",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2026-06-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 2 شهر 6 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-02",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2026-07-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 3 شهر 7 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-03",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2026-08-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 شهر 8 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-04",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2026-09-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 شهر 9 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-05",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2026-10-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 شهر 10 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-06",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2026-11-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 شهر 11 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-07",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2026-12-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 شهر 12 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-08",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 754.0,
+   "due_date": "2027-01-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 شهر 1 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-09",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 761.0,
+   "due_date": "2027-02-28",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 شهر 2 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-10",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 998.0,
+   "due_date": "2027-03-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 شهر 3 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-11",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 998.0,
+   "due_date": "2027-04-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 شهر 4 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-12",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 998.0,
+   "due_date": "2027-05-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 13 شهر 5 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD007-13",
+   "cust_ref": "USD007",
+   "currency": "USD",
+   "original_amount": 999.0,
+   "due_date": "2027-06-29",
+   "security": "Cheque",
+   "reference": "قسط رقم 14 شهر 6 شيكات مجمعة عدد 2 شيك رقم 618839 ورقم 618840 البريد المصري"
+  },
+  {
+   "inst_id": "USD008-01",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2026-07-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 1 عن شهر 7 بإيصال أمانة"
+  },
+  {
+   "inst_id": "USD008-02",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2026-08-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 2 عن شهر 8 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-03",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2026-09-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 3 عن شهر 9 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-04",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2026-10-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 4 عن شهر10 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-05",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2026-11-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم5 عن شهر11 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-06",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2026-12-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 6 عن شهر 12 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-07",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2027-01-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 7 عن شهر 1 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-08",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2027-02-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 8 عن شهر2بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-09",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2027-03-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 9 عن شهر 3 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-10",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2027-04-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 10 عن شهر 4 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-11",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 816.0,
+   "due_date": "2027-05-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 11 عن شهر 5 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD008-12",
+   "cust_ref": "USD008",
+   "currency": "USD",
+   "original_amount": 824.0,
+   "due_date": "2027-06-01",
+   "security": "Trust Receipt",
+   "reference": "اقساط احمد شعبان محمد عمار - محمد فتحي - ابراهيم عبد الهادي قسط رقم 12 عن شهر 6 بإيصالات أمانة عدد 12 ايصال"
+  },
+  {
+   "inst_id": "USD009-01",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2026-08-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-02",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2026-09-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-03",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2026-10-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-04",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2026-11-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-05",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2026-12-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-06",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2027-01-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-07",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2027-02-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-08",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2027-03-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-09",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2027-04-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-10",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2027-05-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-11",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2027-06-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD009-12",
+   "cust_ref": "USD009",
+   "currency": "USD",
+   "original_amount": 750.0,
+   "due_date": "2027-07-01",
+   "security": "Cheque",
+   "reference": "اقساط الفرن والاسكانر شيكات من اقساط الريتون المنتهية"
+  },
+  {
+   "inst_id": "USD010-01",
+   "cust_ref": "USD010",
+   "currency": "USD",
+   "original_amount": 47.0,
+   "due_date": "2026-05-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 5عن شهر 5 عن جهاز لارج في الشيك من البنك الاهلي رقم الشيك 14317000059730"
+  },
+  {
+   "inst_id": "USD010-02",
+   "cust_ref": "USD010",
+   "currency": "USD",
+   "original_amount": 1250.0,
+   "due_date": "2026-07-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 عن شهر 7 عن جهاز لارج في الشيك من البنك الاهلي رقم الشيك 14317000059732"
+  },
+  {
+   "inst_id": "USD010-03",
+   "cust_ref": "USD010",
+   "currency": "USD",
+   "original_amount": 1250.0,
+   "due_date": "2026-08-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 عن شهر 8 عن جهاز لارج في الشيك من البنك الاهلي رقم الشيك 14317000059733"
+  },
+  {
+   "inst_id": "USD010-04",
+   "cust_ref": "USD010",
+   "currency": "USD",
+   "original_amount": 1250.0,
+   "due_date": "2026-09-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 عن شهر 9 عن جهاز لارج في الشيك من البنك الاهلي رقم الشيك 14317000059734"
+  },
+  {
+   "inst_id": "USD010-05",
+   "cust_ref": "USD010",
+   "currency": "USD",
+   "original_amount": 1250.0,
+   "due_date": "2026-10-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 عن شهر 10 عن جهاز لارج في الشيك من البنك الاهلي رقم الشيك 14317000059735"
+  },
+  {
+   "inst_id": "USD010-06",
+   "cust_ref": "USD010",
+   "currency": "USD",
+   "original_amount": 1250.0,
+   "due_date": "2026-11-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 عن شهر 11 عن جهاز لارج في الشيك من البنك الاهلي رقم الشيك 14317000059736"
+  },
+  {
+   "inst_id": "USD010-07",
+   "cust_ref": "USD010",
+   "currency": "USD",
+   "original_amount": 1250.0,
+   "due_date": "2026-12-20",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 عن شهر 12 عن جهاز لارج في الشيك من البنك الاهلي رقم الشيك 14317000059737"
+  },
+  {
+   "inst_id": "USD011-01",
+   "cust_ref": "USD011",
+   "currency": "USD",
+   "original_amount": 3500.0,
+   "due_date": "2026-06-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 شهر 6 بقيمة 3500$ عن مكنة الريتون شيك مجمع رقم 221009001498 بقيمة 2080000"
+  },
+  {
+   "inst_id": "USD011-02",
+   "cust_ref": "USD011",
+   "currency": "USD",
+   "original_amount": 1500.0,
+   "due_date": "2026-07-01",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 شهر 7 بقيمة 1500$ عن مكنة الريتون شيك مجمع رقم 221009001498 بقيمة 2080000"
+  },
+  {
+   "inst_id": "USD012-01",
+   "cust_ref": "USD012",
+   "currency": "USD",
+   "original_amount": 2100.0,
+   "due_date": "2026-07-05",
+   "security": "Cheque",
+   "reference": "تحصيل شيك رقم 68012352 عن قسط 11 شهر 7"
+  },
+  {
+   "inst_id": "USD012-02",
+   "cust_ref": "USD012",
+   "currency": "USD",
+   "original_amount": 1900.0,
+   "due_date": "2026-08-05",
+   "security": "Cheque",
+   "reference": "تحصيل شيك رقم 68012353 عن قسط 12 شهر 8"
+  },
+  {
+   "inst_id": "USD013-01",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2026-07-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 2 شهر 7 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-02",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2026-08-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 3 شهر 8 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-03",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2026-09-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 شهر 9 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-04",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2026-10-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 شهر 10 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-05",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2026-11-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 شهر 11بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-06",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2026-12-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 شهر 12 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-07",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2027-01-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 شهر 1 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-08",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2027-02-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 شهر 2 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-09",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 250.0,
+   "due_date": "2027-03-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 شهر 3 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD013-10",
+   "cust_ref": "USD013",
+   "currency": "USD",
+   "original_amount": 400.0,
+   "due_date": "2027-04-04",
+   "security": "Cheque",
+   "reference": "قسط رقم 11شهر 4 بشيك مجمع رقم 4128060703 بنك الكويت الوطني"
+  },
+  {
+   "inst_id": "USD014-01",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 138.0,
+   "due_date": "2026-06-17",
+   "security": "Cheque",
+   "reference": "قبض/دفع جزئياً من الفترة السابقة"
+  },
+  {
+   "inst_id": "USD014-02",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2026-07-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 4 شهر 7 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-03",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2026-08-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 5 شهر 8 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-04",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2026-09-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 6 شهر 9 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-05",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2026-10-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 7 شهر 10 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-06",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2026-11-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 8 شهر 11 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-07",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2026-12-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 9 شهر 12 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-08",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2027-01-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 10 شهر 1 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-09",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 146.0,
+   "due_date": "2027-02-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 11 شهر 2 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  },
+  {
+   "inst_id": "USD014-10",
+   "cust_ref": "USD014",
+   "currency": "USD",
+   "original_amount": 144.0,
+   "due_date": "2027-03-17",
+   "security": "Cheque",
+   "reference": "قسط رقم 12 شهر 3 بشيك مجمع من بنك ابو ظبي الاسلامي بقيمة 87500 ج م عن جهاز f1"
+  }
+ ],
+ "meta": {
+  "base_report_date": "2026-07-29",
+  "egp_total": 10538790.0,
+  "usd_total": 274629.0,
+  "n_customers": 62,
+  "n_instalments": 533
+ }
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% block title %}Collections{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Weekly Collections</h4>
+<div class="row g-3">
+<div class="col-lg-5"><div class="card shadow-sm"><div class="card-body">
+  <h6>Record a receipt</h6>
+  <form method="post">
+    <div class="mb-2"><label class="form-label small">Date</label>
+      <input type="date" class="form-control form-control-sm" name="collected_on" value="{{ today() }}"></div>
+    <div class="mb-2"><label class="form-label small">Transaction Ref</label>
+      <input class="form-control form-control-sm" name="txn_ref" placeholder="bank / cheque / receipt no."></div>
+    <div class="mb-2"><label class="form-label small">Instalment ID</label>
+      <input class="form-control form-control-sm" name="inst_id" list="instids" required>
+      <datalist id="instids">{% for i in insts %}<option value="{{ i.inst_id }}">{% endfor %}</datalist></div>
+    <div class="mb-2"><label class="form-label small">Amount</label>
+      <input class="form-control form-control-sm" name="amount" required></div>
+    <div class="mb-2"><label class="form-label small">Method</label>
+      <select class="form-select form-select-sm" name="method">
+        {% for m in ['Cash','Cheque','Bank Transfer','Card','Other'] %}<option>{{m}}</option>{% endfor %}</select></div>
+    <div class="mb-2"><label class="form-label small">Comments</label>
+      <input class="form-control form-control-sm" name="comments"></div>
+    <button class="btn btn-primary btn-sm" style="background:#2e7d8a;border:0;">Record payment</button>
+  </form>
+</div></div></div>
+<div class="col-lg-7"><div class="card shadow-sm"><div class="card-body table-responsive">
+  <h6>Recent receipts</h6>
+  <table class="table table-sm"><thead><tr><th>Date</th><th>Txn Ref</th><th>Instalment</th>
+    <th class="money">Amount</th><th>Method</th><th>By</th></tr></thead><tbody>
+  {% for c in recent %}<tr><td>{{ c.collected_on }}</td><td>{{ c.txn_ref }}</td>
+    <td>{{ c.instalment.inst_id }}</td><td class="money">{{ c.amount|money(c.currency) }}</td>
+    <td>{{ c.method }}</td><td>{{ c.received_by }}</td></tr>{% endfor %}
+  </tbody></table>
+</div></div></div>
+</div>
+{% endblock %}

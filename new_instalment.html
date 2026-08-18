@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% block title %}New Instalment{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Add New Instalment / New Customer</h4>
+<div class="card shadow-sm"><div class="card-body">
+<form method="post" class="row g-3">
+  <div class="col-md-3"><label class="form-label small">Instalment ID *</label>
+    <input class="form-control" name="inst_id" required placeholder="e.g. EGP012-07"></div>
+  <div class="col-md-3"><label class="form-label small">Cust Ref *</label>
+    <input class="form-control" name="cust_ref" list="refs" placeholder="existing ref, or blank to auto-assign a new one">
+    <datalist id="refs">{% for c in customers %}<option value="{{ c.cust_ref }}">{% endfor %}</datalist></div>
+  <div class="col-md-3"><label class="form-label small">Customer Account No.</label>
+    <input class="form-control" name="account_no"></div>
+  <div class="col-md-3"><label class="form-label small">Customer name (new customer only)</label>
+    <input class="form-control" name="customer"></div>
+  <div class="col-md-2"><label class="form-label small">Currency (new only)</label>
+    <select class="form-select" name="currency"><option value="EGP">EGP</option><option value="USD">USD</option></select></div>
+  <div class="col-md-3"><label class="form-label small">Ledger owner (new customer)</label>
+    <select class="form-select" name="owner_id"><option value="">— default —</option>
+      {% for u in users %}<option value="{{ u.id }}">{{ u.full_name or u.username }}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><label class="form-label small">Original Outstanding *</label>
+    <input class="form-control" name="original_amount" required></div>
+  <div class="col-md-2"><label class="form-label small">Due Date</label>
+    <input type="date" class="form-control" name="due_date"></div>
+  <div class="col-md-2"><label class="form-label small">Date Raised</label>
+    <input type="date" class="form-control" name="date_raised" value="{{ today() }}"></div>
+  <div class="col-md-2"><label class="form-label small">Security</label>
+    <select class="form-select" name="security">
+      {% for s in ['Cheque','Trust Receipt','Unsecured','Cheque (Mansoura)','Cheque (Alexandria)','Cheque (Cairo)'] %}<option>{{s}}</option>{% endfor %}</select></div>
+  <div class="col-md-6"><label class="form-label small">Reference / Txn Ref</label>
+    <input class="form-control" name="reference" placeholder="cheque / invoice / contract no."></div>
+  <div class="col-12"><button class="btn btn-primary" style="background:#1f3864;border:0;">Add instalment</button>
+    <span class="small text-muted ms-2">For a brand-new customer, enter a new Cust Ref plus name & currency; the customer is created automatically.</span></div>
+</form>
+</div></div>
+{% endblock %}

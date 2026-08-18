@@ -1,0 +1,48 @@
+{% extends "base.html" %}{% block title %}Approvals{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Pending Approvals</h4>
+<p class="text-muted small">Digital authorisations awaiting your decision. You cannot approve a request you raised yourself.
+  Requests appear here from the reschedule and sales/maintenance functions (added in the next update stages).</p>
+
+<div class="card shadow-sm mb-3"><div class="card-body table-responsive p-0">
+<table class="table table-sm mb-0">
+  <thead style="background:#1f3864;color:#fff;"><tr><th>Raised</th><th>Type</th><th>Requested by</th><th>Summary</th><th>Reason</th><th></th></tr></thead>
+  <tbody>
+    {% for a in pending %}
+    <tr>
+      <td class="small" style="white-space:nowrap;">{{ a.ts.strftime('%Y-%m-%d %H:%M') if a.ts else '' }}</td>
+      <td><span class="badge bg-info text-dark">{{ a.kind }}</span></td>
+      <td class="small">{{ a.requester }}</td>
+      <td class="small">{{ a.summary }}</td>
+      <td class="small text-muted">{{ a.reason or '' }}</td>
+      <td class="text-end" style="white-space:nowrap;">
+        <form method="post" action="{{ url_for('approval_decide', aid=a.id, decision='approve') }}" class="d-inline">
+          <button class="btn btn-sm btn-success">Approve</button></form>
+        <form method="post" action="{{ url_for('approval_decide', aid=a.id, decision='reject') }}" class="d-inline">
+          <button class="btn btn-sm btn-outline-danger">Reject</button></form>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="text-center text-muted py-3">Nothing awaiting approval. 🎉</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div></div>
+
+<h6 class="text-muted">Recently decided</h6>
+<div class="card shadow-sm"><div class="card-body table-responsive p-0">
+<table class="table table-sm mb-0">
+  <thead><tr><th>Decided</th><th>Type</th><th>Requested by</th><th>Summary</th><th>Decision</th><th>By</th></tr></thead>
+  <tbody>
+    {% for a in history %}
+    <tr>
+      <td class="small">{{ a.decided_at.strftime('%Y-%m-%d %H:%M') if a.decided_at else '' }}</td>
+      <td class="small">{{ a.kind }}</td><td class="small">{{ a.requester }}</td><td class="small">{{ a.summary }}</td>
+      <td><span class="badge bg-{{ 'success' if a.status=='approved' else 'danger' }}">{{ a.status }}</span></td>
+      <td class="small">{{ a.approver }}</td>
+    </tr>
+    {% else %}<tr><td colspan="6" class="text-center text-muted py-3">No history yet.</td></tr>{% endfor %}
+  </tbody>
+</table>
+</div></div>
+{% endblock %}

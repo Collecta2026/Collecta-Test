@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% block title %}Reminder — {{ cust.name }}{% endblock %}
+{% block content %}
+<div class="noprint mb-3 d-flex gap-2 align-items-center">
+  <span class="text-muted small">Reminder level:</span>
+  {% for l in [1,2,3,4] %}<a class="btn btn-sm btn-outline-secondary {{ 'active' if l==level }}" href="{{ url_for('reminder_letter', cid=cust.id, level=l) }}">L{{ l }}</a>{% endfor %}
+  <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;" onclick="window.print()">Print / PDF</button>
+  <form method="post" action="{{ url_for('reminder_email', cid=cust.id) }}" class="d-inline">
+    <input type="hidden" name="level" value="{{ level }}">
+    <button class="btn btn-sm btn-outline-primary" {{ 'disabled title=No-email-or-SMTP-not-configured' if not (cust.email and email_ready) }}>Email to customer</button></form>
+  <form method="post" action="{{ url_for('reminder_log', cid=cust.id) }}" class="ms-auto d-flex gap-2">
+    <input type="hidden" name="level" value="{{ level }}"><input type="hidden" name="overdue" value="{{ overdue }}">
+    <button class="btn btn-sm btn-outline-success">Mark as sent (log)</button></form>
+</div>
+<div class="card shadow-sm"><div class="card-body p-5" style="max-width:820px;margin:auto;">
+  <div class="d-flex justify-content-between">
+    <div><h4 style="color:#1f3864;margin:0;">{{ org_name }}</h4><div class="text-muted small">Credit Control Department</div></div>
+    <div class="text-end small">{{ today() }}<br>Ref: {{ cust.cust_ref }} / A/C {{ cust.account_no or '—' }}</div>
+  </div>
+  <hr>
+  <div class="mb-3">
+    <div class="arabic fw-bold">{{ cust.name }}</div>
+    {% if cust.contact_person %}<div>Attn: {{ cust.contact_person }}</div>{% endif %}
+    {% if cust.address %}<div class="small text-muted">{{ cust.address }}</div>{% endif %}
+    {% if cust.email %}<div class="small text-muted">{{ cust.email }}</div>{% endif %}
+  </div>
+  <h5 class="{{ 'text-danger' if level>=3 }}">{{ meta.heading }}</h5>
+  <p>Dear Sir/Madam,</p>
+  <p>{{ meta.body }}</p>
+  <table class="table table-sm my-3" style="max-width:520px;">
+    <thead><tr><th>Instalment</th><th>Due</th><th>Days overdue</th><th class="money">Amount ({{ cust.currency }})</th></tr></thead>
+    <tbody>
+    {% for r in rows %}<tr><td>{{ r.inst_id }}</td><td>{{ r.due_date }}</td><td>{{ r.days_overdue }}</td><td class="money">{{ r.net|money }}</td></tr>{% endfor %}
+    <tr class="fw-bold"><td colspan="3">Total overdue</td><td class="money">{{ overdue|money(cust.currency) }}</td></tr>
+    <tr><td colspan="3">Total account balance</td><td class="money">{{ total|money(cust.currency) }}</td></tr>
+    </tbody>
+  </table>
+  {% if level>=3 %}<p class="{{ 'fw-bold text-danger' if level==4 }}">Please treat this matter as {{ 'a matter of urgency' if level==3 else 'requiring your immediate attention to avoid recovery action' }}.</p>{% endif %}
+  <p>If payment has already been made, please disregard this notice and accept our thanks. To discuss your account, contact our Credit Control Department.</p>
+  <p class="mt-4">Yours faithfully,<br><br>Credit Control<br><span class="text-muted">{{ org_name }}</span></p>
+  <div class="small text-muted mt-3">This is reminder level {{ level }} of 4 ({{ meta.trigger }}).</div>
+</div></div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}{% block title %}Call Scheduler{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0" style="color:#1f3864;">Collection Call Scheduler</h4>
+  <div class="small text-muted">Strategy: <b>{{ strategies[strat].label }}</b> · change in Admin → Settings</div>
+</div>
+
+<div class="row g-3 mb-3">
+  {% for lbl,val,col in [('Pending calls',stats.pending,'#1f3864'),('Due today / overdue',stats.due_today,'#c00000'),('Completed',stats.completed,'#548235'),('Promises to pay',stats.promises,'#bf8f00')] %}
+  <div class="col-md-3"><div class="card kpi shadow-sm"><div class="card-body">
+    <div class="text-muted small">{{ lbl }}</div><div class="val" style="color:{{col}}">{{ val }}</div></div></div></div>
+  {% endfor %}
+</div>
+
+<div class="row g-3">
+<div class="col-lg-4">
+  <div class="card shadow-sm mb-3"><div class="card-body">
+    <h6>Generate call plan</h6>
+    <p class="small text-muted">Auto-schedules the highest-priority overdue customers across working days, by aged debt.</p>
+    <form method="post" action="{{ url_for('calls_generate') }}">
+      <div class="mb-2"><label class="form-label small">Start date</label>
+        <input type="date" class="form-control form-control-sm" name="start" value="{{ today() }}"></div>
+      <div class="row g-2">
+        <div class="col"><label class="form-label small">Working days</label>
+          <input class="form-control form-control-sm" name="days" value="5"></div>
+        <div class="col"><label class="form-label small">Calls/day</label>
+          <input class="form-control form-control-sm" name="capacity" value="{{ cap }}"></div>
+      </div>
+      <div class="mb-2 mt-2"><label class="form-label small">Don't re-call within (days)</label>
+        <input class="form-control form-control-sm" name="cooldown" value="{{ cooldown }}"></div>
+      <div class="mb-2"><label class="form-label small">Ledger (controller) — optional</label>
+        <select class="form-select form-select-sm" name="owner_id">
+          <option value="">All ledgers</option>
+          {% for u in users %}<option value="{{ u.id }}">{{ u.full_name or u.username }}</option>{% endfor %}</select></div>
+      <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Generate plan</button>
+    </form>
+  </div></div>
+  <div class="card shadow-sm"><div class="card-body">
+    <h6>Upcoming workload</h6>
+    <table class="table table-sm"><tbody>
+    {% for d,n in upcoming %}<tr><td><a href="{{ url_for('calls', day=d) }}">{{ d }}</a></td><td class="text-end">{{ n }} calls</td></tr>{% endfor %}
+    {% if not upcoming %}<tr><td class="text-muted small">No calls scheduled yet — generate a plan.</td></tr>{% endif %}
+    </tbody></table>
+  </div></div>
+</div>
+
+<div class="col-lg-8"><div class="card shadow-sm"><div class="card-body">
+  <div class="d-flex justify-content-between align-items-center">
+    <h6 class="mb-0">Call list — {{ day }}</h6>
+    <form class="d-flex gap-2" method="get">
+      <input type="date" class="form-control form-control-sm" name="day" value="{{ day }}">
+      <button class="btn btn-sm btn-outline-secondary">Go</button>
+      <a class="btn btn-sm btn-outline-secondary {{ 'active' if mine }}" href="{{ url_for('calls', day=day, mine=1) }}">My calls</a>
+    </form>
+  </div>
+  <table class="table table-sm align-middle mt-2">
+    <thead><tr><th>#</th><th>Customer</th><th>Phone</th><th class="money">Overdue</th>
+      <th class="money">Oldest</th><th>Lvl</th><th class="money">Score</th><th>Log outcome</th></tr></thead>
+    <tbody>
+    {% for c in todays %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td><a href="{{ url_for('customer_detail', cid=c.cust.id) }}" class="arabic">{{ c.cust.name }}</a>
+        <div class="small text-muted">{{ c.cust.cust_ref }} · A/C {{ c.cust.account_no or '—' }}{% if c.broken %} · <span class="text-danger">broke promise</span>{% endif %}</div></td>
+      <td>{{ c.phone or '—' }}</td>
+      <td class="money text-danger">{{ c.overdue|money(c.currency) }}</td>
+      <td class="money">{{ c.oldest }}d</td>
+      <td><span class="badge bg-{{ ['secondary','info','warning','danger','dark'][c.level] }}">L{{ c.level }}</span></td>
+      <td class="money fw-bold">{{ '%.0f'|format(c.score) }}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#log{{ c.task.id }}">Log</button>
+        <a class="btn btn-sm btn-outline-danger" href="{{ url_for('reminder_letter', cid=c.cust.id) }}">Letter</a>
+      </td>
+    </tr>
+    <tr class="collapse" id="log{{ c.task.id }}"><td colspan="8">
+      <form method="post" action="{{ url_for('calls_log', tid=c.task.id) }}" class="row g-2 align-items-end bg-light p-2 rounded">
+        <div class="col-md-3"><label class="form-label small">Outcome</label>
+          <select class="form-select form-select-sm" name="outcome">
+            {% for o in outcomes %}<option value="{{o}}">{{ o.replace('_',' ')|title }}</option>{% endfor %}</select></div>
+        <div class="col-md-2"><label class="form-label small">Promise amount</label>
+          <input class="form-control form-control-sm" name="promise_amount"></div>
+        <div class="col-md-2"><label class="form-label small">Promise date</label>
+          <input type="date" class="form-control form-control-sm" name="promise_date"></div>
+        <div class="col-md-3"><label class="form-label small">Notes</label>
+          <input class="form-control form-control-sm" name="notes"></div>
+        <div class="col-md-2"><button class="btn btn-sm btn-success w-100">Save</button></div>
+      </form>
+    </td></tr>
+    {% endfor %}
+    {% if not todays %}
+      <tr><td colspan="8" class="text-muted small">No calls scheduled for this day.
+        {% if preview %}Top priorities right now (generate a plan to schedule them):{% endif %}</td></tr>
+      {% for p in preview %}
+      <tr><td>{{ loop.index }}</td><td class="arabic">{{ p.customer }}<div class="small text-muted">{{ p.cust_ref }}</div></td>
+        <td>{{ p.phone or '—' }}</td><td class="money text-danger">{{ p.overdue|money(p.currency) }}</td>
+        <td class="money">{{ p.oldest }}d</td><td><span class="badge bg-secondary">L{{ p.level }}</span></td>
+        <td class="money fw-bold">{{ '%.0f'|format(p.score) }}</td><td class="text-muted small">preview</td></tr>
+      {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
+</div></div></div>
+</div>
+{% endblock %}

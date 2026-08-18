@@ -1,0 +1,17 @@
+# Render Blueprint for Collecta — deploys a free web service in Frankfurt (closest to Cairo).
+# The database is Neon (added separately as DATABASE_URL). See the deployment guide.
+services:
+  - type: web
+    name: collecta
+    runtime: python
+    region: frankfurt
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.6
+      - key: SECRET_KEY
+        generateValue: true      # Render creates a strong secret automatically
+      - key: DATABASE_URL
+        sync: false              # you paste your Neon connection string here

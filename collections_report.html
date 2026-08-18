@@ -1,0 +1,31 @@
+{% extends "base.html" %}{% block title %}Monthly Collections{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Monthly Collections by Method</h4>
+<div class="mb-3 noprint">
+  <span class="text-muted small me-2">Download:</span>
+  <a class="btn btn-sm btn-outline-success" href="?export=csv">CSV</a>
+  <a class="btn btn-sm btn-outline-success" href="?export=xlsx">Excel</a>
+  <a class="btn btn-sm btn-outline-danger" href="?export=pdf">PDF</a>
+</div>
+{% for ccy in ['EGP','USD'] %}
+<div class="card shadow-sm mb-3"><div class="card-body table-responsive">
+  <h6>{{ ccy }}</h6>
+  {% set months = rep.data[ccy].keys()|list|sort %}
+  {% if months %}
+  <table class="table table-sm">
+    <thead><tr><th>Month</th>{% for m in rep.methods %}<th class="money">{{ m }}</th>{% endfor %}<th class="money">Total</th></tr></thead>
+    <tbody>
+    {% for mth in months %}{% set row = rep.data[ccy][mth] %}
+      <tr><td>{{ mth }}</td>
+        {% for m in rep.methods %}<td class="money">{{ row[m]|money }}</td>{% endfor %}
+        <td class="money fw-bold">{{ row['_total']|money(ccy) }}</td></tr>
+    {% endfor %}
+      <tr class="fw-bold table-dark"><td>TOTAL</td>
+        {% for m in rep.methods %}<td class="money">{{ rep.totals[ccy][m]|money }}</td>{% endfor %}
+        <td class="money">{{ rep.totals[ccy]['_total']|money(ccy) }}</td></tr>
+    </tbody>
+  </table>
+  {% else %}<p class="text-muted small">No {{ ccy }} collections recorded yet.</p>{% endif %}
+</div></div>
+{% endfor %}
+{% endblock %}

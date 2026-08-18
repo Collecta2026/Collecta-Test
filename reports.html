@@ -1,0 +1,53 @@
+{% extends "base.html" %}{% block title %}Report Writer{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Report Writer</h4>
+<div class="card shadow-sm mb-3"><div class="card-body">
+<form method="get" class="row g-2 align-items-end">
+  <input type="hidden" name="run" value="1">
+  <div class="col-md-2"><label class="form-label small">Currency</label>
+    <select class="form-select form-select-sm" name="ccy">
+      <option value="">All</option><option value="EGP" {{'selected' if f.get('ccy')=='EGP'}}>EGP</option>
+      <option value="USD" {{'selected' if f.get('ccy')=='USD'}}>USD</option></select></div>
+  <div class="col-md-2"><label class="form-label small">Ageing bucket</label>
+    <select class="form-select form-select-sm" name="bucket"><option value="">All</option>
+      {% for b in BUCKETS %}<option value="{{b}}" {{'selected' if f.get('bucket')==b}}>{{b}}</option>{% endfor %}
+      <option value="Settled" {{'selected' if f.get('bucket')=='Settled'}}>Settled</option></select></div>
+  <div class="col-md-2"><label class="form-label small">Status</label>
+    <select class="form-select form-select-sm" name="status"><option value="">All</option>
+      {% for s in ['OVERDUE','CURRENT','SETTLED','NO DATE'] %}<option value="{{s}}" {{'selected' if f.get('status')==s}}>{{s}}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><label class="form-label small">Security</label>
+    <select class="form-select form-select-sm" name="security"><option value="">All</option>
+      {% for s in securities %}<option value="{{s}}" {{'selected' if f.get('security')==s}}>{{s}}</option>{% endfor %}</select></div>
+  <div class="col-md-2"><label class="form-label small">Min net amount</label>
+    <input class="form-control form-control-sm" name="min_amount" value="{{ f.get('min_amount','') }}"></div>
+  <div class="col-md-2 form-check ms-2"><input class="form-check-input" type="checkbox" name="over_limit" value="1" {{'checked' if f.get('over_limit')=='1'}}>
+    <label class="form-check-label small">Over credit limit only</label></div>
+  <div class="col-12 mt-2">
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Run report</button>
+    <button class="btn btn-sm btn-outline-success" name="export" value="csv">Export CSV</button>
+    <button class="btn btn-sm btn-outline-success" name="export" value="xlsx">Export Excel</button>
+    <button class="btn btn-sm btn-outline-danger" name="export" value="pdf">Export PDF</button>
+  </div>
+</form>
+</div></div>
+
+{% if ran %}
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<div class="mb-2">
+  {% for c in ['EGP','USD'] %}{% if totals.get(c) %}<span class="badge bg-secondary me-2">{{ c }} total net: {{ totals[c]|money(c) }}</span>{% endif %}{% endfor %}
+  <span class="text-muted small">{{ rows|length }} rows</span>
+</div>
+<table class="table table-sm table-hover">
+<thead><tr><th>Instalment</th><th>Ref</th><th>Customer</th><th>Ccy</th><th class="money">Net</th>
+<th>Due</th><th class="money">Days</th><th>Bucket</th><th>Status</th><th>Security</th></tr></thead>
+<tbody>
+{% for r in rows %}<tr><td>{{ r.inst_id }}</td><td>{{ r.cust_ref }}</td><td class="arabic">{{ r.customer }}</td>
+<td>{{ r.currency }}</td><td class="money fw-bold">{{ r.net|money }}</td><td>{{ r.due_date or '—' }}</td>
+<td class="money">{{ r.days_overdue if r.days_overdue is not none else '' }}</td><td>{{ r.bucket }}</td>
+<td>{{ r.status }}</td><td>{{ r.security }}</td></tr>{% endfor %}
+</tbody></table>
+</div></div>
+{% else %}
+<p class="text-muted">Choose filters and Run report. Use “Export CSV” to download. Currencies are totalled separately.</p>
+{% endif %}
+{% endblock %}

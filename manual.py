@@ -180,6 +180,26 @@ MANUAL = [
          tips=["Customers over their limit are flagged so you can put them on stop."],
          keywords=["credit limit", "over limit", "headroom", "exposure"]),
 
+    dict(id="parts_accounts", cat="Customers", title="Machine vs Parts & Accessories accounts",
+         path="Ledger > + New Parts Sale", route="parts_new", args={},
+         summary="Every customer now has two separate credit accounts: the long-term Machine "
+                 "instalment plan, and a short-term Parts & Accessories account for spare parts sold "
+                 "on 30/60-day credit. The two are aged and reported separately and never mixed, but "
+                 "the customer page also shows a combined total. Each is kept separate by currency.",
+         steps=["To record a parts sale, open Ledger > + New Parts Sale.",
+                "Pick the customer, enter the amount and currency, and choose Net 30, Net 60 or a custom due date.",
+                "Parts sales are a single payment by the due date and need no guarantee.",
+                "On the customer page, the Machine account and the Parts & Accessories account are shown "
+                "separately, each with its own outstanding, overdue and credit limit, plus a combined total.",
+                "The dashboard and ledger can be viewed Machine-only, Parts-only, or combined.",
+                "Parts can also be loaded in bulk: use the Instalments import template and put PARTS in the "
+                "Account Type column (blank or MACHINE for machine instalments)."],
+         tips=["Parts have their own separate credit limit, independent of the machine limit.",
+               "Existing instalments are all treated as Machine automatically — nothing changes for them.",
+               "EGP and USD are always kept separate, and Machine and Parts are never summed in ageing."],
+         keywords=["parts", "accessories", "spare parts", "net 30", "net 60", "sub-account",
+                   "machine", "two accounts", "parts credit limit"]),
+
     # ---------------- Collections & chasing ----------------
     dict(id="collections", cat="Collections", title="Recording a collection",
          path="Collections > Record Collection", route="collections", args={},

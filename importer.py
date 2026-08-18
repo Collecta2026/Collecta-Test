@@ -19,6 +19,7 @@ SPECS = {
             ("currency", "Currency", "If new", "EGP or USD (must match an existing customer)", "EGP"),
             ("account_no", "Account No", "No", "Optional account number for a new customer", "900123"),
             ("inst_id", "Instalment ID", "Yes", "Unique ID for this instalment", "EGP049-01"),
+            ("account_type", "Account Type", "No", "MACHINE (default) or PARTS for spare-parts/accessories credit", "MACHINE"),
             ("original_amount", "Original Amount", "Yes", "Instalment amount (number, no currency symbol)", "50000"),
             ("due_date", "Due Date", "Yes", "Date the instalment is due (YYYY-MM-DD)", "2026-03-15"),
             ("date_raised", "Date Raised", "No", "Date the instalment was raised (YYYY-MM-DD)", "2026-01-15"),
@@ -285,6 +286,8 @@ def commit(kind, accepted, user):
                 cust_by_ref[ref.upper()] = cust
                 new_customers.append(ref)
             inst = Instalment(inst_id=a["inst_id"], customer_id=cust.id, currency=cust.currency,
+                              account_type=((a.get("account_type") or "MACHINE").strip().upper()
+                                            if (a.get("account_type") or "").strip().upper() in ("MACHINE", "PARTS") else "MACHINE"),
                               original_amount=a["original_amount"],
                               due_date=date.fromisoformat(a["due_date"]) if a.get("due_date") else None,
                               date_raised=date.fromisoformat(a["date_raised"]) if a.get("date_raised") else None,

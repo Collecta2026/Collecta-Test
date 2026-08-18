@@ -23,6 +23,22 @@
   <div class="col-md-3"><div class="card kpi shadow-sm"><div class="card-body">
     <div class="text-muted small">Customers (<a href="{{ url_for('overdue_customers', ccy=ccy) }}" style="font-weight:600;">{{k.customers_overdue}} overdue</a>)</div><div class="val" style="color:{{colour}}"><a class="kpi-link" href="{{ url_for('ledger', ccy=ccy) }}" title="View the {{ ccy }} ledger">{{ k.customers }}</a></div></div></div></div>
 </div>
+{% if kpis_type %}{% set t = kpis_type[ccy] %}
+<div class="row g-3 mb-3">
+  <div class="col-md-4"><div class="card shadow-sm"><div class="card-body py-2">
+    <div class="text-muted small">🏭 Machine — outstanding</div>
+    <div class="fw-bold" style="color:{{colour}};font-size:1.15rem;"><a class="kpi-link" href="{{ url_for('ledger', ccy=ccy, type='MACHINE') }}">{{ t.MACHINE.total|money(ccy) }}</a></div>
+    <div class="small text-danger">Overdue {{ t.MACHINE.overdue|money(ccy) }}</div></div></div></div>
+  <div class="col-md-4"><div class="card shadow-sm"><div class="card-body py-2">
+    <div class="text-muted small">🔧 Parts &amp; Accessories — outstanding</div>
+    <div class="fw-bold" style="color:{{colour}};font-size:1.15rem;"><a class="kpi-link" href="{{ url_for('ledger', ccy=ccy, type='PARTS') }}">{{ t.PARTS.total|money(ccy) }}</a></div>
+    <div class="small text-danger">Overdue {{ t.PARTS.overdue|money(ccy) }}</div></div></div></div>
+  <div class="col-md-4"><div class="card shadow-sm" style="border:2px solid {{colour}};"><div class="card-body py-2">
+    <div class="text-muted small">Combined ({{ ccy }})</div>
+    <div class="fw-bold" style="color:{{colour}};font-size:1.15rem;">{{ t.ALL.total|money(ccy) }}</div>
+    <div class="small text-danger">Overdue {{ t.ALL.overdue|money(ccy) }}</div></div></div></div>
+</div>
+{% endif %}
 {% endfor %}
 
 <div class="card kpi shadow-sm mb-3" style="background:#eef2f8;">

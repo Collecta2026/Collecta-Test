@@ -44,7 +44,8 @@ class Customer(db.Model):
     phone = db.Column(db.String(40))
     email = db.Column(db.String(120))
     address = db.Column(db.Text)
-    credit_limit = db.Column(db.Numeric(16, 2))                 # null = not set
+    credit_limit = db.Column(db.Numeric(16, 2))                 # machine credit limit (null = not set)
+    parts_credit_limit = db.Column(db.Numeric(16, 2))           # separate parts & accessories limit (null = not set)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), index=True)  # ledger owner (credit controller)
     legal_status = db.Column(db.String(12), default="active", index=True)     # active / legal
     legal_date = db.Column(db.Date)
@@ -68,6 +69,7 @@ class Instalment(db.Model):
     inst_id = db.Column(db.String(30), unique=True, nullable=False, index=True)
     customer_id = db.Column(db.Integer, db.ForeignKey("customers.id"), nullable=False, index=True)
     currency = db.Column(db.String(3), nullable=False)
+    account_type = db.Column(db.String(10), default="MACHINE", index=True)  # MACHINE / PARTS
     original_amount = db.Column(db.Numeric(16, 2), nullable=False)
     due_date = db.Column(db.Date)
     security = db.Column(db.String(60))

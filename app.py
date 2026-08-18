@@ -100,6 +100,17 @@ def _ensure_schema(db):
             if "email" not in cols:
                 db.session.execute(text("ALTER TABLE users ADD COLUMN email VARCHAR(200)"))
                 db.session.commit()
+        if "instalments" in tables:
+            icols = [c["name"] for c in insp.get_columns("instalments")]
+            if "account_type" not in icols:
+                db.session.execute(text("ALTER TABLE instalments ADD COLUMN account_type VARCHAR(10)"))
+                db.session.execute(text("UPDATE instalments SET account_type='MACHINE' WHERE account_type IS NULL"))
+                db.session.commit()
+        if "customers" in tables:
+            ccols = [c["name"] for c in insp.get_columns("customers")]
+            if "parts_credit_limit" not in ccols:
+                db.session.execute(text("ALTER TABLE customers ADD COLUMN parts_credit_limit NUMERIC(16,2)"))
+                db.session.commit()
     except Exception:
         db.session.rollback()
 
@@ -288,6 +299,7 @@ def create_app():
     def dashboard():
         rd = parse_date(request.args.get("as_at")) or date.today()
         kpis = svc.dashboard_kpis(rd)
+        kpis_type = svc.dashboard_kpis_by_type(rd)
         ageing = svc.ageing_summary(rd)
         coll = svc.collections_summary()
         top = {c: sorted([b for b in svc.customer_balances(rd) if b["currency"] == c],
@@ -295,7 +307,7 @@ def create_app():
         eq = svc.egp_equivalent(rd)
         legal = svc.legal_summary(rd)
         return render_template("dashboard.html", kpis=kpis, ageing=ageing, coll=coll,
-                               top=top, as_at=rd, eq=eq, legal=legal)
+                               top=top, as_at=rd, eq=eq, legal=legal, kpis_type=kpis_type)
 
     # ---------------- Overdue customers drill-down (from dashboard) ----------------
     @app.route("/overdue/<ccy>")
@@ -342,19 +354,22 @@ def create_app():
         rd = date.today()
         ccy = request.args.get("ccy") or ""
         status = request.args.get("status") or ""
-        rows = svc.instalment_rows(report_date=rd, currency=(ccy or None))
+        atype = (request.args.get("type") or "").upper()
+        if atype not in ("MACHINE", "PARTS"):
+            atype = ""
+        rows = svc.instalment_rows(report_date=rd, currency=(ccy or None), account_type=(atype or None))
         if status:
             rows = [r for r in rows if r["status"] == status]
         rows.sort(key=lambda r: (r["currency"], -r["net"]))
         export = request.args.get("export")
         if export in ("csv", "xlsx", "pdf"):
-            headers = ["Instalment ID", "Cust Ref", "Account No.", "Customer", "Ccy", "Original",
+            headers = ["Instalment ID", "Cust Ref", "Account No.", "Customer", "Ccy", "Type", "Original",
                        "Received", "Net Outstanding", "Due Date", "Days Overdue", "Bucket", "Status", "Security"]
-            data = [[r["inst_id"], r["cust_ref"], r["account_no"], r["customer"], r["currency"],
+            data = [[r["inst_id"], r["cust_ref"], r["account_no"], r["customer"], r["currency"], r["account_type"],
                      r["original"], r["received"], r["net"], r["due_date"], r["days_overdue"],
                      r["bucket"], r["status"], r["security"]] for r in rows]
             return report_download(export, "Debtors Ledger", headers, data, "debtors_ledger")
-        return render_template("ledger.html", rows=rows, ccy=ccy, status=status)
+        return render_template("ledger.html", rows=rows, ccy=ccy, status=status, atype=atype)
 
     # ---------------- Collections ----------------
     @app.route("/collections", methods=["GET", "POST"])
@@ -419,6 +434,51 @@ def create_app():
         return render_template("new_instalment.html", customers=customers,
                                users=User.query.order_by(User.username).all())
 
+    # ---------------- Parts & Accessories sale (short-term credit) ----------------
+    @app.route("/parts/new", methods=["GET", "POST"])
+    @login_required
+    def parts_new():
+        from datetime import timedelta
+        if request.method == "POST":
+            f = request.form
+            ref_in = f.get("cust_ref", "").strip()
+            cust = Customer.query.filter_by(cust_ref=ref_in).first() if ref_in else None
+            if not cust:
+                flash("Choose an existing customer for a parts sale.", "danger")
+                return redirect(url_for("parts_new"))
+            amt = parse_money(f.get("amount"))
+            if not amt or amt <= 0:
+                flash("Enter a positive amount.", "danger")
+                return redirect(url_for("parts_new"))
+            # terms -> due date
+            terms = f.get("terms", "30")
+            raised = parse_date(f.get("date_raised")) or date.today()
+            if terms == "custom":
+                due = parse_date(f.get("due_date")) or (raised + timedelta(days=30))
+            else:
+                days = 60 if terms == "60" else 30
+                due = raised + timedelta(days=days)
+            ccy = f.get("currency") or cust.currency
+            iid = svc.next_parts_inst_id(cust)
+            db.session.add(Instalment(
+                inst_id=iid, customer_id=cust.id, currency=ccy, account_type="PARTS",
+                original_amount=amt, due_date=due, security=None,
+                reference=f.get("invoice_ref"), date_raised=raised,
+                description=f.get("description") or "Spare parts / accessories"))
+            db.session.commit()
+            audit("parts_sale_created", cust.cust_ref, f"{ccy} {amt} due {due} ({iid})")
+            # parts credit-limit warning (non-blocking)
+            parts_out = sum(r["net"] for r in svc.instalment_rows(currency=ccy, account_type="PARTS")
+                            if r["customer_id"] == cust.id)
+            if cust.parts_credit_limit and parts_out > float(cust.parts_credit_limit):
+                flash(f"Recorded {iid}. NOTE: parts balance {parts_out:,.0f} {ccy} now exceeds the "
+                      f"parts credit limit {float(cust.parts_credit_limit):,.0f} {ccy}.", "warning")
+            else:
+                flash(f"Parts sale {iid} recorded for {cust.name} ({ccy} {amt:,.0f}, due {due}).", "success")
+            return redirect(url_for("customer_detail", cid=cust.id))
+        customers = Customer.query.order_by(Customer.cust_ref).all()
+        return render_template("parts_new.html", customers=customers)
+
     # ---------------- Customers: list, search, detail, edit ----------------
     @app.route("/customers")
     @login_required
@@ -446,22 +506,36 @@ def create_app():
             cust.address = f.get("address")
             cust.account_no = f.get("account_no") or cust.account_no
             cust.credit_limit = parse_money(f.get("credit_limit")) if f.get("credit_limit") else None
+            cust.parts_credit_limit = parse_money(f.get("parts_credit_limit")) if f.get("parts_credit_limit") else None
             if "owner_id" in f:
                 cust.owner_id = int(f["owner_id"]) if f.get("owner_id") else None
             cust.notes = f.get("notes")
             db.session.commit()
             flash("Customer updated.", "success")
             return redirect(url_for("customer_detail", cid=cid))
-        rows = [r for r in svc.instalment_rows() if r["customer_id"] == cid]
-        rows.sort(key=lambda r: (r["due_date"] or date.max))
-        total = sum(r["net"] for r in rows)
-        overdue = sum(r["net"] for r in rows if r["bucket"] in svc.OVERDUE_BUCKETS)
+        allrows = [r for r in svc.instalment_rows() if r["customer_id"] == cid]
+        allrows.sort(key=lambda r: (r["due_date"] or date.max))
+
+        def block(pred):
+            rs = [r for r in allrows if pred(r)]
+            return dict(rows=rs, total=sum(r["net"] for r in rs),
+                        overdue=sum(r["net"] for r in rs if r["bucket"] in svc.OVERDUE_BUCKETS))
+        machine = block(lambda r: r["account_type"] == "MACHINE")
+        parts = block(lambda r: r["account_type"] == "PARTS")
+        combined = block(lambda r: True)
+        rows = allrows
+        total = combined["total"]
+        overdue = combined["overdue"]
         limit = float(cust.credit_limit) if cust.credit_limit is not None else None
-        over_limit = (limit is not None and total > limit)
+        parts_limit = float(cust.parts_credit_limit) if cust.parts_credit_limit is not None else None
+        over_limit = (limit is not None and machine["total"] > limit)
+        parts_over = (parts_limit is not None and parts["total"] > parts_limit)
         pays = Collection.query.filter_by(customer_id=cid).order_by(Collection.id.desc()).all()
         notes = svc.customer_notes(cid)
         return render_template("customer_detail.html", cust=cust, rows=rows, total=total,
                                overdue=overdue, limit=limit, over_limit=over_limit, pays=pays,
+                               machine=machine, parts=parts, combined=combined,
+                               parts_limit=parts_limit, parts_over=parts_over,
                                notes=notes, users=User.query.order_by(User.username).all(),
                                legal_stages=svc.LEGAL_STAGES,
                                default_pct=svc.legal_provision_default())

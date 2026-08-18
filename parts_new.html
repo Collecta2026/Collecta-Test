@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% block title %}New Parts Sale{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">New Spare-Parts / Accessories Sale</h4>
+<p class="text-muted small">Short-term credit (net 30 / 60), booked to the customer's <b>Parts &amp; Accessories</b> account —
+  kept entirely separate from their machine instalments. No guarantee required. Single payment by the due date.</p>
+<div class="card shadow-sm"><div class="card-body">
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label small">Customer</label>
+    <select class="form-select form-select-sm" name="cust_ref" required>
+      <option value="">— choose customer —</option>
+      {% for c in customers %}<option value="{{ c.cust_ref }}">{{ c.cust_ref }} · {{ c.name }} ({{ c.currency }})</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Currency</label>
+    <select class="form-select form-select-sm" name="currency">
+      <option value="">(use customer's)</option><option>EGP</option><option>USD</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Amount</label>
+    <input class="form-control form-control-sm" name="amount" required placeholder="e.g. 12000">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Credit terms</label>
+    <select class="form-select form-select-sm" name="terms" id="terms" onchange="document.getElementById('customDate').style.display=(this.value=='custom'?'block':'none')">
+      <option value="30">Net 30 days</option>
+      <option value="60">Net 60 days</option>
+      <option value="custom">Custom due date</option>
+    </select>
+  </div>
+  <div class="col-md-3" id="customDate" style="display:none;">
+    <label class="form-label small">Custom due date</label>
+    <input type="date" class="form-control form-control-sm" name="due_date">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Invoice / reference</label>
+    <input class="form-control form-control-sm" name="invoice_ref" placeholder="Invoice no.">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Sale date</label>
+    <input type="date" class="form-control form-control-sm" name="date_raised">
+  </div>
+  <div class="col-12">
+    <label class="form-label small">Description (optional)</label>
+    <input class="form-control form-control-sm" name="description" placeholder="e.g. consumables / spare parts for machine X">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Record parts sale</button>
+    <span class="text-muted small ms-2">Terms over 60 days aren't used for parts — use the machine instalment plan instead.</span>
+  </div>
+</form>
+</div></div>
+{% endblock %}

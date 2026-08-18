@@ -38,7 +38,8 @@
     <div class="mb-2"><label class="form-label small">Phone / Mobile</label><input class="form-control form-control-sm" name="phone" value="{{ cust.phone or '' }}" placeholder="+20…"></div>
     <div class="mb-2"><label class="form-label small">Email</label><input class="form-control form-control-sm" type="email" name="email" value="{{ cust.email or '' }}"></div>
     <div class="mb-2"><label class="form-label small">Address</label><textarea class="form-control form-control-sm" name="address" rows="2">{{ cust.address or '' }}</textarea></div>
-    <div class="mb-2"><label class="form-label small">Credit limit ({{ cust.currency }})</label><input class="form-control form-control-sm" name="credit_limit" value="{{ cust.credit_limit if cust.credit_limit is not none else '' }}"></div>
+    <div class="mb-2"><label class="form-label small">Machine credit limit ({{ cust.currency }})</label><input class="form-control form-control-sm" name="credit_limit" value="{{ cust.credit_limit if cust.credit_limit is not none else '' }}"></div>
+    <div class="mb-2"><label class="form-label small">Parts credit limit ({{ cust.currency }})</label><input class="form-control form-control-sm" name="parts_credit_limit" value="{{ cust.parts_credit_limit if cust.parts_credit_limit is not none else '' }}"></div>
     <div class="mb-2"><label class="form-label small">Ledger owner (controller)</label>
       <select class="form-select form-select-sm" name="owner_id">
         <option value="">— unallocated —</option>
@@ -49,21 +50,49 @@
 </div></div></div>
 <div class="col-lg-8">
   <div class="card shadow-sm mb-3"><div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h6 class="mb-0" style="color:#1f3864;">Total Outstanding (combined) — {{ cust.currency }}</h6>
+      <a class="btn btn-sm btn-outline-primary" href="{{ url_for('parts_new') }}">+ New Parts Sale</a>
+    </div>
     <div class="row text-center">
-      <div class="col"><div class="text-muted small">Outstanding</div><div class="fs-5 fw-bold">{{ total|money(cust.currency) }}</div></div>
-      <div class="col"><div class="text-muted small">Overdue</div><div class="fs-5 fw-bold text-danger">{{ overdue|money(cust.currency) }}</div></div>
-      <div class="col"><div class="text-muted small">Credit limit</div><div class="fs-5 fw-bold">{{ limit|money(cust.currency) if limit is not none else '—' }}</div></div>
-      <div class="col"><div class="text-muted small">Headroom</div><div class="fs-5 fw-bold {{ 'text-danger' if over_limit }}">{{ (limit-total)|money(cust.currency) if limit is not none else '—' }}</div></div>
+      <div class="col"><div class="text-muted small">Machine</div><div class="fs-6 fw-bold">{{ machine.total|money(cust.currency) }}</div></div>
+      <div class="col"><div class="text-muted small">Parts &amp; Accessories</div><div class="fs-6 fw-bold">{{ parts.total|money(cust.currency) }}</div></div>
+      <div class="col" style="border-left:2px solid #1f3864;"><div class="text-muted small">Combined total</div><div class="fs-5 fw-bold" style="color:#1f3864;">{{ combined.total|money(cust.currency) }}</div></div>
+      <div class="col"><div class="text-muted small">Combined overdue</div><div class="fs-6 fw-bold text-danger">{{ combined.overdue|money(cust.currency) }}</div></div>
     </div>
   </div></div>
-  <div class="card shadow-sm"><div class="card-body table-responsive">
-    <h6>Instalments</h6>
-    <table class="table table-sm"><thead><tr><th>ID</th><th>Due</th><th class="money">Original</th>
+
+  {# ---------------- Machine sub-account ---------------- #}
+  <div class="card shadow-sm mb-3"><div class="card-body table-responsive">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="mb-0">🏭 Machine account</h6>
+      <div class="small text-muted">Outstanding <b>{{ machine.total|money(cust.currency) }}</b> · Overdue <b class="text-danger">{{ machine.overdue|money(cust.currency) }}</b>
+        · Limit {{ limit|money(cust.currency) if limit is not none else '—' }}{% if over_limit %} <span class="badge bg-danger">over limit</span>{% endif %}</div>
+    </div>
+    <table class="table table-sm mt-2"><thead><tr><th>ID</th><th>Due</th><th class="money">Original</th>
       <th class="money">Received</th><th class="money">Net</th><th>Bucket</th><th>Status</th><th>Security</th></tr></thead><tbody>
-    {% for r in rows %}<tr class="{{ 'bucket-old' if r.bucket in ['181-365 Days','365+ Days'] else ('bucket-mid' if r.bucket=='91-180 Days' else '') }}">
+    {% for r in machine.rows %}<tr class="{{ 'bucket-old' if r.bucket in ['181-365 Days','365+ Days'] else ('bucket-mid' if r.bucket=='91-180 Days' else '') }}">
       <td>{{ r.inst_id }}</td><td>{{ r.due_date or '—' }}</td><td class="money">{{ r.original|money }}</td>
       <td class="money text-success">{{ r.received|money }}</td><td class="money fw-bold">{{ r.net|money }}</td>
-      <td>{{ r.bucket }}</td><td>{{ r.status }}</td><td>{{ r.security }}</td></tr>{% endfor %}
+      <td>{{ r.bucket }}</td><td>{{ r.status }}</td><td>{{ r.security }}</td></tr>
+    {% else %}<tr><td colspan="8" class="text-center text-muted py-2">No machine instalments.</td></tr>{% endfor %}
+    </tbody></table>
+  </div></div>
+
+  {# ---------------- Parts & Accessories sub-account ---------------- #}
+  <div class="card shadow-sm"><div class="card-body table-responsive">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="mb-0">🔧 Parts &amp; Accessories account</h6>
+      <div class="small text-muted">Outstanding <b>{{ parts.total|money(cust.currency) }}</b> · Overdue <b class="text-danger">{{ parts.overdue|money(cust.currency) }}</b>
+        · Limit {{ parts_limit|money(cust.currency) if parts_limit is not none else '—' }}{% if parts_over %} <span class="badge bg-danger">over limit</span>{% endif %}</div>
+    </div>
+    <table class="table table-sm mt-2"><thead><tr><th>Invoice ID</th><th>Due</th><th class="money">Amount</th>
+      <th class="money">Received</th><th class="money">Net</th><th>Bucket</th><th>Status</th><th>Ref</th></tr></thead><tbody>
+    {% for r in parts.rows %}<tr class="{{ 'bucket-old' if r.bucket in ['181-365 Days','365+ Days'] else ('bucket-mid' if r.bucket=='91-180 Days' else '') }}">
+      <td>{{ r.inst_id }}</td><td>{{ r.due_date or '—' }}</td><td class="money">{{ r.original|money }}</td>
+      <td class="money text-success">{{ r.received|money }}</td><td class="money fw-bold">{{ r.net|money }}</td>
+      <td>{{ r.bucket }}</td><td>{{ r.status }}</td><td>{{ r.reference or '' }}</td></tr>
+    {% else %}<tr><td colspan="8" class="text-center text-muted py-2">No spare-parts / accessories credit. <a href="{{ url_for('parts_new') }}">Add a parts sale</a>.</td></tr>{% endfor %}
     </tbody></table>
   </div></div>
   <div class="card shadow-sm mt-3"><div class="card-body">

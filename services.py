@@ -42,13 +42,15 @@ def _received_map():
     return {iid: Decimal(str(total)) for iid, total in rows}
 
 
-def instalment_rows(report_date=None, currency=None):
+def instalment_rows(report_date=None, currency=None, account_type=None):
     """Return enriched instalment dicts with net, days_overdue, bucket, status."""
     report_date = report_date or date.today()
     rec = _received_map()
     q = db.session.query(Instalment, Customer).join(Customer, Instalment.customer_id == Customer.id)
     if currency:
         q = q.filter(Instalment.currency == currency)
+    if account_type:
+        q = q.filter(Instalment.account_type == account_type)
     out = []
     for inst, cust in q.all():
         received = rec.get(inst.id, Decimal("0"))
@@ -66,6 +68,7 @@ def instalment_rows(report_date=None, currency=None):
         out.append(dict(
             inst_id=inst.inst_id, cust_ref=cust.cust_ref, account_no=cust.account_no,
             customer=cust.name, currency=inst.currency,
+            account_type=(inst.account_type or "MACHINE"),
             original=float(inst.original_amount or 0), received=float(received),
             net=float(net), due_date=inst.due_date, days_overdue=dov,
             bucket=bucket, status=status, security=inst.security,
@@ -73,6 +76,44 @@ def instalment_rows(report_date=None, currency=None):
             legal=(cust.legal_status == "legal"),
         ))
     return out
+
+
+ACCOUNT_TYPES = ["MACHINE", "PARTS"]
+ACCOUNT_TYPE_LABELS = {"MACHINE": "Machine", "PARTS": "Parts & Accessories"}
+
+
+def dashboard_kpis_by_type(report_date=None):
+    """Per currency, split into Machine and Parts, each with its own totals, plus a combined line.
+    EGP and USD are always kept separate."""
+    rows = instalment_rows(report_date=report_date)
+    out = {}
+    for ccy in ("EGP", "USD"):
+        sub = [r for r in rows if r["currency"] == ccy]
+        block = {}
+        for atype in ("MACHINE", "PARTS", "ALL"):
+            s = sub if atype == "ALL" else [r for r in sub if r["account_type"] == atype]
+            total = sum(r["net"] for r in s)
+            overdue = sum(r["net"] for r in s if r["bucket"] in OVERDUE_BUCKETS)
+            custs = {r["customer_id"] for r in s if r["net"] > 0}
+            block[atype] = dict(total=total, overdue=overdue,
+                                overdue_pct=(overdue / total * 100 if total else 0),
+                                customers=len(custs))
+        out[ccy] = block
+    return out
+
+
+def next_parts_inst_id(customer):
+    """Next Parts invoice/instalment id for a customer, e.g. SP-EGP012-03."""
+    from models import Instalment
+    prefix = f"SP-{customer.cust_ref}-"
+    nums = []
+    for i in Instalment.query.filter_by(customer_id=customer.id, account_type="PARTS").all():
+        if (i.inst_id or "").startswith(prefix):
+            tail = i.inst_id[len(prefix):]
+            if tail.isdigit():
+                nums.append(int(tail))
+    n = (max(nums) + 1) if nums else 1
+    return f"{prefix}{n:02d}"
 
 
 def customer_balances(report_date=None):

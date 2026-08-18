@@ -76,6 +76,13 @@ class Instalment(db.Model):
     reference = db.Column(db.String(200))       # cheque / invoice / contract reference
     date_raised = db.Column(db.Date)
     description = db.Column(db.String(300))
+    # ---- Upload 3: reschedule / add-machine / currency conversion ----
+    orig_fx_rate = db.Column(db.Numeric(12, 4))     # original contract USD->EGP rate (USD instalments)
+    state = db.Column(db.String(12), default="open", index=True)  # open / converted / rescheduled
+    converted_rate = db.Column(db.Numeric(12, 4))   # agreed rate used when converted to EGP
+    linked_id = db.Column(db.Integer)               # source/target instalment id for conversion/reschedule
+    origin = db.Column(db.String(12), default="original")  # original / conversion / reschedule / machine
+    agreement_ref = db.Column(db.String(120))       # hard-copy agreement / contract reference
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     payments = db.relationship("Collection", backref="instalment", lazy=True)

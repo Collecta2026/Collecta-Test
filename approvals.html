@@ -9,11 +9,27 @@
   <thead style="background:#1f3864;color:#fff;"><tr><th>Raised</th><th>Type</th><th>Requested by</th><th>Summary</th><th>Reason</th><th></th></tr></thead>
   <tbody>
     {% for a in pending %}
+    {% set d = details.get(a.id, {}) %}
     <tr>
       <td class="small" style="white-space:nowrap;">{{ a.ts.strftime('%Y-%m-%d %H:%M') if a.ts else '' }}</td>
       <td><span class="badge bg-info text-dark">{{ a.kind }}</span></td>
       <td class="small">{{ a.requester }}</td>
-      <td class="small">{{ a.summary }}</td>
+      <td class="small">{{ a.summary }}
+        {% if a.kind=='currency_conversion' and d %}
+          <div class="mt-1 p-2 rounded {{ 'bg-danger-subtle border border-danger' if (d.fx_diff is not none and d.fx_diff < 0) else 'bg-light' }}" style="font-size:.78rem;">
+            <div>USD converted: <b>{{ '%.2f'|format(d.total_usd or 0) }}</b> · Agreed rate: <b>{{ '%g'|format(d.agreed_rate or 0) }}</b></div>
+            {% if d.total_orig_egp is not none %}<div>Original EGP value: {{ '{:,.0f}'.format(d.total_orig_egp) }} · New EGP value (total deal): <b>{{ '{:,.0f}'.format(d.total_new_egp or 0) }}</b></div>{% endif %}
+            {% if d.fx_diff is not none %}
+              <div class="fw-bold {{ 'text-danger' if d.fx_diff < 0 else 'text-success' }}">
+                {% if d.fx_diff < 0 %}⚠ FX LOSS of {{ '{:,.0f}'.format(-d.fx_diff) }} EGP vs original contract rate{% else %}FX gain of {{ '{:,.0f}'.format(d.fx_diff) }} EGP{% endif %}
+              </div>
+            {% else %}<div class="text-muted">Original rate confirmed at conversion (legacy instalment).</div>{% endif %}
+            {% if d.agreement_ref %}<div>Agreement ref: <b>{{ d.agreement_ref }}</b></div>{% endif %}
+          </div>
+        {% elif a.kind=='date_reschedule' and d and d.agreement_ref %}
+          <div class="small text-muted mt-1">Agreement ref: {{ d.agreement_ref }}</div>
+        {% endif %}
+      </td>
       <td class="small text-muted">{{ a.reason or '' }}</td>
       <td class="text-end" style="white-space:nowrap;">
         <form method="post" action="{{ url_for('approval_decide', aid=a.id, decision='approve') }}" class="d-inline">

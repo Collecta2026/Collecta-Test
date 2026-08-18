@@ -14,6 +14,7 @@ Features:
 import csv
 import io
 import os
+import json
 from functools import wraps
 from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
@@ -106,6 +107,23 @@ def _ensure_schema(db):
                 db.session.execute(text("ALTER TABLE instalments ADD COLUMN account_type VARCHAR(10)"))
                 db.session.execute(text("UPDATE instalments SET account_type='MACHINE' WHERE account_type IS NULL"))
                 db.session.commit()
+            add_cols = [
+                ("orig_fx_rate", "NUMERIC(12,4)"),
+                ("state", "VARCHAR(12)"),
+                ("converted_rate", "NUMERIC(12,4)"),
+                ("linked_id", "INTEGER"),
+                ("origin", "VARCHAR(12)"),
+                ("agreement_ref", "VARCHAR(120)"),
+            ]
+            icols = [c["name"] for c in insp.get_columns("instalments")]
+            for col, typ in add_cols:
+                if col not in icols:
+                    db.session.execute(text(f"ALTER TABLE instalments ADD COLUMN {col} {typ}"))
+                    db.session.commit()
+            # backfill sensible defaults
+            db.session.execute(text("UPDATE instalments SET state='open' WHERE state IS NULL"))
+            db.session.execute(text("UPDATE instalments SET origin='original' WHERE origin IS NULL"))
+            db.session.commit()
         if "customers" in tables:
             ccols = [c["name"] for c in insp.get_columns("customers")]
             if "parts_credit_limit" not in ccols:
@@ -478,6 +496,199 @@ def create_app():
             return redirect(url_for("customer_detail", cid=cust.id))
         customers = Customer.query.order_by(Customer.cust_ref).all()
         return render_template("parts_new.html", customers=customers)
+
+    # ================= Upload 3: reschedule / add-machine / currency conversion =================
+
+    # ---- (b) Add a new machine deal — contract-backed, the contract IS the authorisation ----
+    @app.route("/machine/new", methods=["GET", "POST"])
+    @login_required
+    def machine_new():
+        from datetime import timedelta
+        if request.method == "POST":
+            f = request.form
+            cust = Customer.query.filter_by(cust_ref=f.get("cust_ref", "").strip()).first()
+            if not cust:
+                flash("Choose an existing customer.", "danger")
+                return redirect(url_for("machine_new"))
+            total = parse_money(f.get("total"))
+            count = int(f.get("count") or 1)
+            contract = (f.get("contract_ref") or "").strip()
+            if not total or total <= 0:
+                flash("Enter a positive contract value.", "danger")
+                return redirect(url_for("machine_new"))
+            if not contract:
+                flash("A signed-contract reference is required — the contract is the authorisation.", "danger")
+                return redirect(url_for("machine_new"))
+            ccy = f.get("currency") or cust.currency
+            first = parse_date(f.get("first_due")) or (date.today() + timedelta(days=30))
+            freq = int(f.get("freq_days") or 30)
+            fx = parse_money(f.get("orig_fx_rate")) if ccy == "USD" and f.get("orig_fx_rate") else None
+            sched = svc.build_schedule(total, count, first, freq)
+            for s in sched:
+                iid = svc.next_deal_inst_id(cust, "MC")
+                db.session.add(Instalment(
+                    inst_id=iid, customer_id=cust.id, currency=ccy, account_type="MACHINE",
+                    original_amount=s["amount"], due_date=s["due_date"],
+                    security=f.get("security") or "Contract", reference=contract,
+                    agreement_ref=contract, origin="machine", state="open",
+                    orig_fx_rate=fx, date_raised=date.today(),
+                    description=f.get("description") or "New machine deal"))
+                db.session.flush()
+            db.session.commit()
+            audit("machine_deal_added", cust.cust_ref,
+                  f"{ccy} {total} over {count} instalments, contract {contract}")
+            flash(f"New machine deal booked for {cust.name}: {count} instalments, "
+                  f"{ccy} {total:,.0f}, contract {contract}.", "success")
+            return redirect(url_for("customer_detail", cid=cust.id))
+        customers = Customer.query.order_by(Customer.cust_ref).all()
+        return render_template("machine_new.html", customers=customers)
+
+    # ---- (a) Date reschedule / new-deal terms — routed for CFO/MD approval ----
+    @app.route("/reschedule/<int:cid>", methods=["GET", "POST"])
+    @login_required
+    def reschedule_request(cid):
+        cust = db.session.get(Customer, cid) or abort(404)
+        if request.method == "POST":
+            from models import Approval
+            f = request.form
+            ids = request.form.getlist("inst_ids")
+            if not ids:
+                flash("Select at least one outstanding instalment to reschedule.", "danger")
+                return redirect(url_for("reschedule_request", cid=cid))
+            open_rows = {str(r["id"]): r for r in svc.open_instalments(cid)}
+            picked = [open_rows[i] for i in ids if i in open_rows]
+            ccy = picked[0]["currency"] if picked else cust.currency
+            total = sum(r["net"] for r in picked)
+            count = int(f.get("count") or 1)
+            first = parse_date(f.get("first_due")) or date.today()
+            freq = int(f.get("freq_days") or 30)
+            sched = svc.build_schedule(total, count, first, freq)
+            payload = dict(action="date_reschedule", customer_id=cid, currency=ccy,
+                           source_ids=[r["id"] for r in picked], total=total,
+                           schedule=[dict(amount=s["amount"], due_date=s["due_date"].isoformat()) for s in sched],
+                           agreement_ref=(f.get("agreement_ref") or "").strip())
+            ap = Approval(kind="date_reschedule", requester=(current_user.full_name or current_user.username),
+                          requester_id=current_user.id, customer_id=cid,
+                          summary=f"Reschedule {ccy} {total:,.0f} for {cust.name} into {count} instalments",
+                          payload=json.dumps(payload), reason=(f.get("reason") or ""))
+            db.session.add(ap); db.session.commit()
+            audit("reschedule_requested", cust.cust_ref, ap.summary)
+            _notify_approvers("reschedule", ap.summary, current_user.id)
+            flash("Reschedule submitted for CFO/MD approval. No ledger change until approved.", "success")
+            return redirect(url_for("customer_detail", cid=cid))
+        rows = svc.open_instalments(cid)
+        return render_template("reschedule.html", cust=cust, rows=rows)
+
+    # ---- (c) USD→EGP currency conversion with FX-loss flag — routed for CFO/MD approval ----
+    @app.route("/convert/<int:cid>", methods=["GET", "POST"])
+    @login_required
+    def convert_request(cid):
+        cust = db.session.get(Customer, cid) or abort(404)
+        usd_rows = svc.open_instalments(cid, currency="USD")
+        if request.method == "POST":
+            from models import Approval
+            f = request.form
+            ids = request.form.getlist("inst_ids")
+            picked = [r for r in usd_rows if str(r["id"]) in ids]
+            if not picked:
+                flash("Select at least one USD instalment to convert.", "danger")
+                return redirect(url_for("convert_request", cid=cid))
+            agreed = parse_money(f.get("agreed_rate"))
+            if not agreed or agreed <= 0:
+                flash("Enter the agreed USD→EGP conversion rate.", "danger")
+                return redirect(url_for("convert_request", cid=cid))
+            agreed = float(agreed)
+            # confirm-on-first-use: legacy USD instalments with no stored original rate
+            legacy_rate = float(parse_money(f.get("legacy_rate"))) if f.get("legacy_rate") else None
+            items = []
+            for r in picked:
+                orig = r["orig_fx_rate"] if r["orig_fx_rate"] is not None else legacy_rate
+                items.append(dict(inst_id=r["inst_id"], net=r["net"],
+                                  orig_fx_rate=(float(orig) if orig is not None else None), id=r["id"]))
+            calc = svc.compute_conversion(items, agreed)
+            reschedule = (f.get("mode") == "convert_reschedule")
+            count = int(f.get("count") or 1) if reschedule else 1
+            first = parse_date(f.get("first_due")) or date.today()
+            freq = int(f.get("freq_days") or 30)
+            sched = svc.build_schedule(calc["total_new_egp"], count, first, freq) if reschedule else \
+                    [dict(amount=calc["total_new_egp"], due_date=first)]
+            payload = dict(action="currency_conversion", customer_id=cid,
+                           source_ids=[it["id"] for it in items],
+                           orig_rates={str(it["id"]): it["orig_fx_rate"] for it in items},
+                           agreed_rate=agreed, legacy_rate=legacy_rate,
+                           total_usd=calc["total_usd"], total_new_egp=calc["total_new_egp"],
+                           total_orig_egp=calc["total_orig_egp"], fx_diff=calc["fx_diff"],
+                           schedule=[dict(amount=s["amount"], due_date=s["due_date"].isoformat()) for s in sched],
+                           agreement_ref=(f.get("agreement_ref") or "").strip())
+            loss_tag = ""
+            if calc["is_loss"]:
+                loss_tag = f" — FX LOSS {abs(calc['fx_diff']):,.0f} EGP"
+            elif calc["is_gain"]:
+                loss_tag = f" — FX gain {calc['fx_diff']:,.0f} EGP"
+            ap = Approval(kind="currency_conversion", requester=(current_user.full_name or current_user.username),
+                          requester_id=current_user.id, customer_id=cid,
+                          summary=(f"Convert USD {calc['total_usd']:,.0f} → EGP {calc['total_new_egp']:,.0f} "
+                                   f"@ {agreed:g} for {cust.name}{loss_tag}"),
+                          payload=json.dumps(payload), reason=(f.get("reason") or ""))
+            db.session.add(ap); db.session.commit()
+            audit("conversion_requested", cust.cust_ref, ap.summary)
+            _notify_approvers("currency conversion", ap.summary, current_user.id)
+            flash("Currency conversion submitted for CFO/MD approval. No ledger change until approved.", "success")
+            return redirect(url_for("customer_detail", cid=cid))
+        # GET — live preview if an agreed rate was passed
+        agreed = request.args.get("agreed_rate")
+        legacy = request.args.get("legacy_rate")
+        calc = None
+        needs_legacy = any(r["orig_fx_rate"] is None for r in usd_rows)
+        if agreed:
+            try:
+                a = float(agreed); lg = float(legacy) if legacy else None
+                items = [dict(inst_id=r["inst_id"], net=r["net"],
+                              orig_fx_rate=(r["orig_fx_rate"] if r["orig_fx_rate"] is not None else lg))
+                         for r in usd_rows]
+                calc = svc.compute_conversion(items, a)
+            except ValueError:
+                calc = None
+        return render_template("convert.html", cust=cust, rows=usd_rows, calc=calc,
+                               needs_legacy=needs_legacy, fx_default=svc.get_fx())
+
+    @app.route("/reports/conversions")
+    @login_required
+    def conversions_report():
+        rows = svc.conversion_report_rows()
+        export = request.args.get("export")
+        if export in ("csv", "xlsx", "pdf"):
+            headers = ["Source ID", "Customer", "Cust Ref", "USD Converted", "Original Rate",
+                       "Agreed Rate", "Original EGP Value", "New EGP Value", "FX Gain/(Loss)", "Agreement Ref"]
+            data = [[r["inst_id"], r["customer"], r["cust_ref"], r["usd"], r["orig_rate"],
+                     r["agreed_rate"], r["orig_egp"], r["new_egp"], r["fx_diff"], r["agreement_ref"]]
+                    for r in rows]
+            return report_download(export, "Currency Conversions", headers, data, "currency_conversions")
+        return render_template("conversions_report.html", rows=rows)
+
+    # ---- customer pickers so Reschedule / Convert are reachable from the menu ----
+    @app.route("/reschedule", methods=["GET", "POST"])
+    @login_required
+    def reschedule_picker():
+        if request.method == "POST" and request.form.get("cid"):
+            return redirect(url_for("reschedule_request", cid=int(request.form["cid"])))
+        customers = Customer.query.order_by(Customer.cust_ref).all()
+        return render_template("pick_customer.html", customers=customers, post_to="reschedule_picker",
+                               title="Reschedule instalments",
+                               intro="Choose the customer whose outstanding instalments you want to reschedule.")
+
+    @app.route("/convert", methods=["GET", "POST"])
+    @login_required
+    def convert_picker():
+        if request.method == "POST" and request.form.get("cid"):
+            return redirect(url_for("convert_request", cid=int(request.form["cid"])))
+        # only customers that actually have open USD instalments
+        usd_ids = {r["customer_id"] for r in svc.instalment_rows(currency="USD")
+                   if r["state"] == "open" and r["net"] > 0}
+        customers = [c for c in Customer.query.order_by(Customer.cust_ref).all() if c.id in usd_ids]
+        return render_template("pick_customer.html", customers=customers, post_to="convert_picker",
+                               title="Currency conversion (USD→EGP)",
+                               intro="Choose the customer whose remaining USD balance you want to convert to EGP.")
 
     # ---------------- Customers: list, search, detail, edit ----------------
     @app.route("/customers")
@@ -1291,7 +1502,13 @@ def create_app():
         from models import Approval
         pending = Approval.query.filter_by(status="pending").order_by(Approval.id.desc()).all()
         history = Approval.query.filter(Approval.status != "pending").order_by(Approval.id.desc()).limit(50).all()
-        return render_template("approvals.html", pending=pending, history=history)
+        details = {}
+        for a in pending:
+            try:
+                details[a.id] = json.loads(a.payload) if a.payload else {}
+            except Exception:
+                details[a.id] = {}
+        return render_template("approvals.html", pending=pending, history=history, details=details)
 
     @app.route("/approvals/<int:aid>/<decision>", methods=["POST"])
     @login_required
@@ -1312,9 +1529,70 @@ def create_app():
         ap.decided_at = datetime.now()
         db.session.commit()
         audit("approval_" + ap.status, ap.kind, ap.summary or "")
-        # The authorised action itself (e.g. applying a reschedule) is wired in Upload 2.
+        # Apply the authorised action to the ledger (only on approval).
+        if ap.status == "approved":
+            try:
+                _apply_approval(ap)
+            except Exception as e:
+                db.session.rollback()
+                flash(f"Approved, but applying the change failed: {e}", "danger")
+                return redirect(url_for("approvals_queue"))
         flash(f"Request {ap.status}.", "success")
         return redirect(url_for("approvals_queue"))
+
+    def _apply_approval(ap):
+        """Turn an approved reschedule/conversion into actual ledger entries."""
+        from models import db, Instalment, Customer
+        if not ap.payload:
+            return
+        p = json.loads(ap.payload)
+        action = p.get("action")
+        cust = db.session.get(Customer, p.get("customer_id"))
+        if action == "date_reschedule":
+            # close the source instalments (rescheduled), create the new EGP/USD schedule
+            for iid in p.get("source_ids", []):
+                src = db.session.get(Instalment, iid)
+                if src:
+                    src.state = "rescheduled"
+            for i, s in enumerate(p.get("schedule", [])):
+                nid = svc.next_deal_inst_id(cust, "RS")
+                db.session.add(Instalment(
+                    inst_id=nid, customer_id=cust.id, currency=p.get("currency"),
+                    account_type="MACHINE", original_amount=s["amount"],
+                    due_date=date.fromisoformat(s["due_date"]),
+                    reference=p.get("agreement_ref"), agreement_ref=p.get("agreement_ref"),
+                    origin="reschedule", state="open", date_raised=date.today(),
+                    description="Rescheduled instalment"))
+                db.session.flush()
+            db.session.commit()
+            audit("reschedule_applied", (cust.cust_ref if cust else ""), ap.summary or "")
+        elif action == "currency_conversion":
+            agreed = p.get("agreed_rate")
+            orig_rates = p.get("orig_rates", {})
+            for iid in p.get("source_ids", []):
+                src = db.session.get(Instalment, iid)
+                if not src:
+                    continue
+                # capture the original rate used (stored or the confirmed legacy rate) for the report
+                if src.orig_fx_rate is None:
+                    lr = orig_rates.get(str(iid)) or p.get("legacy_rate")
+                    if lr:
+                        src.orig_fx_rate = lr
+                src.state = "converted"
+                src.converted_rate = agreed
+                src.agreement_ref = p.get("agreement_ref")
+            # create the new EGP instalment(s)
+            for s in p.get("schedule", []):
+                nid = svc.next_deal_inst_id(cust, "CV")
+                new_i = Instalment(
+                    inst_id=nid, customer_id=cust.id, currency="EGP", account_type="MACHINE",
+                    original_amount=s["amount"], due_date=date.fromisoformat(s["due_date"]),
+                    reference=p.get("agreement_ref"), agreement_ref=p.get("agreement_ref"),
+                    origin="conversion", state="open", date_raised=date.today(),
+                    description="USD→EGP currency conversion")
+                db.session.add(new_i); db.session.flush()
+            db.session.commit()
+            audit("conversion_applied", (cust.cust_ref if cust else ""), ap.summary or "")
 
     return app
 

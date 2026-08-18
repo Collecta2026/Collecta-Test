@@ -200,6 +200,51 @@ MANUAL = [
          keywords=["parts", "accessories", "spare parts", "net 30", "net 60", "sub-account",
                    "machine", "two accounts", "parts credit limit"]),
 
+    dict(id="machine_deal", cat="Ledger", title="Adding a new machine deal (contract-backed)",
+         path="Ledger > + New Machine Deal", route="machine_new", args={},
+         summary="Books a new machine instalment plan against a signed contract. The contract is the "
+                 "authorisation, so no separate approval step is needed — but a contract reference is "
+                 "required and stored on every instalment for the audit trail.",
+         steps=["Open Ledger > + New Machine Deal.",
+                "Pick the customer, currency, total contract value and number of instalments.",
+                "For USD deals, record the original contract FX rate so any future conversion can measure a gain or loss.",
+                "Enter the signed-contract reference (required) and submit — the value is split evenly across the instalments."],
+         tips=["The contract is the authorisation; the reference is recorded on every instalment.",
+               "EGP and USD deals stay in their own currency — nothing is converted here."],
+         keywords=["machine", "new deal", "contract", "instalment plan", "add machine"]),
+
+    dict(id="reschedule", cat="Ledger", title="Rescheduling a customer (with approval)",
+         path="Customer page > Reschedule", route="reschedule_request", args={"cid": 0},
+         summary="Re-spreads a customer's outstanding instalments over new dates/terms. The request is held "
+                 "for CFO or MD approval and nothing changes on the ledger until it is approved. It should be "
+                 "backed by a short written agreement, whose reference is recorded.",
+         steps=["On the customer page, click Reschedule.",
+                "Tick the outstanding instalments to reschedule (same currency only).",
+                "Set the new number of instalments, first due date and frequency, and the agreement reference.",
+                "Submit — the request appears in Approvals for the CFO/MD.",
+                "On approval, the old instalments are closed as 'rescheduled' and the new schedule is created for the same total."],
+         tips=["The outstanding value is preserved — only the dates/number of instalments change.",
+               "You cannot approve your own request (separation of duties)."],
+         keywords=["reschedule", "re-spread", "new terms", "approval", "cfo", "md"]),
+
+    dict(id="currency_conversion", cat="Ledger", title="Currency conversion USD→EGP (with FX-loss flag)",
+         path="Customer page > Convert USD→EGP", route="convert_request", args={"cid": 0},
+         summary="Converts the remaining USD outstanding to EGP at an agreed rate. The system compares the "
+                 "agreed rate to each instalment's original contract rate and flags any exchange gain or loss, "
+                 "showing the difference and the total deal value to both the controller and the authorising "
+                 "manager. Held for CFO/MD approval; backed by a short written agreement.",
+         steps=["On the customer page, click Convert USD→EGP.",
+                "Enter the agreed conversion rate and click Preview FX impact — the gain or loss is shown.",
+                "If an instalment has no stored original rate (legacy), enter the rate that applied when the contract was created.",
+                "Choose Convert only (one EGP instalment) or Convert & reschedule (a new EGP schedule).",
+                "Record the written-agreement reference and submit for CFO/MD approval.",
+                "On approval, the USD instalment is closed as 'converted' (not a cash receipt, so USD outstanding drops "
+                "without overstating collections) and a linked EGP instalment is created."],
+         tips=["A conversion is never treated as a payment — collections and commission are not overstated.",
+               "Every conversion is listed in Reports > Currency Conversions with the rates and FX gain/loss.",
+               "Only the remaining outstanding is ever converted; settled history is untouched."],
+         keywords=["currency", "conversion", "usd", "egp", "fx", "exchange loss", "rate", "convert"]),
+
     # ---------------- Collections & chasing ----------------
     dict(id="collections", cat="Collections", title="Recording a collection",
          path="Collections > Record Collection", route="collections", args={},

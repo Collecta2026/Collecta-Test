@@ -52,7 +52,12 @@
   <div class="card shadow-sm mb-3"><div class="card-body">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h6 class="mb-0" style="color:#1f3864;">Total Outstanding (combined) — {{ cust.currency }}</h6>
-      <a class="btn btn-sm btn-outline-primary" href="{{ url_for('parts_new') }}">+ New Parts Sale</a>
+      <div class="d-flex gap-1 flex-wrap">
+        {% if can('reschedule') %}<a class="btn btn-sm btn-outline-secondary" href="{{ url_for('reschedule_request', cid=cust.id) }}">Reschedule</a>{% endif %}
+        {% if can('fx_convert') %}<a class="btn btn-sm btn-outline-secondary" href="{{ url_for('convert_request', cid=cust.id) }}">Convert USD→EGP</a>{% endif %}
+        {% if can('customer_edit') %}<a class="btn btn-sm btn-outline-primary" href="{{ url_for('machine_new') }}">+ Machine Deal</a>{% endif %}
+        <a class="btn btn-sm btn-outline-primary" href="{{ url_for('parts_new') }}">+ New Parts Sale</a>
+      </div>
     </div>
     <div class="row text-center">
       <div class="col"><div class="text-muted small">Machine</div><div class="fs-6 fw-bold">{{ machine.total|money(cust.currency) }}</div></div>

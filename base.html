@@ -38,23 +38,26 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ledger</a>
           <ul class="dropdown-menu">
-            {{ mi('ledger', url_for('ledger'), 'Debtors Ledger') }}
-            {{ mi('ledger', url_for('aged', ccy='EGP'), 'Aged Analysis — EGP') }}
-            {{ mi('ledger', url_for('aged', ccy='USD'), 'Aged Analysis — USD') }}
-            <li><hr class="dropdown-divider"></li>
+            {{ mi('ledger', url_for('ledger'), 'Instalments (Debtors Ledger)') }}
             {{ mi('legal', url_for('legal_ledger'), '⚖ Legal Sub-ledger') }}
-            {{ mi('customer_edit', url_for('new_instalment'), '+ Add Instalment') }}
-            {{ mi('parts_sales', url_for('parts_new'), '+ New Parts Sale (30/60)') }}
-            {{ mi('bulk_import', url_for('import_home'), '⬆ Bulk Import (Excel)') }}
+            <li><hr class="dropdown-divider"></li>
+            <li><h6 class="dropdown-header">New business</h6></li>
+            {{ mi('customer_edit', url_for('machine_new'), '+ New Machine Deal / Contract') }}
+            {{ mi('parts_sales', url_for('parts_new'), '+ Parts & Accessories Sale (30/60)') }}
+            {{ mi('customer_edit', url_for('new_instalment'), '+ Add Single Instalment') }}
           </ul>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Customers</a>
           <ul class="dropdown-menu">
-            {{ mi('customers', url_for('customers'), 'All Customers / Search') }}
+            {{ mi('customers', url_for('customers'), 'Search Customers') }}
             {{ mi('customer_edit', url_for('customer_new'), '+ Add Customer') }}
-            {{ mi('credit_limits', url_for('credit_limits'), 'Credit Limits') }}
+            {{ mi('credit_limits', url_for('credit_limits'), 'Set Credit Limits') }}
+            <li><hr class="dropdown-divider"></li>
+            <li><h6 class="dropdown-header">Account actions (need approval)</h6></li>
+            {{ mi('reschedule', url_for('reschedule_picker'), 'Reschedule Instalments') }}
+            {{ mi('fx_convert', url_for('convert_picker'), 'Currency Conversion (USD→EGP)') }}
           </ul>
         </li>
 
@@ -70,11 +73,20 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Reports</a>
           <ul class="dropdown-menu">
+            <li><h6 class="dropdown-header">Ageing &amp; debtors</h6></li>
+            {{ mi('ledger', url_for('aged', ccy='EGP'), 'Aged Analysis — EGP') }}
+            {{ mi('ledger', url_for('aged', ccy='USD'), 'Aged Analysis — USD') }}
             {{ mi('reports', url_for('reports'), 'Report Writer (Aged Debtors)') }}
-            {{ mi('reports', url_for('collections_report'), 'Monthly Collections') }}
             <li><hr class="dropdown-divider"></li>
+            <li><h6 class="dropdown-header">Collections &amp; performance</h6></li>
+            {{ mi('reports', url_for('collections_report'), 'Monthly Collections') }}
             {{ mi('reports', url_for('commission_report'), 'Commission by Controller') }}
             {{ mi('reports', url_for('performance_report'), 'Controller Performance') }}
+            {{ mi('reports', url_for('commission_targets'), 'Collection Targets') }}
+            <li><hr class="dropdown-divider"></li>
+            <li><h6 class="dropdown-header">Currency &amp; data</h6></li>
+            {{ mi('reports', url_for('conversions_report'), 'Currency Conversions (USD→EGP)') }}
+            {{ mi('bulk_import', url_for('import_home'), '⬆ Bulk Import (Excel)') }}
           </ul>
         </li>
 
@@ -84,10 +96,10 @@
             {{ mi('users_admin', url_for('users'), 'Users & Roles') }}
             {{ mi('access_control', url_for('access_control'), '🔐 Access Control') }}
             {{ mi('allocation', url_for('allocations'), 'Ledger Allocation') }}
-            {{ mi('reports', url_for('commission_targets'), 'Collection Targets') }}
             {{ mi('audit_log', url_for('audit_log_view'), 'Audit Log') }}
             {{ mi('settings', url_for('settings'), 'Settings (FX · Email · Branding · DB)') }}
           </ul>
+
         </li>
 
         {% if can('approvals') %}<li class="nav-item"><a class="nav-link" href="{{ url_for('approvals_queue') }}">Approvals{% if pending_approvals %} <span class="badge bg-warning text-dark">{{ pending_approvals }}</span>{% endif %}</a></li>

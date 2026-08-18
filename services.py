@@ -54,17 +54,25 @@ def instalment_rows(report_date=None, currency=None, account_type=None):
     out = []
     for inst, cust in q.all():
         received = rec.get(inst.id, Decimal("0"))
-        net = (inst.original_amount or Decimal("0")) - received
-        if net < 0:
+        state = (inst.state or "open")
+        if state in ("converted", "rescheduled"):
+            # Closed by conversion/reschedule — outstanding is zero and it is NOT a cash receipt.
             net = Decimal("0")
-        dov = (report_date - inst.due_date).days if inst.due_date else None
-        if net <= 0:
-            bucket, status = "Settled", "SETTLED"
-        elif inst.due_date is None:
-            bucket, status = "No Due Date", "NO DATE"
+            dov = (report_date - inst.due_date).days if inst.due_date else None
+            bucket = "Converted" if state == "converted" else "Rescheduled"
+            status = state.upper()
         else:
-            bucket = bucket_for(dov)
-            status = "OVERDUE" if dov > 0 else "CURRENT"
+            net = (inst.original_amount or Decimal("0")) - received
+            if net < 0:
+                net = Decimal("0")
+            dov = (report_date - inst.due_date).days if inst.due_date else None
+            if net <= 0:
+                bucket, status = "Settled", "SETTLED"
+            elif inst.due_date is None:
+                bucket, status = "No Due Date", "NO DATE"
+            else:
+                bucket = bucket_for(dov)
+                status = "OVERDUE" if dov > 0 else "CURRENT"
         out.append(dict(
             inst_id=inst.inst_id, cust_ref=cust.cust_ref, account_no=cust.account_no,
             customer=cust.name, currency=inst.currency,
@@ -73,6 +81,9 @@ def instalment_rows(report_date=None, currency=None, account_type=None):
             net=float(net), due_date=inst.due_date, days_overdue=dov,
             bucket=bucket, status=status, security=inst.security,
             reference=inst.reference, customer_id=cust.id,
+            state=state, origin=(inst.origin or "original"),
+            orig_fx_rate=(float(inst.orig_fx_rate) if inst.orig_fx_rate is not None else None),
+            id=inst.id,
             legal=(cust.legal_status == "legal"),
         ))
     return out
@@ -114,6 +125,103 @@ def next_parts_inst_id(customer):
                 nums.append(int(tail))
     n = (max(nums) + 1) if nums else 1
     return f"{prefix}{n:02d}"
+
+
+# ---------------- Upload 3: reschedule / add-machine / currency conversion ----------------
+def next_deal_inst_id(customer, tag):
+    """Next id for an instalment created by a deal action. tag e.g. 'CV' (conversion),
+    'RS' (reschedule), 'MC' (machine). Produces CV-EGP012-01 etc."""
+    from models import Instalment
+    prefix = f"{tag}-{customer.cust_ref}-"
+    nums = []
+    for i in Instalment.query.filter_by(customer_id=customer.id).all():
+        if (i.inst_id or "").startswith(prefix):
+            t = i.inst_id[len(prefix):]
+            if t.isdigit():
+                nums.append(int(t))
+    n = (max(nums) + 1) if nums else 1
+    return f"{prefix}{n:02d}"
+
+
+def open_instalments(customer_id, currency=None, account_type=None):
+    """Open (not converted/rescheduled/settled) instalment rows with net > 0 for a customer."""
+    rows = [r for r in instalment_rows()
+            if r["customer_id"] == customer_id and r["state"] == "open" and r["net"] > 0]
+    if currency:
+        rows = [r for r in rows if r["currency"] == currency]
+    if account_type:
+        rows = [r for r in rows if r["account_type"] == account_type]
+    rows.sort(key=lambda r: (r["due_date"] or date.max))
+    return rows
+
+
+def compute_conversion(items, agreed_rate):
+    """FX conversion maths for the warning banner. items: dicts with net (USD outstanding),
+    orig_fx_rate, inst_id. Compares agreed rate to each instalment's original contract rate.
+    Returns per-line and totals: original EGP value, new EGP value, FX gain/loss, total deal value."""
+    agreed = Decimal(str(agreed_rate))
+    rows = []
+    tot_usd = Decimal("0"); tot_orig = Decimal("0"); tot_new = Decimal("0"); have_orig = False
+    for it in items:
+        usd = Decimal(str(it["net"]))
+        orig = Decimal(str(it["orig_fx_rate"])) if it.get("orig_fx_rate") else None
+        orig_egp = (usd * orig) if orig is not None else None
+        new_egp = (usd * agreed)
+        diff = (new_egp - orig_egp) if orig_egp is not None else None
+        rows.append(dict(inst_id=it["inst_id"], net_usd=float(usd),
+                         orig_rate=(float(orig) if orig is not None else None),
+                         orig_egp=(float(orig_egp) if orig_egp is not None else None),
+                         new_egp=float(new_egp),
+                         fx_diff=(float(diff) if diff is not None else None)))
+        tot_usd += usd; tot_new += new_egp
+        if orig_egp is not None:
+            tot_orig += orig_egp; have_orig = True
+    fx_diff = float(tot_new - tot_orig) if have_orig else None
+    return dict(rows=rows, agreed_rate=float(agreed),
+                total_usd=float(tot_usd),
+                total_orig_egp=(float(tot_orig) if have_orig else None),
+                total_new_egp=float(tot_new),
+                fx_diff=fx_diff,
+                is_loss=(fx_diff is not None and fx_diff < -0.005),
+                is_gain=(fx_diff is not None and fx_diff > 0.005))
+
+
+def build_schedule(total, count, first_date, freq_days=30):
+    """Split a total into `count` equal instalments (last absorbs rounding), dated from
+    first_date every freq_days. Returns list of dict(amount, due_date)."""
+    from datetime import timedelta
+    total = Decimal(str(total)); count = max(1, int(count))
+    base = (total / count).quantize(Decimal("0.01"))
+    amounts = [base] * (count - 1)
+    amounts.append(total - base * (count - 1))
+    out = []; d = first_date
+    for a in amounts:
+        out.append(dict(amount=float(a), due_date=d))
+        d = d + timedelta(days=int(freq_days))
+    return out
+
+
+def conversion_report_rows():
+    """All currency conversions (source USD instalments closed as converted), for the report."""
+    from models import Instalment, Customer
+    out = []
+    q = (db.session.query(Instalment, Customer)
+         .join(Customer, Instalment.customer_id == Customer.id)
+         .filter(Instalment.state == "converted"))
+    for inst, cust in q.all():
+        usd = float(inst.original_amount or 0)
+        orig = float(inst.orig_fx_rate) if inst.orig_fx_rate is not None else None
+        rate = float(inst.converted_rate) if inst.converted_rate is not None else None
+        orig_egp = (usd * orig) if orig is not None else None
+        new_egp = (usd * rate) if rate is not None else None
+        diff = (new_egp - orig_egp) if (orig_egp is not None and new_egp is not None) else None
+        out.append(dict(inst_id=inst.inst_id, customer=cust.name, cust_ref=cust.cust_ref,
+                        usd=usd, orig_rate=orig, agreed_rate=rate,
+                        orig_egp=orig_egp, new_egp=new_egp, fx_diff=diff,
+                        agreement_ref=inst.agreement_ref, linked_id=inst.linked_id,
+                        when=inst.created_at))
+    out.sort(key=lambda r: (r["when"] or date.min), reverse=True)
+    return out
 
 
 def customer_balances(report_date=None):

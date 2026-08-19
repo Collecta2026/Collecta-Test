@@ -65,7 +65,7 @@ DEFAULT_MATRIX = {
     "credit_control": {"dashboard", "ledger", "collections", "reminders", "calls",
                        "customers", "customer_edit", "credit_limits", "guarantees",
                        "reports", "exports", "bulk_import", "legal", "reschedule",
-                       "sales_clearance", "parts_sales", "fx_convert"},
+                       "sales_clearance", "parts_sales", "fx_convert", "guarantees"},
     # Account Manager sits in the general accounts: allocates cash and reconciles the
     # Collecta debtors ledger to the GL. Deliberately read + export only inside Collecta,
     # so they never reconcile their own postings (segregation of duties). No posting,
@@ -196,6 +196,8 @@ ENDPOINT_CAP = {
     "reschedule_request": "reschedule", "machine_new": "customer_edit",
     "convert_request": "fx_convert", "convert_preview": "fx_convert", "conversions_report": "reports",
     "reschedule_picker": "reschedule", "convert_picker": "fx_convert",
+    "guarantees_register": "guarantees", "guarantee_new": "guarantees", "guarantee_update": "guarantees",
+    "unguaranteed_report": "reports", "clearance_override": "sales_clearance",
     "customers": "customers", "customer_detail": "customers", "customer_note": "customers",
     "customer_new": "customer_edit",
     "reminders": "reminders", "reminder_letter": "reminders", "reminder_log": "reminders",

@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% block title %}Unguaranteed Exposure{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+  <h4 class="mb-0" style="color:#1f3864;">Unguaranteed Machine Exposure</h4>
+  <div>
+    <a class="btn btn-sm btn-outline-success" href="?ccy={{ ccy }}&amp;export=xlsx">Excel</a>
+    <a class="btn btn-sm btn-outline-danger" href="?ccy={{ ccy }}&amp;export=pdf">PDF</a>
+  </div>
+</div>
+<p class="text-muted small">Open machine instalments with <b>no live guarantee instrument</b> recorded — for management to chase security. Parts are excluded (they carry no guarantee). EGP and USD shown separately.</p>
+<div class="mb-2">
+  {% for cur,amt in tot.items() %}<span class="badge bg-danger me-1">Unguaranteed {{ cur }}: {{ amt|money(cur) }}</span>{% endfor %}
+</div>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm"><thead style="background:#1f3864;color:#fff;"><tr>
+  <th>Instalment</th><th>Ref</th><th>Customer</th><th>Ccy</th><th class="money">Net</th><th>Due</th><th class="money">Days</th><th>Bucket</th></tr></thead><tbody>
+{% for r in rows %}<tr class="{{ 'bucket-old' if r.bucket in ['181-365 Days','365+ Days'] else '' }}">
+  <td>{{ r.inst_id }}</td><td><a href="{{ url_for('customer_detail', cid=r.customer_id) }}">{{ r.cust_ref }}</a></td>
+  <td class="arabic">{{ r.customer }}</td><td>{{ r.currency }}</td><td class="money fw-bold">{{ r.net|money(r.currency) }}</td>
+  <td>{{ r.due_date or '—' }}</td><td class="money">{{ r.days_overdue if r.days_overdue and r.days_overdue>0 else '' }}</td><td>{{ r.bucket }}</td></tr>
+{% else %}<tr><td colspan="8" class="text-center text-muted py-3">Every open machine instalment has a guarantee. 🎉</td></tr>{% endfor %}
+</tbody></table>
+</div></div>
+{% endblock %}

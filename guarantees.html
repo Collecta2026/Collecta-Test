@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block title %}Guarantees{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+  <h4 class="mb-0" style="color:#1f3864;">Guarantees Register</h4>
+  <div>
+    <a class="btn btn-sm btn-primary" style="background:#1f3864;border:0;" href="{{ url_for('guarantee_new') }}">+ Record Guarantee</a>
+    <a class="btn btn-sm btn-outline-success" href="?export=xlsx">Excel</a>
+    <a class="btn btn-sm btn-outline-danger" href="?export=pdf">PDF</a>
+  </div>
+</div>
+<p class="text-muted small">Cheques and promissory notes held as security against machine instalments. Parts &amp; accessories carry no guarantee.</p>
+<form method="get" class="mb-2"><select class="form-select form-select-sm" name="status" style="max-width:220px;display:inline-block;" onchange="this.form.submit()">
+  <option value="">All statuses</option>
+  {% for s in statuses %}<option value="{{ s }}" {{ 'selected' if status==s }}>{{ s|capitalize }}</option>{% endfor %}
+</select></form>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm"><thead style="background:#1f3864;color:#fff;"><tr>
+  <th>Instrument</th><th>Ref</th><th>Bank</th><th>Customer</th><th>Instalment</th><th class="money">Amount</th><th>Due</th><th>Status</th><th></th></tr></thead><tbody>
+{% for g in gs %}<tr>
+  <td>{{ 'Cheque' if g.instrument=='CHEQUE' else 'PN' }}</td><td>{{ g.reference or '' }}</td><td>{{ g.bank or '' }}</td>
+  <td class="arabic">{{ cust_map[g.customer_id].name if g.customer_id in cust_map else '' }}</td>
+  <td>{{ inst_map[g.instalment_id].inst_id if g.instalment_id in inst_map else '—' }}</td>
+  <td class="money">{{ g.amount|money(g.currency) if g.amount else '' }}</td>
+  <td>{{ g.due_date or '—' }}</td>
+  <td><span class="badge bg-{{ {'held':'secondary','due':'warning','cleared':'success','bounced':'danger','returned':'dark'}.get(g.status,'secondary') }} {{ 'text-dark' if g.status=='due' }}">{{ g.status }}</span></td>
+  <td><form method="post" action="{{ url_for('guarantee_update', gid=g.id) }}" class="d-flex gap-1">
+    <select name="status" class="form-select form-select-sm" style="width:110px;">{% for s in statuses %}<option value="{{ s }}" {{ 'selected' if g.status==s }}>{{ s }}</option>{% endfor %}</select>
+    <button class="btn btn-sm btn-outline-secondary">Set</button></form></td></tr>
+{% else %}<tr><td colspan="9" class="text-center text-muted py-3">No guarantees recorded yet.</td></tr>{% endfor %}
+</tbody></table>
+</div></div>
+{% endblock %}

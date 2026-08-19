@@ -245,6 +245,57 @@ MANUAL = [
                "Only the remaining outstanding is ever converted; settled history is untouched."],
          keywords=["currency", "conversion", "usd", "egp", "fx", "exchange loss", "rate", "convert"]),
 
+    dict(id="guarantees", cat="Customers", title="Guarantees register (cheques & promissory notes)",
+         path="Customers > Guarantees Register", route="guarantees_register", args={},
+         summary="Records the security instruments — cheques and promissory notes — held against machine "
+                 "instalments. Parts & accessories carry no guarantee. Each instrument has a status "
+                 "(held, due, cleared, bounced, returned) so you can see what backs each debt.",
+         steps=["Open Customers > Guarantees Register to see all instruments, filterable by status.",
+                "Click + Record Guarantee, pick the customer, choose cheque or promissory note, and enter the "
+                "reference, bank, amount, due date and (optionally) the machine instalment it secures.",
+                "Update an instrument's status from the register as it progresses (e.g. held → due → cleared, or bounced).",
+                "Export the register to Excel or PDF for the file."],
+         tips=["Guarantees attach to machine instalments only — parts are short-term and unsecured by design.",
+               "A bounced or returned instrument no longer counts as security, so the instalment reappears in "
+               "the Unguaranteed Machine Exposure report."],
+         keywords=["guarantee", "cheque", "promissory note", "pn", "security", "instrument", "collateral"]),
+
+    dict(id="unguaranteed", cat="Reports", title="Unguaranteed Machine Exposure report",
+         path="Reports > Unguaranteed Machine Exposure", route="unguaranteed_report", args={},
+         summary="Lists every open machine instalment that has no live guarantee instrument recorded, so "
+                 "management can act to obtain security. EGP and USD are shown separately.",
+         steps=["Open Reports > Unguaranteed Machine Exposure.",
+                "Review the machine instalments with no cheque or promissory note behind them, with totals per currency.",
+                "Export to Excel or PDF to circulate for action."],
+         tips=["Parts are excluded — they carry no guarantee by design.",
+               "Recording a guarantee against an instalment removes it from this report automatically."],
+         keywords=["unguaranteed", "exposure", "security", "no guarantee", "risk", "machine"]),
+
+    dict(id="clearance", cat="Customers", title="Sales / maintenance credit clearance (NO-GO gate)",
+         path="Customer page (Sales/Maintenance view)", route="customers", args={},
+         summary="Before sales or maintenance proceed for a customer, Collecta checks credit clearance. If the "
+                 "customer is in legal OR more than the configured number of days overdue (190 by default), the "
+                 "account shows NO-GO and refers them to credit control. A CFO can override with a recorded reason.",
+         steps=["Sales and Maintenance users opening a NO-GO customer see a clear block instead of the account detail.",
+                "To allow an exception, a CFO opens the customer page and records a clearance override with a reason.",
+                "Once overridden, sales/maintenance can proceed; the override (and who set it) is shown and logged.",
+                "The CFO can revoke the override at any time.",
+                "The overdue-day threshold is set in Admin > Settings (default 190 days)."],
+         tips=["Only the CFO can override a clearance block — sales and maintenance cannot.",
+               "Every block and override is written to the audit log."],
+         keywords=["clearance", "no-go", "sales", "maintenance", "legal", "overdue", "override", "cfo", "190 days"]),
+
+    dict(id="parts_over_limit", cat="Customers", title="Parts over-limit release (warn & accept)",
+         path="Approvals", route="approvals_queue", args={},
+         summary="A parts sale that breaches the customer's parts credit limit is never blocked — it is booked "
+                 "and flagged. An over-limit release request is raised for the Finance Manager or CFO to sign off.",
+         steps=["Record the parts sale as normal; if it exceeds the parts limit, it still goes through.",
+                "Collecta raises a parts over-limit release in Approvals and notifies the approvers.",
+                "The Finance Manager or CFO reviews and releases it — the Managing Director cannot release this one."],
+         tips=["The sale always stands; the approval is a management release, not a block.",
+               "Parts over-limit release is restricted to Finance Manager or CFO."],
+         keywords=["parts", "over limit", "release", "warn", "finance manager", "cfo", "approval"]),
+
     # ---------------- Collections & chasing ----------------
     dict(id="collections", cat="Collections", title="Recording a receipt (oldest-first allocation)",
          path="Collections > Record Collection", route="collections", args={},

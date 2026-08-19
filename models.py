@@ -46,6 +46,10 @@ class Customer(db.Model):
     address = db.Column(db.Text)
     credit_limit = db.Column(db.Numeric(16, 2))                 # machine credit limit (null = not set)
     parts_credit_limit = db.Column(db.Numeric(16, 2))           # separate parts & accessories limit (null = not set)
+    clearance_override = db.Column(db.Boolean, default=False)    # CFO override of a NO-GO clearance
+    clearance_override_by = db.Column(db.String(120))
+    clearance_override_reason = db.Column(db.String(300))
+    clearance_override_at = db.Column(db.DateTime)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), index=True)  # ledger owner (credit controller)
     legal_status = db.Column(db.String(12), default="active", index=True)     # active / legal
     legal_date = db.Column(db.Date)
@@ -213,6 +217,25 @@ class AuditLog(db.Model):
     action = db.Column(db.String(60))
     target = db.Column(db.String(120))
     detail = db.Column(db.Text)
+
+
+class Guarantee(db.Model):
+    """A security instrument (cheque or promissory note) backing a machine instalment.
+    Parts & accessories carry no guarantee. Recorded at instalment level for precision."""
+    __tablename__ = "guarantees"
+    id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey("customers.id"), index=True, nullable=False)
+    instalment_id = db.Column(db.Integer, db.ForeignKey("instalments.id"), index=True)
+    instrument = db.Column(db.String(20), default="CHEQUE")     # CHEQUE / PN
+    reference = db.Column(db.String(120))                        # cheque/PN number
+    bank = db.Column(db.String(120))
+    currency = db.Column(db.String(3))
+    amount = db.Column(db.Numeric(16, 2))
+    due_date = db.Column(db.Date)
+    status = db.Column(db.String(12), default="held", index=True)  # held/due/cleared/bounced/returned
+    notes = db.Column(db.String(300))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_by = db.Column(db.String(120))
 
 
 class AccountCredit(db.Model):

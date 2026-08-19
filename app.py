@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import (Flask, render_template, request, redirect, url_for, flash,
-                   Response, abort)
+                   Response, abort, session)
 from flask_login import (LoginManager, login_user, logout_user, login_required,
                          current_user)
 from sqlalchemy import or_
@@ -129,6 +129,14 @@ def _ensure_schema(db):
             if "parts_credit_limit" not in ccols:
                 db.session.execute(text("ALTER TABLE customers ADD COLUMN parts_credit_limit NUMERIC(16,2)"))
                 db.session.commit()
+            ccols = [c["name"] for c in insp.get_columns("customers")]
+            for col, typ in [("clearance_override", "BOOLEAN"),
+                             ("clearance_override_by", "VARCHAR(120)"),
+                             ("clearance_override_reason", "VARCHAR(300)"),
+                             ("clearance_override_at", "TIMESTAMP")]:
+                if col not in ccols:
+                    db.session.execute(text(f"ALTER TABLE customers ADD COLUMN {col} {typ}"))
+                    db.session.commit()
     except Exception:
         db.session.rollback()
 
@@ -550,12 +558,27 @@ def create_app():
                 description=f.get("description") or "Spare parts / accessories"))
             db.session.commit()
             audit("parts_sale_created", cust.cust_ref, f"{ccy} {amt} due {due} ({iid})")
-            # parts credit-limit warning (non-blocking)
+            # parts credit-limit: warn-and-accept (never blocked). If over limit, raise an
+            # FM/CFO release approval so management signs it off, but the sale still stands.
             parts_out = sum(r["net"] for r in svc.instalment_rows(currency=ccy, account_type="PARTS")
                             if r["customer_id"] == cust.id)
             if cust.parts_credit_limit and parts_out > float(cust.parts_credit_limit):
+                from models import Approval
+                ap = Approval(kind="parts_over_limit",
+                              requester=(current_user.full_name or current_user.username),
+                              requester_id=current_user.id, customer_id=cust.id,
+                              summary=(f"Parts over-limit: {cust.name} parts balance {parts_out:,.0f} {ccy} "
+                                       f"exceeds limit {float(cust.parts_credit_limit):,.0f} {ccy} ({iid})"),
+                              payload=json.dumps(dict(action="parts_over_limit", customer_id=cust.id,
+                                                      inst_id=iid, currency=ccy, balance=parts_out,
+                                                      limit=float(cust.parts_credit_limit))),
+                              reason="Auto-raised on over-limit parts sale")
+                db.session.add(ap); db.session.commit()
+                audit("parts_over_limit_raised", cust.cust_ref, ap.summary)
+                _notify_approvers("parts over-limit", ap.summary, current_user.id)
                 flash(f"Recorded {iid}. NOTE: parts balance {parts_out:,.0f} {ccy} now exceeds the "
-                      f"parts credit limit {float(cust.parts_credit_limit):,.0f} {ccy}.", "warning")
+                      f"parts limit {float(cust.parts_credit_limit):,.0f} {ccy} — sent to Finance Manager/CFO "
+                      f"for release. The sale stands in the meantime.", "warning")
             else:
                 flash(f"Parts sale {iid} recorded for {cust.name} ({ccy} {amt:,.0f}, due {due}).", "success")
             return redirect(url_for("customer_detail", cid=cust.id))
@@ -731,6 +754,120 @@ def create_app():
             return report_download(export, "Currency Conversions", headers, data, "currency_conversions")
         return render_template("conversions_report.html", rows=rows)
 
+    # ================= Upload 4: guarantees, clearance gates, parts over-limit =================
+    @app.route("/guarantees")
+    @login_required
+    def guarantees_register():
+        from models import Guarantee
+        status = request.args.get("status") or ""
+        q = Guarantee.query
+        if status:
+            q = q.filter_by(status=status)
+        gs = q.order_by(Guarantee.due_date).all()
+        cust_map = {c.id: c for c in Customer.query.all()}
+        inst_map = {i.id: i for i in Instalment.query.all()}
+        export = request.args.get("export")
+        if export in ("csv", "xlsx", "pdf"):
+            headers = ["Instrument", "Reference", "Bank", "Customer", "Instalment", "Ccy",
+                       "Amount", "Due Date", "Status"]
+            data = [[svc.INSTRUMENTS.get(g.instrument, g.instrument), g.reference, g.bank,
+                     cust_map.get(g.customer_id).name if cust_map.get(g.customer_id) else "",
+                     inst_map.get(g.instalment_id).inst_id if inst_map.get(g.instalment_id) else "",
+                     g.currency, float(g.amount or 0), g.due_date, g.status] for g in gs]
+            return report_download(export, "Guarantees Register", headers, data, "guarantees_register")
+        return render_template("guarantees.html", gs=gs, cust_map=cust_map, inst_map=inst_map,
+                               status=status, statuses=svc.GUARANTEE_STATUSES)
+
+    @app.route("/guarantees/new", methods=["GET", "POST"])
+    @login_required
+    def guarantee_new():
+        from models import Guarantee
+        if request.method == "POST":
+            f = request.form
+            cust = Customer.query.filter_by(cust_ref=(f.get("cust_ref") or "").strip()).first()
+            if not cust:
+                flash("Choose a customer.", "danger")
+                return redirect(url_for("guarantee_new"))
+            inst = None
+            if f.get("inst_id"):
+                inst = Instalment.query.filter_by(inst_id=f["inst_id"].strip()).first()
+                if inst and (inst.account_type or "MACHINE") != "MACHINE":
+                    flash("Guarantees attach to machine instalments only (parts carry no guarantee).", "danger")
+                    return redirect(url_for("guarantee_new"))
+            g = Guarantee(customer_id=cust.id, instalment_id=(inst.id if inst else None),
+                          instrument=(f.get("instrument") or "CHEQUE"), reference=f.get("reference"),
+                          bank=f.get("bank"), currency=(f.get("currency") or cust.currency),
+                          amount=parse_money(f.get("amount")), due_date=parse_date(f.get("due_date")),
+                          status=(f.get("status") or "held"), notes=f.get("notes"),
+                          created_by=(current_user.full_name or current_user.username))
+            db.session.add(g); db.session.commit()
+            audit("guarantee_added", cust.cust_ref,
+                  f"{g.instrument} {g.reference} {g.currency} {g.amount} due {g.due_date} ({g.status})")
+            flash(f"Guarantee {g.reference or ''} recorded for {cust.name}.", "success")
+            return redirect(url_for("guarantees_register"))
+        customers = Customer.query.order_by(Customer.cust_ref).all()
+        return render_template("guarantee_new.html", customers=customers,
+                               instruments=svc.INSTRUMENTS, statuses=svc.GUARANTEE_STATUSES)
+
+    @app.route("/guarantees/<int:gid>/status", methods=["POST"])
+    @login_required
+    def guarantee_update(gid):
+        from models import Guarantee
+        g = db.session.get(Guarantee, gid) or abort(404)
+        new = (request.form.get("status") or "").lower()
+        if new in svc.GUARANTEE_STATUSES:
+            old = g.status; g.status = new; db.session.commit()
+            cust = db.session.get(Customer, g.customer_id)
+            audit("guarantee_status", cust.cust_ref if cust else "", f"{g.reference}: {old} → {new}")
+            flash(f"Guarantee {g.reference or gid} marked {new}.", "success")
+        return redirect(url_for("guarantees_register"))
+
+    @app.route("/reports/unguaranteed")
+    @login_required
+    def unguaranteed_report():
+        ccy = request.args.get("ccy") or ""
+        rows = svc.unguaranteed_exposure(currency=(ccy or None))
+        export = request.args.get("export")
+        if export in ("csv", "xlsx", "pdf"):
+            headers = ["Instalment ID", "Cust Ref", "Customer", "Ccy", "Net Outstanding",
+                       "Due Date", "Days Overdue", "Bucket"]
+            data = [[r["inst_id"], r["cust_ref"], r["customer"], r["currency"], r["net"],
+                     r["due_date"], r["days_overdue"], r["bucket"]] for r in rows]
+            return report_download(export, "Unguaranteed Machine Exposure", headers, data, "unguaranteed_exposure")
+        # totals per currency (kept separate)
+        tot = {}
+        for r in rows:
+            tot[r["currency"]] = tot.get(r["currency"], 0) + r["net"]
+        return render_template("unguaranteed_report.html", rows=rows, ccy=ccy, tot=tot)
+
+    @app.route("/customer/<int:cid>/clearance-override", methods=["POST"])
+    @login_required
+    def clearance_override(cid):
+        import permissions as perms
+        cust = db.session.get(Customer, cid) or abort(404)
+        if perms.role_key(current_user) not in ("cfo", "admin"):
+            flash("Only the CFO can override a credit clearance block.", "danger")
+            return redirect(url_for("customer_detail", cid=cid))
+        if request.form.get("revoke") == "1":
+            cust.clearance_override = False
+            cust.clearance_override_reason = None
+            db.session.commit()
+            audit("clearance_override_revoked", cust.cust_ref, f"by {current_user.username}")
+            flash("Clearance override revoked.", "success")
+            return redirect(url_for("customer_detail", cid=cid))
+        reason = (request.form.get("reason") or "").strip()
+        if not reason:
+            flash("An override reason is required.", "danger")
+            return redirect(url_for("customer_detail", cid=cid))
+        cust.clearance_override = True
+        cust.clearance_override_by = (current_user.full_name or current_user.username)
+        cust.clearance_override_reason = reason
+        cust.clearance_override_at = datetime.now()
+        db.session.commit()
+        audit("clearance_override", cust.cust_ref, f"by {current_user.username}: {reason}")
+        flash("Clearance override recorded — sales/maintenance may now proceed for this customer.", "success")
+        return redirect(url_for("customer_detail", cid=cid))
+
     # ---- customer pickers so Reschedule / Convert are reachable from the menu ----
     @app.route("/reschedule", methods=["GET", "POST"])
     @login_required
@@ -773,7 +910,16 @@ def create_app():
     @app.route("/customer/<int:cid>", methods=["GET", "POST"])
     @login_required
     def customer_detail(cid):
+        import permissions as perms
         cust = db.session.get(Customer, cid) or abort(404)
+        # Clearance gate: Sales/Maintenance see a NO-GO flag instead of account detail
+        # when the customer is in legal OR over the configured overdue limit (CFO can override).
+        rk = perms.role_key(current_user)
+        if rk in ("sales", "maintenance"):
+            clr = svc.clearance_status(cust)
+            if not clr["ok"] and not cust.clearance_override:
+                audit("clearance_blocked", cust.cust_ref, "; ".join(clr["reasons"]))
+                return render_template("clearance_block.html", cust=cust, clr=clr)
         if request.method == "POST":
             f = request.form
             cust.contact_person = f.get("contact_person")
@@ -809,10 +955,14 @@ def create_app():
         pays = Collection.query.filter_by(customer_id=cid).order_by(Collection.id.desc()).all()
         notes = svc.customer_notes(cid)
         credits = svc.account_credits_for(cid)
+        clr = svc.clearance_status(cust)
+        guarantees = svc.guarantees_for(cid)
+        is_cfo = perms.role_key(current_user) in ("cfo", "admin")
         return render_template("customer_detail.html", cust=cust, rows=rows, total=total,
                                overdue=overdue, limit=limit, over_limit=over_limit, pays=pays,
                                machine=machine, parts=parts, combined=combined,
                                parts_limit=parts_limit, parts_over=parts_over, credits=credits,
+                               clr=clr, guarantees=guarantees, is_cfo=is_cfo,
                                notes=notes, users=User.query.order_by(User.username).all(),
                                legal_stages=svc.LEGAL_STAGES,
                                default_pct=svc.legal_provision_default())
@@ -1066,6 +1216,8 @@ def create_app():
             section = request.form.get("section")
             if section == "fx":
                 set_setting("fx_rate", request.form.get("fx_rate", "50.5"))
+                if request.form.get("clearance_overdue_days"):
+                    set_setting("clearance_overdue_days", request.form.get("clearance_overdue_days"))
                 flash("FX rate updated.", "success")
             elif section == "email":
                 for k in ("smtp_host", "smtp_port", "smtp_user", "smtp_pass",
@@ -1111,6 +1263,7 @@ def create_app():
         vals = {k: get_setting(k, "") for k in
                 ("fx_rate", "smtp_host", "smtp_port", "smtp_user", "smtp_from", "smtp_tls")}
         vals["fx_rate"] = vals["fx_rate"] or "50.5"
+        vals["clearance_overdue_days"] = get_setting("clearance_overdue_days", "190")
         vals["call_strategy"] = get_setting("call_strategy", "balanced")
         vals["call_capacity"] = get_setting("call_capacity", "15")
         vals["call_cooldown"] = get_setting("call_cooldown", "5")
@@ -1581,6 +1734,7 @@ def create_app():
     @require_perm("approvals")
     def approval_decide(aid, decision):
         from models import db, Approval
+        import permissions as perms
         ap = db.session.get(Approval, aid) or abort(404)
         if ap.status != "pending":
             flash("That request has already been decided.", "warning")
@@ -1590,6 +1744,10 @@ def create_app():
             return redirect(url_for("approvals_queue"))
         if decision not in ("approve", "reject"):
             abort(400)
+        # Parts over-limit release is restricted to Finance Manager or CFO (not MD).
+        if ap.kind == "parts_over_limit" and perms.role_key(current_user) not in ("fm", "cfo", "admin"):
+            flash("Parts over-limit release requires the Finance Manager or CFO.", "danger")
+            return redirect(url_for("approvals_queue"))
         ap.status = "approved" if decision == "approve" else "rejected"
         ap.approver = (current_user.full_name or current_user.username)
         ap.decided_at = datetime.now()
@@ -1659,6 +1817,9 @@ def create_app():
                 db.session.add(new_i); db.session.flush()
             db.session.commit()
             audit("conversion_applied", (cust.cust_ref if cust else ""), ap.summary or "")
+        elif action == "parts_over_limit":
+            # The sale already stands; approval is the management release/acknowledgement.
+            audit("parts_over_limit_released", (cust.cust_ref if cust else ""), ap.summary or "")
 
     return app
 

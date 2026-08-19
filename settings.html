@@ -8,6 +8,9 @@
   <form method="post"><input type="hidden" name="section" value="fx">
     <div class="mb-2"><label class="form-label small">1 USD =</label>
       <div class="input-group input-group-sm"><input class="form-control" name="fx_rate" value="{{ v.fx_rate }}"><span class="input-group-text">EGP</span></div></div>
+      <div class="mt-2"><label class="form-label small">Sales/maintenance clearance limit (days overdue)</label>
+      <div class="input-group input-group-sm"><input class="form-control" name="clearance_overdue_days" value="{{ v.clearance_overdue_days }}"><span class="input-group-text">days</span></div>
+      <div class="form-text" style="font-size:.72rem;">Above this, or if in legal, sales/maintenance are NO-GO until a CFO override.</div></div>
     <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save FX</button>
   </form>
 </div></div></div>

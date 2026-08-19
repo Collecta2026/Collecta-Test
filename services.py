@@ -201,6 +201,66 @@ def build_schedule(total, count, first_date, freq_days=30):
     return out
 
 
+def clearance_threshold_days():
+    from models import get_setting
+    try:
+        return int(get_setting("clearance_overdue_days", "190"))
+    except Exception:
+        return 190
+
+
+def customer_max_overdue(customer_id, report_date=None):
+    """Highest days-overdue across a customer's open instalments (0 if none overdue)."""
+    rows = [r for r in instalment_rows(report_date=report_date)
+            if r["customer_id"] == customer_id and r["state"] == "open" and r["net"] > 0]
+    days = [r["days_overdue"] for r in rows if r["days_overdue"] and r["days_overdue"] > 0]
+    return max(days) if days else 0
+
+
+def clearance_status(customer, report_date=None):
+    """NO-GO if the customer is in legal OR more than the configured days overdue.
+    Returns dict(ok, reasons, max_overdue, threshold)."""
+    threshold = clearance_threshold_days()
+    reasons = []
+    if getattr(customer, "legal_status", "") == "legal":
+        reasons.append("Account is in legal")
+    mx = customer_max_overdue(customer.id, report_date)
+    if mx > threshold:
+        reasons.append(f"Overdue {mx} days (over {threshold}-day limit)")
+    return dict(ok=(len(reasons) == 0), reasons=reasons, max_overdue=mx, threshold=threshold)
+
+
+# ---- Guarantees ----
+GUARANTEE_STATUSES = ["held", "due", "cleared", "bounced", "returned"]
+INSTRUMENTS = {"CHEQUE": "Cheque", "PN": "Promissory Note"}
+
+
+def guarantees_for(customer_id):
+    from models import Guarantee
+    return Guarantee.query.filter_by(customer_id=customer_id).order_by(Guarantee.due_date).all()
+
+
+def guaranteed_instalment_ids():
+    """Set of instalment ids that have at least one live guarantee (not bounced/returned)."""
+    from models import Guarantee
+    ids = set()
+    for g in Guarantee.query.filter(Guarantee.status.in_(["held", "due", "cleared"])).all():
+        if g.instalment_id:
+            ids.add(g.instalment_id)
+    return ids
+
+
+def unguaranteed_exposure(report_date=None, currency=None):
+    """Open MACHINE instalments with no live guarantee instrument, grouped for the report.
+    Parts are excluded by design (they carry no guarantee)."""
+    gids = guaranteed_instalment_ids()
+    rows = [r for r in instalment_rows(report_date=report_date, currency=currency,
+                                       account_type="MACHINE")
+            if r["state"] == "open" and r["net"] > 0 and r["id"] not in gids]
+    rows.sort(key=lambda r: (r["currency"], -r["net"]))
+    return rows
+
+
 def propose_allocation(customer_id, account_type, currency, amount):
     """Oldest-due-date-first allocation within one account and currency.
     Legal-customer instalments are skipped in the auto-suggestion (0), but still listed so the

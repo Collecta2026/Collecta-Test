@@ -67,6 +67,24 @@
     </div>
   </div></div>
 
+  {% if not clr.ok %}
+  <div class="alert {{ 'alert-warning' if cust.clearance_override else 'alert-danger' }} py-2 mb-3">
+    <b>Credit clearance: {{ 'OVERRIDDEN (sales/maintenance may proceed)' if cust.clearance_override else 'NO-GO for sales/maintenance' }}</b>
+    — {{ clr.reasons|join('; ') }}.
+    {% if cust.clearance_override %}<div class="small">Override by {{ cust.clearance_override_by }} — {{ cust.clearance_override_reason }}</div>{% endif %}
+    {% if is_cfo %}
+      <form method="post" action="{{ url_for('clearance_override', cid=cust.id) }}" class="mt-2 d-flex gap-2 flex-wrap align-items-center">
+        {% if cust.clearance_override %}
+          <input type="hidden" name="revoke" value="1"><button class="btn btn-sm btn-outline-dark">Revoke override</button>
+        {% else %}
+          <input class="form-control form-control-sm" name="reason" placeholder="CFO override reason" style="max-width:320px;" required>
+          <button class="btn btn-sm btn-danger">CFO override — allow sales/maintenance</button>
+        {% endif %}
+      </form>
+    {% endif %}
+  </div>
+  {% endif %}
+
   {% if credits %}
   <div class="alert alert-info py-2 mb-3"><b>Unallocated credit on account:</b>
     {% for cr in credits %}<span class="badge bg-info text-dark ms-1">{{ cr.account_type.title() }} · {{ cr.balance|money(cr.currency) }}</span>{% endfor %}

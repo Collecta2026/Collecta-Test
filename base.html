@@ -54,6 +54,7 @@
             {{ mi('customers', url_for('customers'), 'Search Customers') }}
             {{ mi('customer_edit', url_for('customer_new'), '+ Add Customer') }}
             {{ mi('credit_limits', url_for('credit_limits'), 'Set Credit Limits') }}
+            {{ mi('guarantees', url_for('guarantees_register'), 'Guarantees Register') }}
             <li><hr class="dropdown-divider"></li>
             <li><h6 class="dropdown-header">Account actions (need approval)</h6></li>
             {{ mi('reschedule', url_for('reschedule_picker'), 'Reschedule Instalments') }}
@@ -77,6 +78,7 @@
             {{ mi('ledger', url_for('aged', ccy='EGP'), 'Aged Analysis — EGP') }}
             {{ mi('ledger', url_for('aged', ccy='USD'), 'Aged Analysis — USD') }}
             {{ mi('reports', url_for('reports'), 'Report Writer (Aged Debtors)') }}
+            {{ mi('reports', url_for('unguaranteed_report'), 'Unguaranteed Machine Exposure') }}
             <li><hr class="dropdown-divider"></li>
             <li><h6 class="dropdown-header">Collections &amp; performance</h6></li>
             {{ mi('reports', url_for('collections_report'), 'Monthly Collections') }}

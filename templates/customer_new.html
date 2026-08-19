@@ -1,0 +1,39 @@
+{% extends "base.html" %}{% block title %}New Customer{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">New Customer Setup</h4>
+<div class="card shadow-sm"><div class="card-body">
+<form method="post" class="row g-3">
+  <div class="col-md-3"><label class="form-label small">Currency *</label>
+    <select class="form-select" name="currency" id="ccy" onchange="suggest()">
+      <option value="EGP">EGP</option><option value="USD">USD</option></select></div>
+  <div class="col-md-3"><label class="form-label small">Cust Ref <span class="text-muted">(optional)</span></label>
+    <input class="form-control" name="cust_ref" id="ref" placeholder="leave blank to auto-assign (e.g. {{ nxt['EGP'] }})"></div>
+  <div class="col-md-3"><label class="form-label small">Customer Account No.</label>
+    <input class="form-control" name="account_no"></div>
+  <div class="col-md-3"><label class="form-label small">Credit limit</label>
+    <input class="form-control" name="credit_limit"></div>
+  <div class="col-md-3"><label class="form-label small">Ledger owner (controller)</label>
+    <select class="form-select" name="owner_id">
+      <option value="">— default for currency —</option>
+      {% for u in users %}<option value="{{ u.id }}">{{ u.full_name or u.username }}</option>{% endfor %}</select></div>
+  <div class="col-md-6"><label class="form-label small">Customer name *</label>
+    <input class="form-control" name="name" required></div>
+  <div class="col-md-6"><label class="form-label small">Contact person</label>
+    <input class="form-control" name="contact_person"></div>
+  <div class="col-md-4"><label class="form-label small">Phone / Mobile</label>
+    <input class="form-control" name="phone" placeholder="+20…"></div>
+  <div class="col-md-4"><label class="form-label small">Email</label>
+    <input class="form-control" type="email" name="email"></div>
+  <div class="col-md-4"><label class="form-label small">Address</label>
+    <input class="form-control" name="address"></div>
+  <div class="col-12"><label class="form-label small">Notes</label>
+    <textarea class="form-control" name="notes" rows="2"></textarea></div>
+  <div class="col-12"><button class="btn btn-primary" style="background:#1f3864;border:0;">Create customer</button>
+    <span class="small text-muted ms-2">After creating, add their instalments from “+ Instalment”. You can also create a customer on the fly there.</span></div>
+</form>
+</div></div>
+<script>
+const NXT = {{ nxt|tojson }};
+function suggest(){ document.getElementById('ref').value = NXT[document.getElementById('ccy').value]; }
+</script>
+{% endblock %}

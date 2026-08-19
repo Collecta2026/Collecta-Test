@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block title %}Credit Limits{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Credit Limits</h4>
+<div class="mb-3 noprint">
+  <span class="text-muted small me-2">Download:</span>
+  <a class="btn btn-sm btn-outline-success" href="?export=csv">CSV</a>
+  <a class="btn btn-sm btn-outline-success" href="?export=xlsx">Excel</a>
+  <a class="btn btn-sm btn-outline-danger" href="?export=pdf">PDF</a>
+</div>
+<p class="text-muted small">Customers whose outstanding exceeds their limit are flagged. Set limits on each customer's page.</p>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm table-hover">
+<thead><tr><th>Ref</th><th>Account No.</th><th>Customer</th><th>Ccy</th>
+<th class="money">Outstanding</th><th class="money">Overdue</th><th class="money">Credit Limit</th><th class="money">Headroom</th><th>Status</th></tr></thead>
+<tbody>
+{% for r in rows %}
+<tr class="{{ 'table-danger' if r.over }}">
+<td><a href="{{ url_for('customer_detail', cid=r.cust.id) }}">{{ r.cust.cust_ref }}</a></td>
+<td>{{ r.cust.account_no or '—' }}</td><td class="arabic">{{ r.cust.name }}</td><td>{{ r.cust.currency }}</td>
+<td class="money">{{ r.total|money(r.cust.currency) }}</td>
+<td class="money text-danger">{{ r.overdue|money(r.cust.currency) }}</td>
+<td class="money">{{ r.limit|money(r.cust.currency) if r.limit is not none else '—' }}</td>
+<td class="money {{ 'text-danger' if r.over }}">{{ r.headroom|money(r.cust.currency) if r.headroom is not none else '—' }}</td>
+<td>{% if r.limit is none %}<span class="badge bg-secondary">no limit</span>{% elif r.over %}<span class="badge bg-danger">OVER LIMIT</span>{% else %}<span class="badge bg-success">within</span>{% endif %}</td></tr>
+{% endfor %}
+</tbody></table>
+</div></div>
+{% endblock %}

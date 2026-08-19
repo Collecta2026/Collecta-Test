@@ -1,0 +1,101 @@
+{% extends "base.html" %}{% block title %}Legal Sub-ledger{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <div>
+    <div class="fw-bold" style="color:#1f3864;">{{ org_name }}</div>
+    <h4 class="mb-0" style="color:#1f3864;">Legal Sub-ledger &amp; Doubtful-debt Provision</h4>
+<div class="mb-3 noprint">
+  <span class="text-muted small me-2">Download:</span>
+  <a class="btn btn-sm btn-outline-success" href="?export=csv">CSV</a>
+  <a class="btn btn-sm btn-outline-success" href="?export=xlsx">Excel</a>
+  <a class="btn btn-sm btn-outline-danger" href="?export=pdf">PDF</a>
+</div>
+  </div>
+  <button class="btn btn-sm btn-outline-secondary noprint" onclick="window.print()">Print</button>
+</div>
+<p class="text-muted small">Accounts referred to the legal team. These are excluded from routine chasing (calls &amp; reminders). Provision is the doubtful-debt allowance against each account.</p>
+
+{% for ccy in ['EGP','USD'] %}{% set t = ll.totals[ccy] %}
+{% if t.n %}
+<div class="card shadow-sm mb-3"><div class="card-body">
+  <h6 class="text-muted">{{ ccy }} — {{ t.n }} account(s)</h6>
+  <div class="row text-center mb-3">
+    <div class="col"><div class="text-muted small">Gross legal debt</div><div class="fs-5 fw-bold">{{ t.gross|money(ccy) }}</div></div>
+    <div class="col"><div class="text-muted small">Overdue</div><div class="fs-5 fw-bold text-danger">{{ t.overdue|money(ccy) }}</div></div>
+    <div class="col"><div class="text-muted small">Doubtful-debt provision</div><div class="fs-5 fw-bold" style="color:#bf8f00;">{{ t.provision|money(ccy) }}</div></div>
+    <div class="col"><div class="text-muted small">Net of provision</div><div class="fs-5 fw-bold">{{ t.net|money(ccy) }}</div></div>
+  </div>
+  <table class="table table-sm table-hover">
+    <thead><tr><th>Ref</th><th>Account</th><th>Customer</th><th>Stage</th><th>Referred</th>
+      <th class="money">Outstanding</th><th class="money">Prov %</th><th class="money">Provision</th><th class="money">Net</th><th class="noprint"></th></tr></thead>
+    <tbody>
+    {% for r in ll.rows %}{% if r.currency==ccy %}
+    <tr>
+      <td>{{ r.cust.cust_ref }}</td><td>{{ r.cust.account_no or '—' }}</td>
+      <td class="arabic"><a href="{{ url_for('customer_detail', cid=r.cust.id) }}">{{ r.cust.name }}</a></td>
+      <td><span class="badge bg-dark">{{ r.stage or '—' }}</span></td>
+      <td>{{ r.legal_date or '—' }}</td>
+      <td class="money">{{ r.total|money }}</td>
+      <td class="money">{{ '%.0f'|format(r.pct) }}%</td>
+      <td class="money" style="color:#bf8f00;">{{ r.provision|money }}</td>
+      <td class="money fw-bold">{{ r.net|money }}</td>
+      <td class="noprint">
+        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#lg{{ r.cust.id }}">Edit</button>
+      </td>
+    </tr>
+    <tr class="collapse noprint" id="lg{{ r.cust.id }}"><td colspan="10">
+      <div class="d-flex gap-3 bg-light p-2 rounded">
+        <form method="post" action="{{ url_for('legal_update', cid=r.cust.id) }}" class="d-flex gap-2 align-items-end">
+          <div><label class="form-label small">Stage</label>
+            <select class="form-select form-select-sm" name="stage">
+              {% for s in stages %}<option {{ 'selected' if r.stage==s }}>{{ s }}</option>{% endfor %}</select></div>
+          <div><label class="form-label small">Provision %</label>
+            <input class="form-control form-control-sm" name="provision_pct" value="{{ '%.0f'|format(r.pct) }}" style="width:90px"></div>
+          <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Update</button>
+        </form>
+        <form method="post" action="{{ url_for('legal_return', cid=r.cust.id) }}" onsubmit="return confirm('Return this account to active collections?')">
+          <button class="btn btn-sm btn-outline-danger">Return to active</button></form>
+      </div>
+    </td></tr>
+    {% endif %}{% endfor %}
+    </tbody>
+  </table>
+</div></div>
+{% endif %}
+{% endfor %}
+{% if not ll.rows %}<div class="alert alert-light border">No accounts in the legal sub-ledger yet.</div>{% endif %}
+
+<!-- Candidates -->
+<div class="card shadow-sm noprint"><div class="card-body">
+  <div class="d-flex justify-content-between align-items-center">
+    <h6 class="mb-0">Candidates for legal transfer</h6>
+    <form class="d-flex gap-2 align-items-center" method="get">
+      <span class="small text-muted">oldest overdue ≥</span>
+      <input class="form-control form-control-sm" name="min_days" value="{{ min_days }}" style="width:80px">
+      <span class="small text-muted">days</span><button class="btn btn-sm btn-outline-secondary">Apply</button>
+    </form>
+  </div>
+  <p class="small text-muted">Long-overdue accounts still in active collections. Transferring moves them to the legal sub-ledger and stops routine chasing.</p>
+  <table class="table table-sm table-hover">
+    <thead><tr><th>Ref</th><th>Customer</th><th>Ccy</th><th class="money">Overdue</th><th class="money">Oldest</th><th>Transfer to legal</th></tr></thead>
+    <tbody>
+    {% for c in cands %}
+    <tr>
+      <td>{{ c.cust_ref }}</td><td class="arabic">{{ c.customer }}</td><td>{{ c.currency }}</td>
+      <td class="money text-danger">{{ c.overdue|money(c.currency) }}</td><td class="money">{{ c.oldest }}d</td>
+      <td>
+        <form method="post" action="{{ url_for('legal_transfer') }}" class="d-flex gap-1 align-items-center">
+          <input type="hidden" name="customer_id" value="{{ c.customer_id }}">
+          <select class="form-select form-select-sm" name="stage" style="width:150px">
+            {% for s in stages %}<option>{{ s }}</option>{% endfor %}</select>
+          <input class="form-control form-control-sm" name="provision_pct" value="{{ '%.0f'|format(default_pct) }}" style="width:70px" title="provision %">
+          <input class="form-control form-control-sm" name="reason" placeholder="reason" style="width:150px">
+          <button class="btn btn-sm btn-dark">Transfer</button>
+        </form>
+      </td></tr>
+    {% endfor %}
+    {% if not cands %}<tr><td colspan="6" class="text-muted small">No candidates at this threshold.</td></tr>{% endif %}
+    </tbody>
+  </table>
+</div></div>
+{% endblock %}

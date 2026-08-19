@@ -339,9 +339,24 @@ MANUAL = [
                 "dispute, refused, paid) and add notes.",
                 "Collecta schedules the right follow-up automatically."],
          tips=["Use 'My calls' to see only the customers you own.",
-               "Priority combines amount, age, security and escalation level - set the "
-               "strategy in Admin > Settings."],
-         keywords=["call", "scheduler", "phone", "priority", "follow up", "promise to pay"]),
+               "Daily capacity defaults to about 25 calls; set it in Admin > Settings.",
+               "Priority is driven by debt age and blended with other account signals — each customer shows "
+               "reason chips (e.g. 'cheque/PN due', 'over limit', 'nearing legal', 'broken promise', "
+               "'broken reschedule', 'no contact 40d') so you can see why they're on the list.",
+               "Recently-contacted customers are held back by the cool-down; legal accounts are left to the legal team."],
+         keywords=["call", "scheduler", "worklist", "phone", "priority", "follow up", "promise to pay", "chase"]),
+
+    dict(id="scorecard", cat="Reports", title="Controller activity scorecard",
+         path="Reports > Controller Scorecard", route="controller_scorecard", args={},
+         summary="Measures each controller's activity and effectiveness over a period: calls assigned vs "
+                 "completed (coverage), customers contacted, promises obtained and kept, and cash collected. "
+                 "This is the data a future commission model would draw on — activity as a qualifier, collection as the driver.",
+         steps=["Open Reports > Controller Scorecard and set the date range.",
+                "Review coverage %, contacts, promises made and kept, and collections per controller.",
+                "Export to Excel or PDF for review meetings."],
+         tips=["Coverage rewards working the assigned list; promise-keep rewards follow-through, not just promises made.",
+               "Collections stay attributed to whoever recorded the receipt."],
+         keywords=["scorecard", "activity", "performance", "coverage", "promises", "controller", "commission"]),
 
     # ---------------- Allocation ----------------
     dict(id="allocations", cat="Allocation", title="Allocating ledgers to controllers",

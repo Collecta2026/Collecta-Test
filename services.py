@@ -578,6 +578,51 @@ def _broken_promises():
     return out
 
 
+def _over_limit_customers(report_date=None):
+    """customer_ids whose machine or parts outstanding exceeds their credit limit."""
+    from models import Customer
+    rows = instalment_rows(report_date=report_date)
+    machine = {}
+    parts = {}
+    for r in rows:
+        if r["state"] != "open" or r["net"] <= 0:
+            continue
+        if r["account_type"] == "PARTS":
+            parts[r["customer_id"]] = parts.get(r["customer_id"], 0) + r["net"]
+        else:
+            machine[r["customer_id"]] = machine.get(r["customer_id"], 0) + r["net"]
+    out = set()
+    for c in Customer.query.all():
+        if c.credit_limit and machine.get(c.id, 0) > float(c.credit_limit):
+            out.add(c.id)
+        if c.parts_credit_limit and parts.get(c.id, 0) > float(c.parts_credit_limit):
+            out.add(c.id)
+    return out
+
+
+def _guarantee_due_soon(within_days=14):
+    """customer_ids with a live cheque/PN due within N days or already past due."""
+    from models import Guarantee
+    today = date.today()
+    horizon = today + timedelta(days=within_days)
+    out = set()
+    for g in Guarantee.query.filter(Guarantee.status.in_(["held", "due"])).all():
+        if g.due_date and g.due_date <= horizon:
+            out.add(g.customer_id)
+    return out
+
+
+def _broken_reschedule(report_date=None):
+    """customer_ids with a rescheduled instalment that is now overdue (missed new terms)."""
+    rows = instalment_rows(report_date=report_date)
+    out = set()
+    for r in rows:
+        if (r.get("origin") == "reschedule" and r["state"] == "open"
+                and r["net"] > 0 and r["days_overdue"] and r["days_overdue"] > 0):
+            out.add(r["customer_id"])
+    return out
+
+
 def collection_priority(report_date=None, strategy=None, owner_id=None):
     """Score every customer with overdue debt. Returns list sorted by score desc.
     If owner_id is given, only that ledger owner's customers are considered."""
@@ -611,6 +656,10 @@ def collection_priority(report_date=None, strategy=None, owner_id=None):
         return []
     last = _last_contact_map()
     broken = _broken_promises()
+    over_limit = _over_limit_customers(report_date)
+    guar_due = _guarantee_due_soon()
+    broken_resched = _broken_reschedule(report_date)
+    threshold = clearance_threshold_days()
     # phone numbers
     from models import Customer
     phones = {c.id: c.phone for c in Customer.query.all()}
@@ -629,10 +678,35 @@ def collection_priority(report_date=None, strategy=None, owner_id=None):
         prom_f = 1.0 if a["customer_id"] in broken else 0.0
         score = 100 * (w["amount"] * amt_f + w["age"] * age_f + w["security"] * sec_f
                        + w["escalation"] * esc_f + w["promise"] * prom_f)
+        # --- transparent signal bonuses (Upload 4 aware) with reason chips ---
+        cid = a["customer_id"]
+        reasons = []
+        if a["oldest"] >= 1:
+            reasons.append(f"{a['oldest']}d overdue")
+        approaching_legal = (not a.get("legal")) and threshold - 30 <= a["oldest"] < threshold
+        if cid in broken:
+            score += 10; reasons.append("broken promise")
+        if cid in broken_resched:
+            score += 10; reasons.append("broken reschedule")
+        if approaching_legal:
+            score += 10; reasons.append(f"nearing legal ({threshold}d)")
+        if cid in guar_due:
+            score += 12; reasons.append("cheque/PN due")
+        if cid in over_limit:
+            score += 8; reasons.append("over limit")
+        lc = last.get(cid)
+        if lc:
+            dsc = (report_date - lc).days
+            if dsc >= 30:
+                score += 5; reasons.append(f"no contact {dsc}d")
+        else:
+            reasons.append("never contacted")
         a = dict(a)
-        a.update(phone=phones.get(a["customer_id"]), score=round(score, 1), level=lvl,
+        a.update(phone=phones.get(cid), score=round(score, 1), level=lvl,
                  unsecured_pct=round(100 * sec_f), broken_promise=bool(prom_f),
-                 last_contact=last.get(a["customer_id"]))
+                 over_limit=(cid in over_limit), guarantee_due=(cid in guar_due),
+                 broken_reschedule=(cid in broken_resched), approaching_legal=approaching_legal,
+                 reasons=reasons, last_contact=lc)
         out.append(a)
     out.sort(key=lambda x: x["score"], reverse=True)
     return out
@@ -695,6 +769,69 @@ def generate_call_plan(start_date=None, days=5, capacity=15, cooldown=5, assigne
     return created
 
 
+def controller_scorecard(start=None, end=None):
+    """Per-controller activity & effectiveness over a date window.
+    Activity: calls assigned vs completed (coverage). Effectiveness: promises obtained,
+    promises kept, cash collected in the window. Normalised so it can gate commission later."""
+    from models import CallTask, Collection, User
+    end = end or date.today()
+    start = start or (end - timedelta(days=30))
+
+    # map a controller display name -> user
+    users = User.query.all()
+    name_of = {}
+    for u in users:
+        name_of[u.username] = u
+        if u.full_name:
+            name_of[u.full_name] = u
+
+    stats = {}
+
+    def row(key):
+        return stats.setdefault(key, dict(controller=key, assigned=0, completed=0,
+                                          contacted=0, promises=0, promises_kept=0,
+                                          collected=0.0, collected_ccy={}))
+
+    # calls assigned/completed in window
+    for t in CallTask.query.filter(CallTask.scheduled_for >= start,
+                                   CallTask.scheduled_for <= end).all():
+        who = t.assigned_to or "(unassigned)"
+        r = row(who)
+        r["assigned"] += 1
+        if t.status == "completed":
+            r["completed"] += 1
+        if t.outcome and t.outcome not in ("no_answer",):
+            r["contacted"] += 1
+        if t.outcome == "promise_to_pay":
+            r["promises"] += 1
+            # kept if a collection from that customer landed on/after the promise and >= promised amount-ish
+            if t.promise_date:
+                paid = Collection.query.filter(Collection.customer_id == t.customer_id,
+                                               Collection.collected_on >= t.created_at.date()
+                                               if t.created_at else start).all()
+                if paid:
+                    r["promises_kept"] += 1
+
+    # cash collected in window, attributed to the receiver
+    for c in Collection.query.filter(Collection.collected_on >= start,
+                                     Collection.collected_on <= end).all():
+        who = c.received_by or "(unknown)"
+        r = row(who)
+        r["collected"] += float(c.amount or 0)
+        cur = c.currency or "EGP"
+        r["collected_ccy"][cur] = r["collected_ccy"].get(cur, 0) + float(c.amount or 0)
+
+    out = []
+    for key, r in stats.items():
+        cov = (r["completed"] / r["assigned"] * 100) if r["assigned"] else 0
+        keep = (r["promises_kept"] / r["promises"] * 100) if r["promises"] else 0
+        r["coverage_pct"] = round(cov)
+        r["promise_keep_pct"] = round(keep)
+        out.append(r)
+    out.sort(key=lambda x: (x["coverage_pct"], x["collected"]), reverse=True)
+    return dict(rows=out, start=start, end=end)
+
+
 def call_list_for(day, assigned_to=None, owner_id=None):
     """Pending calls scheduled for a day, enriched with current overdue + score, ordered.
     owner_id restricts to a controller's allocated ledger."""
@@ -713,7 +850,10 @@ def call_list_for(day, assigned_to=None, owner_id=None):
         out.append(dict(task=t, cust=t.customer, overdue=p.get("overdue", 0),
                         currency=p.get("currency", t.customer.currency), score=t.priority_score,
                         level=p.get("level", 0), oldest=p.get("oldest", 0),
-                        phone=t.customer.phone, broken=p.get("broken_promise", False)))
+                        phone=t.customer.phone, broken=p.get("broken_promise", False),
+                        reasons=p.get("reasons", []), over_limit=p.get("over_limit", False),
+                        guarantee_due=p.get("guarantee_due", False),
+                        approaching_legal=p.get("approaching_legal", False)))
     out.sort(key=lambda x: x["score"], reverse=True)
     return out
 

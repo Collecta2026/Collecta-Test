@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block title %}Record Guarantee{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Record a Guarantee Instrument</h4>
+<p class="text-muted small">Attach a cheque or promissory note to a customer (optionally to a specific machine instalment).</p>
+<div class="card shadow-sm"><div class="card-body">
+<form method="post" class="row g-3">
+  <div class="col-md-6"><label class="form-label small">Customer</label>
+    <select class="form-select form-select-sm" name="cust_ref" required>
+      <option value="">— choose customer —</option>
+      {% for c in customers %}<option value="{{ c.cust_ref }}">{{ c.cust_ref }} · {{ c.name }} ({{ c.currency }})</option>{% endfor %}
+    </select></div>
+  <div class="col-md-3"><label class="form-label small">Instrument</label>
+    <select class="form-select form-select-sm" name="instrument">{% for k,v in instruments.items() %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select></div>
+  <div class="col-md-3"><label class="form-label small">Status</label>
+    <select class="form-select form-select-sm" name="status">{% for s in statuses %}<option value="{{ s }}">{{ s|capitalize }}</option>{% endfor %}</select></div>
+  <div class="col-md-4"><label class="form-label small">Reference (cheque/PN no.)</label><input class="form-control form-control-sm" name="reference"></div>
+  <div class="col-md-4"><label class="form-label small">Bank</label><input class="form-control form-control-sm" name="bank"></div>
+  <div class="col-md-2"><label class="form-label small">Currency</label>
+    <select class="form-select form-select-sm" name="currency"><option value="">(customer's)</option><option>EGP</option><option>USD</option></select></div>
+  <div class="col-md-2"><label class="form-label small">Amount</label><input class="form-control form-control-sm" name="amount"></div>
+  <div class="col-md-3"><label class="form-label small">Instalment ID (optional)</label><input class="form-control form-control-sm" name="inst_id" placeholder="machine instalment"></div>
+  <div class="col-md-3"><label class="form-label small">Due date</label><input type="date" class="form-control form-control-sm" name="due_date"></div>
+  <div class="col-12"><label class="form-label small">Notes</label><input class="form-control form-control-sm" name="notes"></div>
+  <div class="col-12"><button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save guarantee</button>
+    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('guarantees_register') }}">Cancel</a></div>
+</form>
+</div></div>
+{% endblock %}

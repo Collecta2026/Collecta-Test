@@ -16,7 +16,7 @@ import io
 import os
 import json
 from functools import wraps
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from decimal import Decimal, InvalidOperation
 
 from dotenv import load_dotenv
@@ -1226,7 +1226,7 @@ def create_app():
                 flash("Email settings saved.", "success")
             elif section == "strategy":
                 set_setting("call_strategy", request.form.get("call_strategy", "balanced"))
-                set_setting("call_capacity", request.form.get("call_capacity", "15"))
+                set_setting("call_capacity", request.form.get("call_capacity", "25"))
                 set_setting("call_cooldown", request.form.get("call_cooldown", "5"))
                 flash("Collection strategy updated.", "success")
             elif section == "branding":
@@ -1265,7 +1265,7 @@ def create_app():
         vals["fx_rate"] = vals["fx_rate"] or "50.5"
         vals["clearance_overdue_days"] = get_setting("clearance_overdue_days", "190")
         vals["call_strategy"] = get_setting("call_strategy", "balanced")
-        vals["call_capacity"] = get_setting("call_capacity", "15")
+        vals["call_capacity"] = get_setting("call_capacity", "25")
         vals["call_cooldown"] = get_setting("call_cooldown", "5")
         current_db = "Neon / PostgreSQL" if "postgres" in app.config["SQLALCHEMY_DATABASE_URI"] \
             else "local SQLite"
@@ -1371,7 +1371,7 @@ def create_app():
         todays = svc.call_list_for(day, owner_id=owner_id)
         stats = svc.call_stats()
         strat = svc.get_strategy()
-        cap = int(get_setting("call_capacity", "15") or 15)
+        cap = int(get_setting("call_capacity", "25") or 15)
         cooldown = int(get_setting("call_cooldown", "5") or 5)
         upcoming = (db.session.query(CallTask.scheduled_for, db.func.count(CallTask.id))
                     .filter(CallTask.status == "pending")
@@ -1388,7 +1388,7 @@ def create_app():
     def calls_generate():
         start = parse_date(request.form.get("start")) or date.today()
         days = int(request.form.get("days", 5))
-        cap = int(request.form.get("capacity", 15))
+        cap = int(request.form.get("capacity", 25))
         cooldown = int(request.form.get("cooldown", 5))
         owner_id = int(request.form["owner_id"]) if request.form.get("owner_id") else None
         assign = None
@@ -1424,6 +1424,23 @@ def create_app():
             svc.add_note(t.customer_id, who, summary, kind="outcome", call_task_id=tid)
         flash("Call logged.", "success")
         return redirect(request.referrer or url_for("calls"))
+
+    # ---------------- Controller activity scorecard ----------------
+    @app.route("/reports/scorecard")
+    @login_required
+    def controller_scorecard():
+        end = parse_date(request.args.get("end")) or date.today()
+        start = parse_date(request.args.get("start")) or (end - timedelta(days=30))
+        sc = svc.controller_scorecard(start=start, end=end)
+        export = request.args.get("export")
+        if export in ("csv", "xlsx", "pdf"):
+            headers = ["Controller", "Calls Assigned", "Completed", "Coverage %", "Contacted",
+                       "Promises", "Promises Kept", "Keep %", "Collected"]
+            data = [[r["controller"], r["assigned"], r["completed"], r["coverage_pct"], r["contacted"],
+                     r["promises"], r["promises_kept"], r["promise_keep_pct"], round(r["collected"])]
+                    for r in sc["rows"]]
+            return report_download(export, "Controller Scorecard", headers, data, "controller_scorecard")
+        return render_template("scorecard.html", sc=sc, start=start, end=end)
 
     # ---------------- Customer contact notes / comments ----------------
     @app.route("/customer/<int:cid>/note", methods=["POST"])

@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% block title %}Access Control{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Access Control</h4>
+<p class="text-muted small">Tick which role may use each function. Menus show every item to everyone;
+  functions a user isn't entitled to appear <b>dimmed</b>. The <b>Administrator</b> always has full access
+  (it can't be locked out) — this is your override "back door". Changes are recorded in the audit log.</p>
+<form method="post">
+<div class="row g-3 mb-3">
+  <div class="col-lg-4"><div class="card shadow-sm h-100"><div class="card-body">
+    <h6>Subscription plan</h6>
+    <p class="small text-muted mb-2">Controls which premium features are switched on for this organisation. As the administrator you can change it here any time.</p>
+    <select class="form-select form-select-sm" name="plan">
+      {% for p in plans %}<option value="{{ p }}"{{ ' selected' if p==plan else '' }}>{{ plan_labels[p] }}</option>{% endfor %}
+    </select>
+  </div></div></div>
+  <div class="col-lg-8"><div class="card shadow-sm h-100"><div class="card-body">
+    <h6>Who may give digital authorisations</h6>
+    <p class="small text-muted mb-2">These roles can approve reschedules and gate exceptions from the Approvals queue. (A person can never approve their own request.)</p>
+    <div class="d-flex flex-wrap gap-3">
+      {% for key, label in roles %}{% if key != 'admin' %}
+      <label class="form-check-label small"><input class="form-check-input me-1" type="checkbox" name="approver_roles" value="{{ key }}"{{ ' checked' if key in approver_roles else '' }}>{{ label }}</label>
+      {% endif %}{% endfor %}
+    </div>
+  </div></div></div>
+</div>
+
+<div class="card shadow-sm"><div class="card-body table-responsive">
+  <h6>Permission matrix</h6>
+  <table class="table table-sm table-bordered align-middle" style="font-size:.85rem;">
+    <thead style="background:#1f3864;color:#fff;position:sticky;top:0;">
+      <tr><th style="min-width:230px;">Function</th><th class="text-center">Plan</th>
+      {% for key, label in roles %}<th class="text-center" title="{{ label }}">{{ label.split(' ')[0] }}</th>{% endfor %}</tr>
+    </thead>
+    <tbody>
+      {% for cap, label, group, minplan in caps %}
+      <tr>
+        <td>{{ label }} <span class="text-muted small">({{ group }})</span></td>
+        <td class="text-center"><span class="badge bg-{{ 'secondary' if minplan=='core' else ('info' if minplan=='professional' else 'dark') }}">{{ plan_labels[minplan] }}</span></td>
+        {% for rkey, rlabel in roles %}
+        <td class="text-center">
+          {% if rkey=='admin' %}
+            <input type="checkbox" checked disabled title="Administrator always has full access">
+          {% else %}
+            <input type="checkbox" name="perm_{{ rkey }}_{{ cap }}"{{ ' checked' if cap in matrix[rkey] else '' }}>
+          {% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button class="btn btn-primary" style="background:#1f3864;border:0;">Save access control</button>
+</div></div>
+</form>
+{% endblock %}

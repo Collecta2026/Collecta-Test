@@ -1,0 +1,59 @@
+{% extends "base.html" %}{% block title %}New Machine Deal{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Add a New Machine Deal</h4>
+<p class="text-muted small">Books a new machine instalment plan against a signed contract. The <b>contract is the
+  authorisation</b> — no separate approval step — so a contract reference is required and recorded on every instalment.</p>
+<div class="card shadow-sm"><div class="card-body">
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label small">Customer</label>
+    <select class="form-select form-select-sm" name="cust_ref" required>
+      <option value="">— choose customer —</option>
+      {% for c in customers %}<option value="{{ c.cust_ref }}">{{ c.cust_ref }} · {{ c.name }} ({{ c.currency }})</option>{% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Currency</label>
+    <select class="form-select form-select-sm" name="currency" id="ccy" onchange="document.getElementById('fxwrap').style.display=(this.value=='USD'?'block':'none')">
+      <option value="">(use customer's)</option><option>EGP</option><option>USD</option></select>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Total contract value</label>
+    <input class="form-control form-control-sm" name="total" required placeholder="e.g. 600000">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Number of instalments</label>
+    <input class="form-control form-control-sm" name="count" value="12" required>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">First due date</label>
+    <input type="date" class="form-control form-control-sm" name="first_due">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Frequency (days)</label>
+    <input class="form-control form-control-sm" name="freq_days" value="30">
+  </div>
+  <div class="col-md-3" id="fxwrap" style="display:none;">
+    <label class="form-label small">Original contract FX rate (USD→EGP)</label>
+    <input class="form-control form-control-sm" name="orig_fx_rate" placeholder="e.g. 50.5">
+    <div class="form-text" style="font-size:.72rem;">Recorded now so any future conversion can flag an FX gain/loss.</div>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label small">Signed contract reference <span class="text-danger">*</span></label>
+    <input class="form-control form-control-sm" name="contract_ref" required placeholder="e.g. CT-2026-014">
+  </div>
+  <div class="col-md-3">
+    <label class="form-label small">Security</label>
+    <input class="form-control form-control-sm" name="security" value="Contract">
+  </div>
+  <div class="col-12">
+    <label class="form-label small">Description (optional)</label>
+    <input class="form-control form-control-sm" name="description" placeholder="e.g. Model X analyser">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Book machine deal</button>
+    <span class="text-muted small ms-2">The value is split evenly across the instalments (last absorbs any rounding).</span>
+  </div>
+</form>
+</div></div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Collecta">
+  <defs>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#264a86"/><stop offset="1" stop-color="#1f3864"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2c14e"/><stop offset="1" stop-color="#d99a17"/>
+    </linearGradient>
+  </defs>
+  <!-- rounded square badge -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#navy)"/>
+  <!-- open "C" arc that ends in an inflow arrowhead (collecting inward) -->
+  <path d="M46 20 A18 18 0 1 0 46 44" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <!-- arrowhead at the top opening, pointing inward toward the coin -->
+  <path d="M45 12 L47 21 L38 20 Z" fill="#ffffff"/>
+  <!-- gold coin being gathered in the centre -->
+  <circle cx="32" cy="32" r="10.5" fill="url(#gold)" stroke="#b9820f" stroke-width="1.2"/>
+  <!-- up-arrow inside coin = cash recovered / trending up -->
+  <path d="M32 27 l5 6 h-3 v4 h-4 v-4 h-3 Z" fill="#1f3864"/>
+</svg>

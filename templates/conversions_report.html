@@ -1,0 +1,33 @@
+{% extends "base.html" %}{% block title %}Currency Conversions{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+  <h4 class="mb-0" style="color:#1f3864;">Currency Conversions (USD → EGP)</h4>
+  <div>
+    <a class="btn btn-sm btn-outline-success" href="?export=csv">CSV</a>
+    <a class="btn btn-sm btn-outline-success" href="?export=xlsx">Excel</a>
+    <a class="btn btn-sm btn-outline-danger" href="?export=pdf">PDF</a>
+  </div>
+</div>
+<p class="text-muted small">Every approved USD→EGP conversion, with the original contract rate, the agreed rate, the EGP
+  values and the exchange gain/(loss). The source USD instalment is closed as “converted” (not a cash receipt), so USD
+  outstanding and collections are never overstated.</p>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm">
+  <thead style="background:#1f3864;color:#fff;"><tr><th>Source ID</th><th>Customer</th><th class="money">USD</th>
+    <th>Orig rate</th><th>Agreed rate</th><th class="money">Orig EGP</th><th class="money">New EGP</th><th class="money">FX Gain/(Loss)</th><th>Agreement</th></tr></thead>
+  <tbody>
+  {% for r in rows %}<tr>
+    <td>{{ r.inst_id }}</td><td class="arabic">{{ r.customer }}</td>
+    <td class="money">{{ r.usd|money('USD') }}</td>
+    <td>{{ '%g'|format(r.orig_rate) if r.orig_rate else '—' }}</td>
+    <td>{{ '%g'|format(r.agreed_rate) if r.agreed_rate else '—' }}</td>
+    <td class="money">{{ r.orig_egp|money('EGP') if r.orig_egp is not none else '—' }}</td>
+    <td class="money">{{ r.new_egp|money('EGP') if r.new_egp is not none else '—' }}</td>
+    <td class="money {{ 'text-danger' if (r.fx_diff is not none and r.fx_diff<0) else 'text-success' }}">
+      {{ r.fx_diff|money('EGP') if r.fx_diff is not none else '—' }}</td>
+    <td class="small">{{ r.agreement_ref or '' }}</td></tr>
+  {% else %}<tr><td colspan="9" class="text-center text-muted py-3">No conversions recorded yet.</td></tr>{% endfor %}
+  </tbody>
+</table>
+</div></div>
+{% endblock %}

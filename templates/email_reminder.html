@@ -1,0 +1,16 @@
+<div style="font-family:Arial,sans-serif;max-width:640px;color:#222;">
+  <h2 style="color:#1f3864;margin-bottom:0;">{{ org_name }}</h2>
+  <div style="color:#777;font-size:12px;">Credit Control Department · {{ today() }} · Ref {{ cust.cust_ref }} / A/C {{ cust.account_no or '—' }}</div>
+  <hr>
+  <p><b>{{ cust.name }}</b>{% if cust.contact_person %}<br>Attn: {{ cust.contact_person }}{% endif %}</p>
+  <h3 style="color:{{ '#c00000' if level>=3 else '#1f3864' }};">{{ meta.heading }}</h3>
+  <p>Dear Sir/Madam,</p>
+  <p>{{ meta.body }}</p>
+  <table cellpadding="6" style="border-collapse:collapse;font-size:14px;">
+    <tr style="background:#1f3864;color:#fff;"><th align="left">Instalment</th><th align="left">Due</th><th align="right">Days</th><th align="right">Amount ({{ cust.currency }})</th></tr>
+    {% for r in rows %}<tr><td>{{ r.inst_id }}</td><td>{{ r.due_date }}</td><td align="right">{{ r.days_overdue }}</td><td align="right">{{ '%.0f'|format(r.net) }}</td></tr>{% endfor %}
+    <tr style="font-weight:bold;border-top:2px solid #1f3864;"><td colspan="3">Total overdue</td><td align="right">{{ '%.0f'|format(overdue) }} {{ cust.currency }}</td></tr>
+  </table>
+  <p>If payment has already been made, please disregard this notice. To discuss your account, reply to this email or contact our Credit Control Department.</p>
+  <p>Yours faithfully,<br>Credit Control<br><span style="color:#777;">{{ org_name }}</span></p>
+</div>

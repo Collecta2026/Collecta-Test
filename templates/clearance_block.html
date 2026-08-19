@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block title %}Credit Clearance{% endblock %}
+{% block content %}
+<div class="card shadow-sm" style="max-width:640px;margin:2rem auto;border:2px solid #c00000;">
+  <div class="card-body text-center">
+    <div style="font-size:2.4rem;">⛔</div>
+    <h4 style="color:#c00000;">Credit Clearance: NO-GO</h4>
+    <p class="mb-1"><b>{{ cust.name }}</b> <span class="text-muted">({{ cust.cust_ref }})</span></p>
+    <p class="text-muted small">Sales and maintenance cannot proceed for this customer:</p>
+    <ul class="list-unstyled">{% for r in clr.reasons %}<li class="text-danger">• {{ r }}</li>{% endfor %}</ul>
+    <p class="small text-muted">Please refer to Credit Control. A CFO override is required to proceed.</p>
+    {% if false %}
+    <form method="post" action="{{ url_for('clearance_override', cid=cust.id) }}" class="mt-3">
+      <input class="form-control form-control-sm mb-2" name="reason" placeholder="CFO override reason" required>
+      <button class="btn btn-sm btn-danger">CFO override — proceed</button>
+    </form>
+    {% endif %}
+    <p class="small text-muted">A CFO can authorise an override from this customer's page.</p>
+    <a class="btn btn-sm btn-outline-secondary mt-2" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+  </div>
+</div>
+{% endblock %}

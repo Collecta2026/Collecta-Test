@@ -1,0 +1,37 @@
+{% extends "base.html" %}{% block title %}Reschedule{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Reschedule — {{ cust.name }} <span class="text-muted">({{ cust.cust_ref }})</span></h4>
+<p class="text-muted small">Pick the outstanding instalments to reschedule and set the new terms. The request goes to the
+  CFO/MD for approval — <b>nothing changes on the ledger until it is approved</b>. Back it with a short written agreement and record its reference.</p>
+{% if not rows %}<div class="alert alert-info py-2">No open instalments to reschedule.</div>{% else %}
+<form method="post">
+<div class="card shadow-sm mb-3"><div class="card-body table-responsive">
+  <h6>Outstanding instalments</h6>
+  <table class="table table-sm"><thead><tr><th></th><th>ID</th><th>Type</th><th>Ccy</th><th>Due</th><th class="money">Net</th><th>Bucket</th></tr></thead><tbody>
+  {% for r in rows %}<tr>
+    <td><input type="checkbox" name="inst_ids" value="{{ r.id }}" checked></td>
+    <td>{{ r.inst_id }}</td><td>{{ 'Machine' if r.account_type=='MACHINE' else 'Parts' }}</td>
+    <td>{{ r.currency }}</td><td>{{ r.due_date or '—' }}</td>
+    <td class="money fw-bold">{{ r.net|money(r.currency) }}</td><td>{{ r.bucket }}</td></tr>{% endfor %}
+  </tbody></table>
+  <div class="text-muted small">Only instalments of the <b>same currency</b> should be rescheduled together — EGP and USD are never combined.</div>
+</div></div>
+<div class="card shadow-sm"><div class="card-body row g-3">
+  <div class="col-md-3"><label class="form-label small">New number of instalments</label>
+    <input class="form-control form-control-sm" name="count" value="6" required></div>
+  <div class="col-md-3"><label class="form-label small">First new due date</label>
+    <input type="date" class="form-control form-control-sm" name="first_due" required></div>
+  <div class="col-md-3"><label class="form-label small">Frequency (days)</label>
+    <input class="form-control form-control-sm" name="freq_days" value="30"></div>
+  <div class="col-md-3"><label class="form-label small">Written-agreement reference</label>
+    <input class="form-control form-control-sm" name="agreement_ref" placeholder="e.g. RS-2026-004"></div>
+  <div class="col-12"><label class="form-label small">Reason / note for the approver</label>
+    <input class="form-control form-control-sm" name="reason" placeholder="Why the customer is being rescheduled"></div>
+  <div class="col-12">
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Submit for CFO/MD approval</button>
+    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('customer_detail', cid=cust.id) }}">Cancel</a>
+  </div>
+</div></div>
+</form>
+{% endif %}
+{% endblock %}

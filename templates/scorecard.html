@@ -1,0 +1,31 @@
+{% extends "base.html" %}{% block title %}Controller Scorecard{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+  <h4 class="mb-0" style="color:#1f3864;">Controller Activity Scorecard</h4>
+  <div>
+    <a class="btn btn-sm btn-outline-success" href="?start={{ start }}&amp;end={{ end }}&amp;export=xlsx">Excel</a>
+    <a class="btn btn-sm btn-outline-danger" href="?start={{ start }}&amp;end={{ end }}&amp;export=pdf">PDF</a>
+  </div>
+</div>
+<form method="get" class="row g-2 mb-3" style="max-width:520px;">
+  <div class="col-auto"><label class="form-label small mb-0">From</label><input type="date" class="form-control form-control-sm" name="start" value="{{ start }}"></div>
+  <div class="col-auto"><label class="form-label small mb-0">To</label><input type="date" class="form-control form-control-sm" name="end" value="{{ end }}"></div>
+  <div class="col-auto align-self-end"><button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Apply</button></div>
+</form>
+<p class="text-muted small">Activity and effectiveness per controller over the period. Coverage is completed vs assigned calls;
+  promise-keep is promises that were followed by a payment. Collection is what they banked. This data is what a future
+  commission model would draw on — activity as a qualifier, collection as the driver.</p>
+<div class="card shadow-sm"><div class="card-body table-responsive">
+<table class="table table-sm align-middle"><thead style="background:#1f3864;color:#fff;"><tr>
+  <th>Controller</th><th class="money">Assigned</th><th class="money">Completed</th><th class="money">Coverage</th>
+  <th class="money">Contacted</th><th class="money">Promises</th><th class="money">Kept</th><th class="money">Keep %</th><th class="money">Collected</th></tr></thead><tbody>
+{% for r in sc.rows %}<tr>
+  <td>{{ r.controller }}</td><td class="money">{{ r.assigned }}</td><td class="money">{{ r.completed }}</td>
+  <td class="money"><span class="badge bg-{{ 'success' if r.coverage_pct>=80 else ('warning text-dark' if r.coverage_pct>=50 else 'danger') }}">{{ r.coverage_pct }}%</span></td>
+  <td class="money">{{ r.contacted }}</td><td class="money">{{ r.promises }}</td><td class="money">{{ r.promises_kept }}</td>
+  <td class="money">{{ r.promise_keep_pct }}%</td>
+  <td class="money fw-bold">{% for cur,amt in r.collected_ccy.items() %}{{ amt|money(cur) }}{% if not loop.last %} · {% endif %}{% endfor %}{% if not r.collected_ccy %}—{% endif %}</td></tr>
+{% else %}<tr><td colspan="9" class="text-center text-muted py-3">No activity in this period.</td></tr>{% endfor %}
+</tbody></table>
+</div></div>
+{% endblock %}

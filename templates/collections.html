@@ -1,0 +1,52 @@
+{% extends "base.html" %}{% block title %}Collections{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Record a Receipt</h4>
+<p class="text-muted small">The receipt is allocated <b>oldest instalment first</b> within the chosen account — you confirm or
+  override before anything posts. Receipts are single-currency; to settle a USD debt with EGP (or vice-versa), use
+  <b>Customers → Currency Conversion</b> first (CFO/MD approval).</p>
+<div class="row g-3">
+<div class="col-lg-5"><div class="card shadow-sm"><div class="card-body">
+  <h6>Receipt details</h6>
+  <form method="post">
+    <input type="hidden" name="step" value="propose">
+    <div class="mb-2"><label class="form-label small">Customer</label>
+      <select class="form-select form-select-sm" name="cust_ref" required>
+        <option value="">— choose customer —</option>
+        {% for c in customers %}<option value="{{ c.cust_ref }}">{{ c.cust_ref }} · {{ c.name }} ({{ c.currency }})</option>{% endfor %}
+      </select></div>
+    <div class="row g-2">
+      <div class="col-6 mb-2"><label class="form-label small">Account</label>
+        <select class="form-select form-select-sm" name="account_type" required>
+          <option value="MACHINE">Machine</option><option value="PARTS">Parts &amp; Accessories</option></select></div>
+      <div class="col-6 mb-2"><label class="form-label small">Currency</label>
+        <select class="form-select form-select-sm" name="currency" required>
+          <option value="EGP">EGP</option><option value="USD">USD</option></select></div>
+    </div>
+    <div class="mb-2"><label class="form-label small">Amount received</label>
+      <input class="form-control form-control-sm" name="amount" placeholder="lump sum - we'll split it"></div>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="checkbox" name="apply_credit" value="1" id="ac">
+      <label class="form-check-label small" for="ac">Also apply any unallocated credit on this account</label></div>
+    <div class="mb-2"><label class="form-label small">Date</label>
+      <input type="date" class="form-control form-control-sm" name="collected_on" value="{{ today() }}"></div>
+    <div class="mb-2"><label class="form-label small">Transaction ref</label>
+      <input class="form-control form-control-sm" name="txn_ref" placeholder="bank / cheque / receipt no."></div>
+    <div class="mb-2"><label class="form-label small">Method</label>
+      <select class="form-select form-select-sm" name="method">
+        {% for m in ['Cash','Cheque','Bank Transfer','Card','Other'] %}<option>{{m}}</option>{% endfor %}</select></div>
+    <div class="mb-2"><label class="form-label small">Comments</label>
+      <input class="form-control form-control-sm" name="comments"></div>
+    <button class="btn btn-primary btn-sm" style="background:#2e7d8a;border:0;">Propose allocation &rarr;</button>
+  </form>
+</div></div></div>
+<div class="col-lg-7"><div class="card shadow-sm"><div class="card-body table-responsive">
+  <h6>Recent receipts</h6>
+  <table class="table table-sm"><thead><tr><th>Date</th><th>Txn Ref</th><th>Instalment</th>
+    <th class="money">Amount</th><th>Method</th><th>By</th></tr></thead><tbody>
+  {% for c in recent %}<tr><td>{{ c.collected_on }}</td><td>{{ c.txn_ref }}</td>
+    <td>{{ c.instalment.inst_id }}</td><td class="money">{{ c.amount|money(c.currency) }}</td>
+    <td>{{ c.method }}</td><td>{{ c.received_by }}</td></tr>{% endfor %}
+  </tbody></table>
+</div></div></div>
+</div>
+{% endblock %}

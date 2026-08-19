@@ -198,6 +198,7 @@ ENDPOINT_CAP = {
     "reschedule_picker": "reschedule", "convert_picker": "fx_convert",
     "guarantees_register": "guarantees", "guarantee_new": "guarantees", "guarantee_update": "guarantees",
     "unguaranteed_report": "reports", "clearance_override": "sales_clearance",
+    "controller_scorecard": "reports",
     "customers": "customers", "customer_detail": "customers", "customer_note": "customers",
     "customer_new": "customer_edit",
     "reminders": "reminders", "reminder_letter": "reminders", "reminder_log": "reminders",

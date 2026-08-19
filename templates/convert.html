@@ -1,0 +1,85 @@
+{% extends "base.html" %}{% block title %}Currency Conversion{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">USD → EGP Conversion — {{ cust.name }} <span class="text-muted">({{ cust.cust_ref }})</span></h4>
+<p class="text-muted small">Converts the <b>remaining USD outstanding</b> to EGP at an agreed rate. The system compares the agreed
+  rate to each instalment's original contract rate and flags any exchange gain or loss. The request goes to the
+  CFO/MD for approval — <b>nothing changes on the ledger until approved</b> — and must be backed by a short written agreement.</p>
+
+{% if not rows %}<div class="alert alert-info py-2">This customer has no open USD instalments to convert.</div>{% else %}
+
+{# ---- live preview banner ---- #}
+{% if calc %}
+  <div class="card shadow-sm mb-3" style="border:2px solid {{ '#c00000' if calc.is_loss else ('#1e7e34' if calc.is_gain else '#1f3864') }};">
+    <div class="card-body">
+      <div class="d-flex justify-content-between flex-wrap">
+        <div><div class="text-muted small">USD outstanding converted</div><div class="fs-6 fw-bold">$ {{ '{:,.2f}'.format(calc.total_usd) }}</div></div>
+        <div><div class="text-muted small">Agreed rate</div><div class="fs-6 fw-bold">{{ '%g'|format(calc.agreed_rate) }}</div></div>
+        {% if calc.total_orig_egp is not none %}<div><div class="text-muted small">Original EGP value</div><div class="fs-6 fw-bold">{{ '{:,.0f}'.format(calc.total_orig_egp) }}</div></div>{% endif %}
+        <div><div class="text-muted small">New EGP value (total deal)</div><div class="fs-5 fw-bold" style="color:#1f3864;">{{ '{:,.0f}'.format(calc.total_new_egp) }}</div></div>
+      </div>
+      {% if calc.fx_diff is not none %}
+        {% if calc.is_loss %}
+          <div class="alert alert-danger mt-3 mb-0 py-2"><b>⚠ Exchange LOSS of {{ '{:,.0f}'.format(-calc.fx_diff) }} EGP</b>
+            — converting at {{ '%g'|format(calc.agreed_rate) }} realises less than the original contract value. This will be shown to the authorising manager.</div>
+        {% elif calc.is_gain %}
+          <div class="alert alert-success mt-3 mb-0 py-2"><b>Exchange gain of {{ '{:,.0f}'.format(calc.fx_diff) }} EGP</b> vs the original contract rate.</div>
+        {% else %}
+          <div class="alert alert-secondary mt-3 mb-0 py-2">No material FX difference against the original contract rate.</div>
+        {% endif %}
+      {% else %}
+        <div class="alert alert-warning mt-3 mb-0 py-2">No original contract rate is stored for one or more of these USD instalments.
+          Enter the rate that was in force when the contract was created (below) so the gain/loss can be measured.</div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+<form method="get" class="card shadow-sm mb-3"><div class="card-body row g-2 align-items-end">
+  <div class="col-md-3"><label class="form-label small">Agreed conversion rate (USD→EGP)</label>
+    <input class="form-control form-control-sm" name="agreed_rate" value="{{ request.args.get('agreed_rate','') }}" placeholder="e.g. {{ '%g'|format(fx_default) }}"></div>
+  {% if needs_legacy %}<div class="col-md-3"><label class="form-label small">Original contract rate (legacy)</label>
+    <input class="form-control form-control-sm" name="legacy_rate" value="{{ request.args.get('legacy_rate','') }}" placeholder="rate at contract time"></div>{% endif %}
+  <div class="col-md-3"><button class="btn btn-sm btn-outline-primary">Preview FX impact</button></div>
+</div></form>
+
+<form method="post">
+<div class="card shadow-sm mb-3"><div class="card-body table-responsive">
+  <h6>Open USD instalments</h6>
+  <table class="table table-sm"><thead><tr><th></th><th>ID</th><th>Type</th><th>Due</th><th class="money">Net USD</th><th>Original rate</th></tr></thead><tbody>
+  {% for r in rows %}<tr>
+    <td><input type="checkbox" name="inst_ids" value="{{ r.id }}" checked></td>
+    <td>{{ r.inst_id }}</td><td>{{ 'Machine' if r.account_type=='MACHINE' else 'Parts' }}</td>
+    <td>{{ r.due_date or '—' }}</td><td class="money fw-bold">{{ r.net|money('USD') }}</td>
+    <td>{% if r.orig_fx_rate %}{{ '%g'|format(r.orig_fx_rate) }}{% else %}<span class="text-warning">not stored</span>{% endif %}</td></tr>{% endfor %}
+  </tbody></table>
+</div></div>
+<div class="card shadow-sm"><div class="card-body row g-3">
+  <div class="col-md-3"><label class="form-label small">Agreed rate (USD→EGP) <span class="text-danger">*</span></label>
+    <input class="form-control form-control-sm" name="agreed_rate" value="{{ request.args.get('agreed_rate','') }}" required></div>
+  {% if needs_legacy %}<div class="col-md-3"><label class="form-label small">Original contract rate (legacy) <span class="text-danger">*</span></label>
+    <input class="form-control form-control-sm" name="legacy_rate" value="{{ request.args.get('legacy_rate','') }}" required></div>{% endif %}
+  <div class="col-md-3"><label class="form-label small">Mode</label>
+    <select class="form-select form-select-sm" name="mode" id="mode" onchange="document.getElementById('rswrap').style.display=(this.value=='convert_reschedule'?'flex':'none')">
+      <option value="convert_only">Convert only (one EGP instalment)</option>
+      <option value="convert_reschedule">Convert &amp; reschedule</option></select></div>
+  <div class="col-md-3"><label class="form-label small">Written-agreement reference</label>
+    <input class="form-control form-control-sm" name="agreement_ref" placeholder="e.g. FX-2026-002"></div>
+  <div class="col-12 row g-3" id="rswrap" style="display:none;">
+    <div class="col-md-3"><label class="form-label small">EGP instalments</label>
+      <input class="form-control form-control-sm" name="count" value="6"></div>
+    <div class="col-md-3"><label class="form-label small">First new due date</label>
+      <input type="date" class="form-control form-control-sm" name="first_due"></div>
+    <div class="col-md-3"><label class="form-label small">Frequency (days)</label>
+      <input class="form-control form-control-sm" name="freq_days" value="30"></div>
+  </div>
+  <div class="col-12"><label class="form-label small">Reason / note for the approver</label>
+    <input class="form-control form-control-sm" name="reason" placeholder="Context for the CFO/MD"></div>
+  <div class="col-12">
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Submit for CFO/MD approval</button>
+    <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('customer_detail', cid=cust.id) }}">Cancel</a>
+    <span class="text-muted small ms-2">The FX gain/loss shown above is recorded and presented to the approver.</span>
+  </div>
+</div></div>
+</form>
+{% endif %}
+{% endblock %}

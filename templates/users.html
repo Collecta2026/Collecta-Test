@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% block title %}Users{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Users &amp; Roles</h4>
+<p class="text-muted small">Each user has a role that controls what they can do (configure roles on
+  <a href="{{ url_for('access_control') }}">Access Control</a>). Add an email so they receive
+  approval-request notifications.</p>
+<div class="row g-3">
+<div class="col-lg-5"><div class="card shadow-sm"><div class="card-body">
+  <h6>Add user</h6>
+  <form method="post" action="{{ url_for('users_new') }}">
+    <div class="mb-2"><label class="form-label small">Username</label><input class="form-control form-control-sm" name="username" required></div>
+    <div class="mb-2"><label class="form-label small">Full name</label><input class="form-control form-control-sm" name="full_name"></div>
+    <div class="mb-2"><label class="form-label small">Email <span class="text-muted">(for notifications)</span></label><input class="form-control form-control-sm" type="email" name="email"></div>
+    <div class="mb-2"><label class="form-label small">Password</label><input class="form-control form-control-sm" type="password" name="password" required></div>
+    <div class="mb-2"><label class="form-label small">Role</label>
+      <select class="form-select form-select-sm" name="role">
+        {% for key, label in ROLE_LABELS.items() %}<option value="{{ key }}"{{ ' selected' if key=='credit_control' else '' }}>{{ label }}</option>{% endfor %}
+      </select></div>
+    <button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Create user</button>
+  </form>
+</div></div></div>
+<div class="col-lg-7"><div class="card shadow-sm"><div class="card-body table-responsive">
+  <table class="table table-sm align-middle"><thead><tr><th>Username</th><th>Name</th><th>Email</th><th>Role</th><th></th></tr></thead><tbody>
+  {% for u in rows %}
+  <tr>
+    <td>{{ u.username }}</td>
+    <td>{{ u.full_name or '' }}</td>
+    <td class="small">{{ u.email or '—' }}</td>
+    <td><span class="badge bg-{{ 'dark' if u.role in ('admin',) else 'secondary' }}">{{ ROLE_LABELS.get(u.role, u.role) }}</span></td>
+    <td class="text-end" style="white-space:nowrap;">
+      <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#edit{{ u.id }}">Edit</button>
+      <form method="post" action="{{ url_for('users_delete', uid=u.id) }}" class="d-inline" onsubmit="return confirm('Delete user?')">
+        <button class="btn btn-sm btn-outline-danger">Delete</button></form>
+    </td>
+  </tr>
+  <tr class="collapse" id="edit{{ u.id }}"><td colspan="5">
+    <form method="post" action="{{ url_for('users_update', uid=u.id) }}" class="row g-2 align-items-end">
+      <div class="col-md-3"><label class="form-label small">Full name</label><input class="form-control form-control-sm" name="full_name" value="{{ u.full_name or '' }}"></div>
+      <div class="col-md-3"><label class="form-label small">Email</label><input class="form-control form-control-sm" type="email" name="email" value="{{ u.email or '' }}"></div>
+      <div class="col-md-3"><label class="form-label small">Role</label>
+        <select class="form-select form-select-sm" name="role">
+          {% for key, label in ROLE_LABELS.items() %}<option value="{{ key }}"{{ ' selected' if u.role==key or (u.role=='user' and key=='credit_control') else '' }}>{{ label }}</option>{% endfor %}
+        </select></div>
+      <div class="col-md-3"><button class="btn btn-sm btn-primary" style="background:#1f3864;border:0;">Save</button></div>
+    </form>
+    <form method="post" action="{{ url_for('users_reset', uid=u.id) }}" class="row g-2 align-items-end mt-1">
+      <div class="col-md-4"><label class="form-label small">Reset password</label><input type="password" name="password" placeholder="new password" class="form-control form-control-sm"></div>
+      <div class="col-md-3"><button class="btn btn-sm btn-outline-secondary">Reset</button></div>
+    </form>
+  </td></tr>
+  {% endfor %}
+  </tbody></table>
+</div></div></div>
+</div>
+{% endblock %}

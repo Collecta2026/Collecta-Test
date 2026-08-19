@@ -1,0 +1,72 @@
+{% extends "base.html" %}{% block title %}Confirm Allocation{% endblock %}
+{% block content %}
+<h4 style="color:#1f3864;">Confirm Allocation — {{ cust.name }} <span class="text-muted">({{ cust.cust_ref }})</span></h4>
+<p class="text-muted small">Proposed <b>oldest-first</b> allocation on the <b>{{ atype.title() }}</b> account in <b>{{ ccy }}</b>.
+  Adjust any figure to override the suggestion, then confirm. Legal instalments are shown but not auto-allocated.</p>
+
+<div class="card shadow-sm mb-3"><div class="card-body">
+  <div class="row text-center">
+    <div class="col"><div class="text-muted small">Cash received</div><div class="fw-bold">{{ cash|money(ccy) }}</div></div>
+    {% if credit_used %}<div class="col"><div class="text-muted small">Credit applied</div><div class="fw-bold">{{ credit_used|money(ccy) }}</div></div>{% endif %}
+    <div class="col" style="border-left:2px solid #1f3864;"><div class="text-muted small">Total to allocate</div><div class="fw-bold" style="color:#1f3864;">{{ (cash+credit_used)|money(ccy) }}</div></div>
+    <div class="col"><div class="text-muted small">Auto-allocated</div><div class="fw-bold">{{ prop.allocated|money(ccy) }}</div></div>
+    <div class="col"><div class="text-muted small">Surplus → credit</div><div class="fw-bold {{ 'text-info' if prop.surplus>0 }}">{{ prop.surplus|money(ccy) }}</div></div>
+  </div>
+  {% if avail_credit and not credit_used %}<div class="small text-muted mt-2">Note: {{ avail_credit|money(ccy) }} unallocated credit is available on this account (not applied).</div>{% endif %}
+</div></div>
+
+<form method="post">
+  <input type="hidden" name="step" value="confirm">
+  <input type="hidden" name="cust_ref" value="{{ cust.cust_ref }}">
+  <input type="hidden" name="account_type" value="{{ atype }}">
+  <input type="hidden" name="currency" value="{{ ccy }}">
+  <input type="hidden" name="amount" value="{{ cash }}">
+  {% if credit_used %}<input type="hidden" name="apply_credit" value="1">{% endif %}
+  <input type="hidden" name="collected_on" value="{{ collected_on }}">
+  <input type="hidden" name="txn_ref" value="{{ txn_ref or '' }}">
+  <input type="hidden" name="method" value="{{ method or '' }}">
+  <input type="hidden" name="comments" value="{{ comments or '' }}">
+
+  <div class="card shadow-sm mb-3"><div class="card-body table-responsive">
+    <table class="table table-sm align-middle"><thead><tr>
+      <th>Instalment</th><th>Due</th><th>Bucket</th><th class="money">Outstanding</th><th class="money" style="width:160px;">Allocate</th></tr></thead><tbody>
+    {% for r in prop.rows %}<tr class="{{ 'table-warning' if r.legal }}">
+      <td>{{ r.inst_id }}{% if r.legal %} <span class="badge bg-warning text-dark">legal</span>{% endif %}</td>
+      <td>{{ r.due_date or '—' }}</td><td>{{ r.bucket }}</td>
+      <td class="money">{{ r.net|money(ccy) }}</td>
+      <td><input class="form-control form-control-sm money-in" name="alloc_{{ r.id }}" value="{{ '%.2f'|format(r.suggested) }}"
+                 data-net="{{ r.net }}" style="text-align:right;"></td></tr>
+    {% else %}<tr><td colspan="5" class="text-center text-muted py-3">No open instalments on this account.</td></tr>{% endfor %}
+    </tbody>
+    <tfoot><tr><th colspan="4" class="text-end">Total allocated</th><th class="money"><span id="tot">0</span></th></tr></tfoot>
+    </table>
+    <div class="small text-muted">Overriding: type any amount up to each instalment's outstanding. Anything you don't allocate is held as unallocated credit.</div>
+  </div></div>
+
+  {% if impact %}
+  <div class="card shadow-sm mb-3"><div class="card-body">
+    <h6 class="mb-2">Ageing impact of this receipt</h6>
+    <div class="d-flex gap-3 flex-wrap">
+      {% for bucket, amt in impact %}<div class="border rounded px-2 py-1"><span class="text-muted small">{{ bucket }}</span><br><b>−{{ amt|money(ccy) }}</b></div>{% endfor %}
+    </div>
+  </div></div>
+  {% endif %}
+
+  <button class="btn btn-primary btn-sm" style="background:#1f3864;border:0;">Confirm &amp; post receipt</button>
+  <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('collections') }}">Cancel</a>
+</form>
+
+<script>
+  function recompute(){
+    var t=0; document.querySelectorAll('.money-in').forEach(function(el){
+      var v=parseFloat((el.value||'0').replace(/,/g,''))||0;
+      var net=parseFloat(el.dataset.net)||0;
+      if(v>net){v=net; el.value=net.toFixed(2);}
+      t+=v;
+    });
+    document.getElementById('tot').textContent=t.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  document.querySelectorAll('.money-in').forEach(function(el){el.addEventListener('input',recompute);});
+  recompute();
+</script>
+{% endblock %}
